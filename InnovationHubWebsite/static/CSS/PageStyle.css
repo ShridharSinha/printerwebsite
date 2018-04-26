@@ -1,4 +1,19 @@
-table.MenuBar {
+body {
+  background-color: #E4EDDB;
+  font-family: arial;
+}
+
+h1 {
+  color: #307672;
+}
+
+.top {
+  position: relative;
+  top: 10px;
+  text-align: center;
+}
+
+table.MenuBar{
   table-layout: fixed;
   position: -webkit-sticky;
   position: sticky;
@@ -21,7 +36,7 @@ table.MenuBar th:hover {
   color: #1A3C40;
 }
 
-table.MenuBar tbody {
+table.MenuBar tbody{
   background-color: #307672;
   color: #E4EDDB;
 
@@ -33,19 +48,4 @@ table.MenuBar tbody {
 table.MenuBar tbody th:hover {
   color: #307672;
   background-color: #E4EDDB;
-}
-
-h1 {
-  color: #307672;
-  font-family: arial;
-}
-
-body {
-  background-color: #E4EDDB;
-}
-
-.top {
-  position: relative;
-  top: 10px;
-  text-align: center;
 }

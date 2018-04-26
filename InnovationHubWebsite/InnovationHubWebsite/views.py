@@ -6,17 +6,20 @@ from django.template import Context, loader
 
 #HomePage Views
 def HomePage(request):
+    #context = {'Quota' : '00:31:23'}
     return render(request, 'HomePage.html')
 
 
 #Schedule Views
 def Schedule(request):
-    return HttpResponse("Schedule")
+    #return HttpResponse("Schedule")
+    return render(request, 'SchedulePage.html')
 
 
 #Submit Views
 def Submission(request):
-    return HttpResponse("Submission")
+    #return HttpResponse("Submission")
+    return render(request, 'SubmitFile.html')
 
 def SubmissionForm(request):
     return HttpResponse("Submission Form")
@@ -30,7 +33,8 @@ def Fail(request):
 
 #Account Views
 def AccountData(request):
-    return HttpResponse("Account Data")
+    #return HttpResponse("Account Data")
+    return render(request, 'AccountData.html')
 
 def EditAccount(request):
     return HttpResponse("Account Editor")
