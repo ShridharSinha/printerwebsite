@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   {% load static %}
   <link href="{% static 'CSS/PageStyle.css' %}" rel = "stylesheet" type = "text/css">
-  <title>InnovationHub  |  Submit</title>
+  <title>InnovationHub  |  Home</title>
 </head>
 
 <body>
@@ -21,30 +21,29 @@
       </tr>
 
     </thead>
+    <tbody>
 
-  <tbody>
+      <tr>
+        <div>
+          <th style="cursor:pointer" onclick="location.href='/home'">Home</th>
+        </div>
 
-    <tr>
-      <div>
-        <th style="cursor:pointer" onclick="location.href='/home'">Home</th>
-      </div>
+        <div>
+          <th style="cursor:pointer" onclick="location.href='/schedule'">Schedule</th>
+        </div>
 
-      <div>
-        <th style="cursor:pointer" onclick="location.href='/schedule'">Schedule</th>
-      </div>
+        <div>
+          <th style="cursor:pointer" onclick="location.href='/submit/request'">Submit</th>
+        </div>
 
-      <div>
-        <th style="cursor:pointer" onclick="location.href='/submit/request'">Submit</th>
-      </div>
+        <div>
+          <th style="cursor:pointer" onclick="location.href='/account/data'">Account</th>
+        </div>
+      </tr>
 
-      <div>
-        <th style="cursor:pointer" onclick="location.href='/account/data'">Account</th>
-      </div>
-    </tr>
-
-  </tbody>
+    </tbody>
 
   </table>
-  <h1 class = "top">Submit File</h1>
+  <h1 class = "top">Welcome Home</h1>
 </body>
 </html>
