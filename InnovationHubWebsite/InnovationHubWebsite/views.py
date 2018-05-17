@@ -44,3 +44,12 @@ def Login(request):
 
 def SignUp(request):
     return HttpResponse("Create an Account")
+
+def layout(request):
+    context = {'Quota' : '00:31:23'}
+    return render(request, 'layout.html', context)
+
+
+#The Carl Segment
+def CarlPage(request):
+    return HttpResponse("The Carl Page")
