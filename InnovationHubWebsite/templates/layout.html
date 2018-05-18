@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+  <meta charset="utf-8">
+  {% load static %}
+  <link href="{% static 'CSS/PageStyle.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/reset.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/text.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/960.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/demo.css' %}" rel = "stylesheet" type = "text/css">
+  <title>InnovationHub  |  Home</title>
+</head>
+
+<body>
+  <div class = "container_12">
+      <div class = 'grid_4 header'>
+        <th rowspan = "2" colspan = "1"><!--<img src = '/CuriosityGymLogo.png' alt = 'Curiosity Gym' border = '3'>-->Curiosity Gym</th>
+      </div>
+      <div class = 'grid_4 header'>
+        <th rowspan = "2" colspan = "2">The Carl Segment</th>
+      </div>
+      <div class = 'grid_4 header'>
+        <th style="cursor:pointer" onclick="location.href='/account/data'">TIME</th>
+        <br>
+        <th style="cursor:pointer" onclick="location.href='/account/data'">{{Quota}}</th>
+      </div>
+      <div class="clear"></div>
+
+        <div class = 'grid_3 navBottom'>
+          <th style="cursor:pointer" onclick="location.href='/home'">Home</th>
+        </div>
+
+        <div class = 'grid_3 navBottom'>
+          <th style="cursor:pointer" onclick="location.href='/schedule'">Schedule</th>
+        </div>
+
+        <div class = 'grid_3 navBottom'>
+          <th style="cursor:pointer" onclick="location.href='/submit/request'">Submit</th>
+        </div>
+
+        <div class = 'grid_3 navBottom'>
+          <th style="cursor:pointer" onclick="location.href='/account/data'">Account</th>
+        </div>
+      <div class="clear"></div>
+
+  </div>
+</body>
+</html>

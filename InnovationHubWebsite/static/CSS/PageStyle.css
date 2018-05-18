@@ -1,0 +1,58 @@
+/*COLOURS:
+ *#1A3C40
+ *#144D53
+ *#307672
+ *#E4EDDB
+ */
+
+body {
+  background-color: #E4EDDB;
+  font-family: arial;
+}
+
+h1 {
+  color: #307672;
+}
+
+.top {
+  position: relative;
+  top: 10px;
+  text-align: center;
+}
+
+table.MenuBar{
+  table-layout: fixed;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  border: 2px solid #144D53;
+
+  background-color: #1A3C40;
+  color: #E4EDDB;
+
+  border-radius: 6px;
+
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+table.MenuBar th:hover{
+  background-color: #E4EDDB;
+  color: #1A3C40;
+}
+
+table.MenuBar tbody{
+  background-color: #307672;
+  color: #E4EDDB;
+
+  border: 2px solid #144D53;
+
+  font-size: 20px;
+}
+
+table.MenuBar tbody th:hover{
+  color: #307672;
+  background-color: #E4EDDB;
+}

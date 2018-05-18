@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+  <meta charset="utf-8">
+  {% load static %}
+  <link href="{% static 'CSS/PageStyle.css' %}" rel = "stylesheet" type = "text/css">
+  <!--<link href="{% static 'CSS/reset.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/text.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/960.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/demo.css' %}" rel = "stylesheet" type = "text/css">-->
+  <title>InnovationHub  |  Schedule</title>
+</head>
+
+<body>
+  <table class = "MenuBar">
+    <thead>
+      <tr>
+        <th rowspan = "2" colspan = "1"><!--<img src = '/CuriosityGymLogo.png' alt = 'Curiosity Gym' border = '3'>-->Curiosity Gym</th>
+        <th rowspan = "2" colspan = "2" style="cursor:pointer" onclick="location.href='/carlSegment/'">The Carl Segment</th>
+        <th style="cursor:pointer" onclick="location.href='/account/data'">TIME</th>
+      </tr>
+
+      <tr>
+        <th style="cursor:pointer" onclick="location.href='/account/data'">{{Quota}}</th>
+      </tr>
+
+    </thead>
+
+  <tbody>
+
+    <tr>
+      <div>
+        <th style="cursor:pointer" onclick="location.href='/home'">Home</th>
+      </div>
+
+      <div>
+        <th style="cursor:pointer" onclick="location.href='/schedule'">Schedule</th>
+      </div>
+
+      <div>
+        <th style="cursor:pointer" onclick="location.href='/submit/request'">Submit</th>
+      </div>
+
+      <div>
+        <th style="cursor:pointer" onclick="location.href='/account/data'">Account</th>
+      </div>
+    </tr>
+
+  </tbody>
+
+  </table>
+  <h1 class = "top">Print Schedule</h1>
+</body>
+</html>
