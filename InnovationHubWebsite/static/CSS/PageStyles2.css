@@ -1,0 +1,79 @@
+/*COLOURS:
+ *#1A3C40
+ *#144D53
+ *#307672
+ *#E4EDDB
+ */
+
+table.Data {
+  background-color:#1A3C40;
+  font-family: monospace;
+
+  border: 2px solid #144D53;
+  border-radius: 6px;
+  width: 100%;
+  padding:10px 0px;
+
+  color: #E4EDDB;
+  font-weight: bold;
+  align-content: center;
+
+  margin:30px 0px;
+}
+
+table.Data thead {
+  font-size: 30px;
+}
+
+table.Data tbody {
+  background-color: #307672;
+  text-align:center;
+  font-size:20px;
+}
+
+table.Data tbody tr.Subheading {
+  background-color: #144D53;
+  font-size:25px;
+}
+
+table.Data thead tr th.Button {
+  font-size: 15px;
+  border:2px solid #E4EDDB;
+  border-radius: 6px;
+}
+
+table.Data thead tr th.Button:hover {
+  color: #1A3C40;
+  background-color: #E4EDDB;
+}
+
+table.Data thead tr th.Votes {
+  font-size:20px;
+  text-align: right;
+}
+
+h1.top.heading{
+  /*border: 2px solid #144D53;*/
+  border-radius:6px;
+  padding:10px 0px;
+  margin:30px 0px;
+
+  width: 100%;
+  align-self: center;
+
+  color: #E4EDDB;
+  font-family:monospace;
+  font-size: 30px;
+
+  background-color: #307672;
+
+  z-index: -999;
+}
+
+#Carl {
+  font-size:30px;
+}
+
+#WhiteBack {
+  background-color: #E4EDDB;
+}

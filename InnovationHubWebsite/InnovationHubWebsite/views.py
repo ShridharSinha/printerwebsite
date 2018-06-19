@@ -53,3 +53,8 @@ def layout(request):
 #The Carl Segment
 def CarlPage(request):
     return HttpResponse("The Carl Page")
+
+
+#Featured Prints
+def Featured(request):
+    return HttpResponse("Featured Prints")

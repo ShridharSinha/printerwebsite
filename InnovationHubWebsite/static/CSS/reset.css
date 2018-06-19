@@ -12,7 +12,7 @@ audio,
 b,
 big,
 blockquote,
-body,
+/*body,*/
 canvas,
 caption,
 center,
@@ -34,12 +34,12 @@ figure,
 font,
 footer,
 form,
-h1,
+/*h1,
 h2,
 h3,
 h4,
 h5,
-h6,
+h6,*/
 header,
 hgroup,
 hr,
@@ -77,14 +77,13 @@ strong,
 sub,
 summary,
 sup,
-table,
+/*table,
 tbody,
 td,
 tfoot,
 th,
-thead,
+thead,*/
 time,
-tr,
 tt,
 u,
 ul,
@@ -160,13 +159,13 @@ li {
   display: list-item;
 }
 
-table {
+/*table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 th,
-td,
+td,*/
 caption {
   font-weight: normal;
   vertical-align: top;

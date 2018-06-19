@@ -44,4 +44,7 @@ urlpatterns = [
 
     #CarlSegment
     path('carlSegment/', views.CarlPage),
+
+    #FeaturedPrints
+    path('featuredPrints/', views.Featured),
 ]

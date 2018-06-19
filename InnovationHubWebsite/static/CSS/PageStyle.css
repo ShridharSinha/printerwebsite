@@ -5,9 +5,9 @@
  *#E4EDDB
  */
 
-body {
+ body {
   background-color: #E4EDDB;
-  font-family: arial;
+  font-family: monospace;
 }
 
 h1 {
@@ -36,6 +36,9 @@ table.MenuBar{
   font-family: monospace;
   font-weight: bold;
   font-size: 25px;
+
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 table.MenuBar th:hover{
