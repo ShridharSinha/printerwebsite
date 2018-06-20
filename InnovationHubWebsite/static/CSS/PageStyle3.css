@@ -1,0 +1,11 @@
+/*COLOURS:
+ *#1A3C40
+ *#144D53
+ *#307672
+ *#E4EDDB
+ */
+
+table.Data thead tr.FooterNote th {
+  font-size: 10px;
+  text-align: right;
+}
