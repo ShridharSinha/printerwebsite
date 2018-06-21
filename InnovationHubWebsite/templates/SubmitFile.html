@@ -6,6 +6,7 @@
   <link href="{% static 'CSS/PageStyle.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyles2.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle3.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/PageStyle4.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/960.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/960_12_col.css' %}" rel = "stylesheet" type = "text/css">
   <title>InnovationHub  |  Submit</title>
@@ -26,29 +27,36 @@
 
     </thead>
 
-  <tbody>
+    <tbody>
+      <tr>
+        <div>
+          <th style="cursor:pointer" onclick="location.href='/home'">Home</th>
+        </div>
 
-    <tr>
-      <div>
-        <th style="cursor:pointer" onclick="location.href='/home'">Home</th>
-      </div>
+        <div>
+          <th style="cursor:pointer" onclick="location.href='/schedule'">Schedule</th>
+        </div>
 
-      <div>
-        <th style="cursor:pointer" onclick="location.href='/schedule'">Schedule</th>
-      </div>
+        <div>
+          <th style="cursor:pointer" onclick="location.href='/submit/request'">Submit</th>
+        </div>
 
-      <div>
-        <th style="cursor:pointer" onclick="location.href='/submit/request'">Submit</th>
-      </div>
-
-      <div>
-        <th style="cursor:pointer" onclick="location.href='/account/data'">Account</th>
-      </div>
-    </tr>
-
-  </tbody>
+        <div>
+          <th style="cursor:pointer" onclick="location.href='/account/data'">Account</th>
+        </div>
+      </tr>
+    </tbody>
 
   </table>
-  <h1 class = "top heading">Submit File</h1>
+
+  <div class="container_12">
+
+    <div class="grid_12 header">
+      <h1 class = "top heading">Submit Your File</h1>
+    </div>
+
+    <div class="clear"></div>
+  </div>
+
 </body>
 </html>

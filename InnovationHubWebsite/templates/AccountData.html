@@ -6,6 +6,7 @@
   <link href="{% static 'CSS/PageStyle.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyles2.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle3.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/PageStyle4.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/960.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/960_12_col.css' %}" rel = "stylesheet" type = "text/css">
   <title>InnovationHub  |  Account</title>
@@ -49,6 +50,45 @@
   </tbody>
 
   </table>
-  <h1 class = "top heading">Account Data</h1>
+  <div class="container_12">
+
+    <div class="grid_12 header">
+      <h1 class = "top heading">Your Account</h1>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_4 header"><h1></h1></div>
+    <div class="grid_4 header">
+
+      <h1 class="top"><img class='logo' src = "{% static 'Images/Icon.png' %}" alt = 'Your Face'></h1>
+
+    </div>
+    <div class="grid_4 header"></div>
+    <div class="clear"></div>
+
+    <div class="grid_12 header">
+      <table class="Data">
+        <thead>
+          <tr>
+            <th colspan="2">We know all about you...</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="Field">Name:</td>
+            <td class="LeftAlign">Aryaman Kejriwal</td>
+          </tr>
+          <tr>
+            <td class="Field">Class:</td>
+            <td class="LeftAlign">10D</td>
+          </tr>
+          <tr>
+            <td class="Field">Time:</td>
+            <td class="LeftAlign">{{Quota}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </body>
 </html>

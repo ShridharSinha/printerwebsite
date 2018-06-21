@@ -1,0 +1,18 @@
+/*COLOURS:
+ *#1A3C40
+ *#144D53
+ *#307672
+ *#E4EDDB
+ */
+
+ table.Data tbody tr td.Field {
+   background-color: #144D53;
+ }
+
+ table.Data tbody tr td.LeftAlign{
+   text-align: left;
+ }
+
+ table.Data tbody tr td.RightAlign{
+   text-align: right;
+ }
