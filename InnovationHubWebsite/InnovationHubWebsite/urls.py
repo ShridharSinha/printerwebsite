@@ -31,6 +31,7 @@ urlpatterns = [
     #Submit
     path('submit/', views.Submission),
     path('submit/request/', views.Submission),
+    path('submit/preview/', views.Preview),
     path('submit/form/', views.SubmissionForm),
     path('submit/success/', views.Success),
     path('submit/fail/', views.Fail),
@@ -47,4 +48,7 @@ urlpatterns = [
 
     #FeaturedPrints
     path('featuredPrints/', views.Featured),
+
+    #data
+    path('data/', views.Data),
 ]

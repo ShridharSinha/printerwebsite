@@ -21,6 +21,9 @@ def Submission(request):
     context = {'Quota' : '00:31:23'}
     return render(request, 'SubmitFile.html', context)
 
+def Preview(request):
+    return HttpResponse("Preview your model")
+
 def SubmissionForm(request):
     return HttpResponse("Submission Form")
 
@@ -58,3 +61,9 @@ def CarlPage(request):
 #Featured Prints
 def Featured(request):
     return HttpResponse("Featured Prints")
+
+
+#Raw Data Views
+def Data(request):
+    context = {}
+    return render(request, 'RawData.html', context)
