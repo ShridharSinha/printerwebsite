@@ -55,12 +55,14 @@ def layout(request):
 
 #The Carl Segment
 def CarlPage(request):
-    return HttpResponse("The Carl Page")
+    context = {'Quota' : '00:31:23'}
+    return render(request, 'CarlSegment.html', context)
 
 
 #Featured Prints
 def Featured(request):
-    return HttpResponse("Featured Prints")
+    context = {'Quota' : '00:31:23'}
+    return render(request, 'FeaturedPrints.html', context)
 
 
 #Raw Data Views
