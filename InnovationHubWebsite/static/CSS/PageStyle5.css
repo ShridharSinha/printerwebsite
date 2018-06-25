@@ -1,0 +1,17 @@
+/*COLOURS:
+ *#1A3C40
+ *#144D53
+ *#307672
+ *#E4EDDB
+ */
+
+table#NavBar.MenuBar {
+  border-collapse: separate;
+  border-spacing: 2px;
+
+  z-index:999;
+}
+
+img.logo {
+  z-index:0;
+}
