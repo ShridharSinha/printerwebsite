@@ -41,7 +41,6 @@ urlpatterns = [
     path('account/data/', views.AccountData),
     path('account/edit/', views.EditAccount),
     path('account/login/', views.Login),
-    path('account/signup/', views.SignUp),
 
     #CarlSegment
     path('carlSegment/', views.CarlPage),

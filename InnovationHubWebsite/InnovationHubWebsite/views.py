@@ -45,9 +45,6 @@ def EditAccount(request):
 def Login(request):
     return HttpResponse("Login to Account")
 
-def SignUp(request):
-    return HttpResponse("Create an Account")
-
 def layout(request):
     context = {'Quota' : '00:31:23'}
     return render(request, 'layout.html', context)

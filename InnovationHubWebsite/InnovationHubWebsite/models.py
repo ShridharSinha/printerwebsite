@@ -7,6 +7,10 @@ class User(models.Model):
     last_name =models.CharField(max_length=50)
     quota     =models.IntegerField()
 
+    def __str__(self):
+        name = self.first_name + " " + self.last_name
+        return(name)
+
 class Job(models.Model):
     job_id          =models.AutoField(primary_key=True)
     job_title       =models.CharField(max_length=50)
@@ -18,11 +22,14 @@ class Job(models.Model):
     fk_user         =models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     file_path       =models.CharField(max_length=50, null=True)
 
-class FeaturedPrints(models.Model):
+    def __str__(self):
+        return(self.job_title)
+
+class FeaturedPrint(models.Model):
     fk_user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     fk_job =models.ForeignKey(Job, on_delete=models.CASCADE, null=True)
     votes  =models.IntegerField()
 
-class RecentPrints(models.Model):
+class RecentPrint(models.Model):
     fk_user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     fk_job =models.ForeignKey(Job, on_delete=models.CASCADE, null=True)
