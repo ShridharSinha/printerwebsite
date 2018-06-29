@@ -27,6 +27,7 @@ urlpatterns = [
 
     #Schedule
     path('schedule/', views.Schedule),
+    path('printData/<int:jobid>', views.PrintData),
 
     #Submit
     path('submit/', views.Submission),

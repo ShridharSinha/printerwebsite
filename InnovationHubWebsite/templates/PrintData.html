@@ -54,68 +54,66 @@
   </table>
 
   <div class="container_12">
-    <div class="grid_12 header"><h1 class="top heading">Schedule</h1></div>
+    <div class="grid_12 header"><h1 class="top heading">Print Details</h1></div>
     <div class="clear"></div>
 
-    <div class="grid_12 header">
+    <div class="grid_6 header">
       <table class="Data">
         <thead>
           <tr>
-            <th colspan="4">My Print Schedule</th>
+            {% for Job in JobData%}
+            <th>{{Job.job_title}}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid_6 header">
+      <table class="Data">
+        <thead>
+          <tr>
+            <th colspan="2">Print Information</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr class="Subheading">
-            <td>#</td>
-            <td>Print Name</td>
-            <td>Status</td>
-            <td>PickUp Date*</td>
-          </tr>
-
-          {% for Job in Jobs %}
+          {% for Job in JobData %}
           <tr>
-            <td style="cursor:pointer" onclick="location.href='/printData/{{Job.job_id}}'" class="Hover">{{Job.job_id}}</td>
+            <td class="Field">ID:</td>
+            <td>{{Job.job_id}}</td>
+          </tr>
+          <tr>
+            <td class="Field">Name:</td>
             <td>{{Job.job_title}}</td>
+          </tr>
+          <tr>
+            <td class="Field">Status:</td>
             <td>{{Job.status}}</td>
+          </tr>
+          <tr>
+            <td class="Field">Upload Date:</td>
+            <td>{{Job.upload_time}}</td>
+          </tr>
+          <tr>
+            <td class="Field">Print Date:</td>
             <td>{{Job.print_start_time}}</td>
           </tr>
-          {% endfor %}
-
-        </tbody>
-
-        <thead>
-          <tr class="FooterNote">
-            <th colspan="4">*PickUp Dates are Approximate</td>
+          <tr>
+            <td class="Field">PickUp Date:</td>
+            <td>{{Job.print_end_time}}</td>
           </tr>
-        </thead>
+        </tbody>
+        {% endfor %}
+
       </table>
     </div>
     <div class="clear"></div>
-    <div class="grid_12 header">
-      <table class="Data">
-        <thead>
-          <tr>
-            <th colspan="3">My Top Prints</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr class="Subheading">
-            <td>Name 1</td>
-            <td>Name 2</td>
-            <td>Name 3</td>
-          </tr>
-
-          <tr>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
-          </tr>
-        </tbody>
-
-      </table>
-    </div>
   </div>
 
   <table class="Data Footer">

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
+from  .models import *
 
 # Create your views here.
 
@@ -12,7 +13,13 @@ def HomePage(request):
 
 #Schedule Views
 def Schedule(request):
-    context = {'Quota' : '00:31:23'}
+    prints = Job.objects.all()
+    context = {'Quota' : '00:31:23',
+               'Jobs'  : prints,
+              }
+    #for i in range(0, len(prints)):
+        #context["Job"    + str(i)] = prints[i].__str__()
+        #context["Status" + str(i)] = prints[i].status
     return render(request, 'SchedulePage.html', context)
 
 
@@ -32,6 +39,12 @@ def Success(request):
 
 def Fail(request):
     return HttpResponse("Submission Fail")
+
+def PrintData(request, jobid):
+    printData = Job.objects.filter(job_id=jobid)
+    context = {'Quota'   : '00:31:23',
+               'JobData' : printData}
+    return render(request, 'PrintData.html', context)
 
 
 #Account Views
