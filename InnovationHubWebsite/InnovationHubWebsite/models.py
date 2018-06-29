@@ -28,11 +28,24 @@ class Job(models.Model):
 
 
 class FeaturedPrint(models.Model):
-    fk_user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    #fk_user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     fk_job =models.ForeignKey(Job, on_delete=models.CASCADE, null=True)
     votes  =models.IntegerField()
-    
+
+    #ERRORY LINE
+    def __str__(self):
+        name = ''
+        for n in FeaturedPrint.objects.raw('SELECT job_title FROM FeaturedPrint , Job WHERE FeaturedPrint.fk_job = Job.job_id;'):
+            name = n
+        return(name)
+
+    #def __str__(self):
+    #    job = FeaturedPrint.objects.filter(job_id = self.fk_job).select_related()
+    #    return(job.job_title)
+
 
 class RecentPrint(models.Model):
-    fk_user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    #fk_user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     fk_job =models.ForeignKey(Job, on_delete=models.CASCADE, null=True)
+
+    #def __str__(self):
