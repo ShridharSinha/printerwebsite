@@ -33,15 +33,18 @@ class FeaturedPrint(models.Model):
     votes  =models.IntegerField()
 
     #ERRORY LINE
-    def __str__(self):
-        name = ''
-        for n in FeaturedPrint.objects.raw('SELECT job_title FROM FeaturedPrint , Job WHERE FeaturedPrint.fk_job = Job.job_id;'):
-            name = n
-        return(name)
+    #def __str__(self):
+    #    name = ''
+    #    for n in FeaturedPrint.objects.raw('SELECT job_title FROM FeaturedPrint , Job WHERE FeaturedPrint.fk_job = Job.job_id;'):
+    #        name = n
+    #    return(name)
 
     #def __str__(self):
     #    job = FeaturedPrint.objects.filter(job_id = self.fk_job).select_related()
     #    return(job.job_title)
+
+    def __str__(self):
+        return(self.fk_job.__str__())
 
 
 class RecentPrint(models.Model):

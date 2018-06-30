@@ -71,7 +71,9 @@ def CarlPage(request):
 
 #Featured Prints
 def Featured(request):
-    context = {'Quota' : '00:31:23'}
+    context = {'Quota' : '00:31:23',
+               'Jobs'  : FeaturedPrint.objects.all()}
+
     return render(request, 'FeaturedPrints.html', context)
 
 
