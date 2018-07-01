@@ -129,11 +129,13 @@
             <td>Name</td>
           </tr>
 
+          {%for user in TopPrints%}
           <tr>
-            <td>1</td>
-            <td>Aryaman Kejriwal</td>
+            <td>{{user.user_id}}</td>
+            <td>{{user}}</td>
           </tr>
-          <tr>
+          {%endfor%}
+          <!--<tr>
             <td>2</td>
             <td>Shridhar Sinha</td>
           </tr>
@@ -148,7 +150,7 @@
           <tr>
             <td>5</td>
             <td>Carl(R.I.P.)</td>
-          </tr>
+          </tr>-->
 
         </tbody>
       </table>
@@ -169,7 +171,14 @@
             <td>Name</td>
           </tr>
 
+          {%for user in TopPrints%}
           <tr>
+            <td>{{user.user_id}}</td>
+            <td>{{user}}</td>
+          </tr>
+          {%endfor%}
+
+          <!--<tr>
             <td>1</td>
             <td>Aryaman Kejriwal</td>
           </tr>
@@ -188,7 +197,7 @@
           <tr>
             <td>5</td>
             <td>Carl(R.I.P.)</td>
-          </tr>
+          </tr>-->
 
         </tbody>
       </table>

@@ -19,6 +19,8 @@ def HomePage(request):
 
     for i in range(3, len(context.get('FeaturedPrint'))):
         context.get('FeaturedPrint').pop()
+
+    context['TopPrints'] = list(User.objects.all())
     return render(request, 'HomePage.html', context)
 
 
