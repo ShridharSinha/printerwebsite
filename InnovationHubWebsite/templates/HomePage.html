@@ -220,9 +220,9 @@
 
         <tbody>
           <tr class="Subheading">
-            <td>Name 1</td>
-            <td>Name 2</td>
-            <td>Name 3</td>
+            {% for Job in FeaturedPrint %}
+            <td>{{Job}}</td>
+            {%endfor%}
           </tr>
           <tr>
             <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
@@ -233,9 +233,9 @@
 
         <thead>
           <tr>
-            <th class="Votes">Voting</th>
-            <th class="Votes">Voting</th>
-            <th class="Votes">Voting</th>
+            {% for Job in FeaturedPrint %}
+            <th class="Votes">{{Job.votes}}</th>
+            {%endfor%}
           </tr>
 
           <tr>

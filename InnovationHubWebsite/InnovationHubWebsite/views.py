@@ -8,6 +8,17 @@ from  .models import *
 #HomePage Views
 def HomePage(request):
     context = {'Quota' : '00:31:23'}
+    context['FeaturedPrint'] = list(FeaturedPrint.objects.all())
+
+    for i in range(0, len(context.get('FeaturedPrint'))):
+        for j in range(0, len(context.get('FeaturedPrint')) - i - 1):
+            if(context.get('FeaturedPrint')[j].votes < context.get('FeaturedPrint')[j + 1].votes):
+                temp = context.get('FeaturedPrint')[j]
+                context.get('FeaturedPrint')[j] = context.get('FeaturedPrint')[j + 1]
+                context.get('FeaturedPrint')[j + 1] = temp
+
+    for i in range(3, len(context.get('FeaturedPrint'))):
+        context.get('FeaturedPrint').pop()
     return render(request, 'HomePage.html', context)
 
 
@@ -72,7 +83,14 @@ def CarlPage(request):
 #Featured Prints
 def Featured(request):
     context = {'Quota' : '00:31:23',
-               'Jobs'  : FeaturedPrint.objects.all()}
+               'Jobs'  : list(FeaturedPrint.objects.all())}
+
+    for i in range(0, len(context.get('Jobs'))):
+        for j in range(0, len(context.get('Jobs')) - i - 1):
+            if(context.get('Jobs')[j].votes < context.get('Jobs')[j + 1].votes):
+                temp = context.get('Jobs')[j]
+                context.get('Jobs')[j] = context.get('Jobs')[j + 1]
+                context.get('Jobs')[j + 1] = temp
 
     return render(request, 'FeaturedPrints.html', context)
 
