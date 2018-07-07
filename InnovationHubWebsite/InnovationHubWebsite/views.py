@@ -24,9 +24,18 @@ def HomePage(request):
     return render(request, 'HomePage.html', context)
 
 
+
 #Schedule Views
 def Schedule(request):
-    prints = Job.objects.all()
+    prints = list(Job.objects.all())
+
+    for i in range(0, len(prints)):
+        for j in range(0, len(prints) - i - 1):
+            if(prints[j].job_id > prints[j + 1].job_id):
+                temp = prints[j]
+                prints[j] = prints[j + 1]
+                prints[j + 1] = temp
+
     context = {'Quota' : '00:31:23',
                'Jobs'  : prints,
               }
@@ -34,6 +43,7 @@ def Schedule(request):
         #context["Job"    + str(i)] = prints[i].__str__()
         #context["Status" + str(i)] = prints[i].status
     return render(request, 'SchedulePage.html', context)
+
 
 
 #Submit Views
@@ -60,6 +70,7 @@ def PrintData(request, jobid):
     return render(request, 'PrintData.html', context)
 
 
+
 #Account Views
 def AccountData(request):
     context = {'Quota' : '00:31:23'}
@@ -74,6 +85,7 @@ def Login(request):
 def layout(request):
     context = {'Quota' : '00:31:23'}
     return render(request, 'layout.html', context)
+
 
 
 #The Carl Segment
@@ -95,9 +107,3 @@ def Featured(request):
                 context.get('Jobs')[j + 1] = temp
 
     return render(request, 'FeaturedPrints.html', context)
-
-
-#Raw Data Views
-def Data(request):
-    context = {}
-    return render(request, 'RawData.html', context)

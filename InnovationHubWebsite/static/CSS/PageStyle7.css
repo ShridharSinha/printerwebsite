@@ -1,0 +1,31 @@
+/*COLOURS:
+ *#1A3C40
+ *#144D53
+ *#307672
+ *#E4EDDB
+ */
+
+input {
+  background-color: #307672;
+  color:#E4EDDB;
+  border:2px solid #144D53;
+  border-radius: 6px;
+
+  font-family: monospace;
+  font-size: 20px;
+
+  text-align: center;
+
+  padding: 2px;
+}
+
+input.Submit {
+  padding: 3px;
+}
+
+input.Submit:hover {
+  background-color: #E4EDDB;
+  color:#307672;
+
+  cursor:pointer;
+}

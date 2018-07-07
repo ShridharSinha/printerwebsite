@@ -8,8 +8,15 @@
   <link href="{% static 'CSS/PageStyle3.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle4.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle5.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/PageStyle6.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/PageStyle7.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/960.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/960_12_col.css' %}" rel = "stylesheet" type = "text/css">
+
+  <script src="{% static 'JS/p5.js' %}"></script>
+  <script src="{% static 'JS/p5.dom.js' %}"></script>
+  <!--<script src="{% static 'JS/Background.js' %}"></script>-->
+
   <title>InnovationHub  |  Submit</title>
 </head>
 
@@ -50,6 +57,8 @@
 
   </table>
 
+  <div id="Background" style="z-index: -999; position: fixed; width:100%; height:100%;"></div>
+
   <div class="container_12">
 
     <div class="grid_12 header">
@@ -58,39 +67,44 @@
 
     <div class="clear"></div>
     <div class="grid_12 header">
-      <table class="Data Footer">
-        <thead>
-          <tr>
-            <th colspan="2">File Information</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="Field">Print Name:</td>
-            <td>[Enter your print name here]</td>
-          </tr>
-          <tr>
-            <td class="Field">.stl File:</td>
-            <td>[select your .stl file]</td>
-          </tr>
-        </tbody>
+      <form>
+        <table class="Data Footer">
+          <thead>
+            <tr>
+              <th colspan="2" style="padding:0px 0px 10px 0px;">File Information</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="Field">Print Name:</td>
+              <td><input type="text" name="printName"></td>
+            </tr>
+            <tr>
+              <td class="Field">Colour:</td>
+              <td><input type="text" name="colour"></td>
+            </tr>
+            <tr>
+              <td class="Field">.stl File:</td>
+              <td><input type="text" name="file"></td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
 
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-          </tr>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
 
-          <tr>
-            <th></th>
-            <th></th>
-          </tr>
-
-          <tr>
-            <th colspan="2" class="Button" style="font-size:20px;">Submit</th>
-          </tr>
-        </thead>
-      </table>
+            <tr>
+              <th colspan="2"><input type="submit" name="Submit" class="Submit"></th>
+            </tr>
+          </thead>
+        </table>
+      </form>
     </div>
   </div>
 

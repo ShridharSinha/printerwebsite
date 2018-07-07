@@ -48,7 +48,4 @@ urlpatterns = [
 
     #FeaturedPrints
     path('featuredPrints/', views.Featured),
-
-    #data
-    path('data/', views.Data),
 ]

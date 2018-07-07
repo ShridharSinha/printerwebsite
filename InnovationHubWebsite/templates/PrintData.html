@@ -9,8 +9,14 @@
   <link href="{% static 'CSS/PageStyle4.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle5.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle6.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/PageStyle7.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/960.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/960_12_col.css' %}" rel = "stylesheet" type = "text/css">
+
+  <script src="{% static 'JS/p5.js' %}"></script>
+  <script src="{% static 'JS/p5.dom.js' %}"></script>
+  <!--<script src="{% static 'JS/Background.js' %}"></script>-->
+
   <title>InnovationHub  |  Schedule</title>
 </head>
 
@@ -52,6 +58,8 @@
   </tbody>
 
   </table>
+
+  <div id="Background" style="z-index: -999; position: fixed; width:100%; height:100%;"></div>
 
   <div class="container_12">
     <div class="grid_12 header"><h1 class="top heading">Print Details</h1></div>
