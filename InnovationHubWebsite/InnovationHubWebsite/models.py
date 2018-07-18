@@ -26,6 +26,9 @@ class Job(models.Model):
     def __str__(self):
         return(self.job_title)
 
+    def getStatus(self):
+        return(self.status)
+
 
 class FeaturedPrint(models.Model):
     #print_id =models.AutoField(primary_key=True)

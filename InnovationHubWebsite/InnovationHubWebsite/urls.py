@@ -48,4 +48,7 @@ urlpatterns = [
 
     #FeaturedPrints
     path('featuredPrints/', views.Featured),
+
+    #Layout
+    path('layout/', views.Layout),
 ]

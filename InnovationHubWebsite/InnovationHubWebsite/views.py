@@ -28,6 +28,12 @@ def HomePage(request):
 #Schedule Views
 def Schedule(request):
     prints = list(Job.objects.all())
+    printed = []
+
+    for i in range(len(prints) - 1, -1):
+        if(prints[i].getStatus() == "Printed"):
+            p = prints.pop(i)
+            printed.append(p)
 
     for i in range(0, len(prints)):
         for j in range(0, len(prints) - i - 1):
@@ -107,3 +113,9 @@ def Featured(request):
                 context.get('Jobs')[j + 1] = temp
 
     return render(request, 'FeaturedPrints.html', context)
+
+
+#Layout
+def Layout(request):
+    context = {}
+    return render(request, 'Layout.html', context)
