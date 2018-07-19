@@ -1,0 +1,46 @@
+{% extends "Layout.html" %}
+{% load static %}
+  {% block title %}InnovationHub  |  Login{% endblock %}
+
+  {% block heading %}Login{% endblock %}
+
+  {% block content %}
+  <div class="container_12">
+    <div class="grid_12 header">
+      <form>
+        <table class="Data Footer">
+          <thead>
+            <tr>
+              <th colspan="2" style="padding:0px 0px 10px 0px;">Enter Your Information</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="Field" style="font-size: 25px;">Username:</td>
+              <td><input type="text" name="username" style="font-size: 25px;"></td>
+            </tr>
+            <tr>
+              <td class="Field" style="font-size: 25px;">Password:</td>
+              <td><input type="password" name="password" style="font-size: 25px;"></td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+
+            <tr>
+              <th colspan="2"><input type="submit" name="submit" class="Submit" style="font-size: 25px;" value="Login"></th>
+            </tr>
+          </thead>
+        </table>
+      </form>
+    </div>
+  </div>
+  {% endblock %}

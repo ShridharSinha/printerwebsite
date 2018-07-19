@@ -27,13 +27,18 @@ def HomePage(request):
 
 #Schedule Views
 def Schedule(request):
-    prints = list(Job.objects.all())
-    printed = []
+    inQueue  = list(Job.objects.filter(status = "in Queue"))
+    printing = list(Job.objects.filter(status = "Printing"))
 
-    for i in range(len(prints) - 1, -1):
-        if(prints[i].getStatus() == "Printed"):
-            p = prints.pop(i)
-            printed.append(p)
+    prints = []
+
+    for i in range(0, len(inQueue)):
+        prints.append(inQueue[i])
+
+    for i in range(0, len(printing)):
+        prints.append(printing[i])
+
+    printed  = list(Job.objects.filter(status = "Printed"))
 
     for i in range(0, len(prints)):
         for j in range(0, len(prints) - i - 1):
@@ -42,8 +47,16 @@ def Schedule(request):
                 prints[j] = prints[j + 1]
                 prints[j + 1] = temp
 
-    context = {'Quota' : '00:31:23',
-               'Jobs'  : prints,
+    for i in range(0, len(printed)):
+        for j in range(0, len(printed) - i - 1):
+            if(printed[j].job_id > printed[j + 1].job_id):
+                temp = printed[j]
+                printed[j] = printed[j + 1]
+                printed[j + 1] = temp
+
+    context = {'Quota'   : '00:31:23',
+               'Jobs'    : prints,
+               'Printed' : printed,
               }
     #for i in range(0, len(prints)):
         #context["Job"    + str(i)] = prints[i].__str__()
@@ -100,6 +113,11 @@ def CarlPage(request):
     return render(request, 'CarlSegment.html', context)
 
 
+#Login views
+def Login(request):
+    context = {'Quota' : '00:31:23'}
+    return render(request, 'Login.html', context)
+
 #Featured Prints
 def Featured(request):
     context = {'Quota' : '00:31:23',
@@ -117,5 +135,15 @@ def Featured(request):
 
 #Layout
 def Layout(request):
-    context = {}
+    context = {'Quota' : '00:31:23'}
     return render(request, 'Layout.html', context)
+
+
+#Errors
+#def error_404_view(request, exception):
+#    context = {'Quota' : '00:31:23',}
+#    return render(request, '404.html', context)
+
+#def error_500_view(request, exception):
+#    context = {'Quota' : '00:31:23',}
+#    return render(request, '500.html', context)

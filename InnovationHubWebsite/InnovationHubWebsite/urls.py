@@ -18,6 +18,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
     #admin
     path('admin/', admin.site.urls),
 
@@ -46,9 +47,15 @@ urlpatterns = [
     #CarlSegment
     path('carlSegment/', views.CarlPage),
 
+    #Login
+    path('login/', views.Login),
+
     #FeaturedPrints
     path('featuredPrints/', views.Featured),
 
     #Layout
     path('layout/', views.Layout),
 ]
+
+#handler404 = 'views.error_404_view'
+#handler500 = 'views.error_500_view'

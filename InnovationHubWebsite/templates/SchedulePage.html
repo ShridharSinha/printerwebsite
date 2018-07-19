@@ -7,6 +7,7 @@
   {% block content %}
   <div class="container_12">
     <div class="grid_12 header">
+      {% if Jobs %}
       <table class="Data">
         <thead>
           <tr>
@@ -39,7 +40,51 @@
           </tr>
         </thead>
       </table>
+      {% else %}
+      <h1 class="top heading">You don't seem to have any pending prints</h1>
+      {% endif %}
     </div>
+    <div class="clear"></div>
+
+    <div class="grid_12 header">
+      {% if Printed %}
+      <table class="Data">
+        <thead>
+          <tr>
+            <th colspan="4">My Completed Print</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="Subheading">
+            <td>#</td>
+            <td>Print Name</td>
+            <td>Status</td>
+            <td>PickUp Date*</td>
+          </tr>
+
+          {% for Job in Printed %}
+          <tr>
+            <td style="cursor:pointer" onclick="location.href='/printData/{{Job.job_id}}'" class="Hover">{{Job.job_id}}</td>
+            <td>{{Job.job_title}}</td>
+            <td>{{Job.status}}</td>
+            <td>{{Job.print_start_time}}</td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+
+        <thead>
+          <tr class="FooterNote">
+            <th colspan="4">*PickUp Dates are Approximate</td>
+          </tr>
+        </thead>
+      </table>
+      {% else %}
+      <h1 class="top heading">You don't seem to have any completed prints</h1>
+      {% endif %}
+    </div>
+
     <div class="clear"></div>
     <div class="grid_12 header">
       <table class="Data">

@@ -45,9 +45,9 @@
 {% endblock %}
 
 {% block body %}
-<body>
+<body style="margin:0px; padding:0px 2px;">
   {% block header %}
-  <table class = "MenuBar" id="NavBar">
+  <table class = "MenuBar" id="NavBar" style="margin: 4px auto auto auto">
     <thead>
       <tr>
         <th rowspan = "2" colspan = "1" id="WhiteBack"><a href="https://www.curiositygym.com" target="_blank"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></th>
@@ -97,6 +97,8 @@
   {% block content %}{% endblock %}
 
   {% block footer %}
+  <p style="font-size:41px; color:#E4EDDB; cursor:default;">|                                                        |</p>
+  <div style="bottom:-76%; height:100%; position:fixed; width:100%">
   <table class="Data Footer">
     <thead>
       <tr>
@@ -113,9 +115,20 @@
         <td>lorem@ipsum.com</td>
       </tr>
     </tbody>
+    <thead>
+      <tr></tr>
+      <tr></tr>
+      <tr></tr>
+      <tr></tr>
+      <tr>
+        <th class="Button" colspan="2">Developed by Aryaman Kejriwal and Shridhar Sinha</th>
+      </tr>
+    </thead>
   </table>
+  </div>
   {% endblock %}
 </body>
+</div>
 {% endblock %}
 
 </html>
