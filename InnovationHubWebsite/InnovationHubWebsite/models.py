@@ -22,6 +22,9 @@ class Job(models.Model):
     printer_name    =models.CharField(max_length=20, null=True)
     fk_user         =models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     file_path       =models.CharField(max_length=50, null=True)
+    uploadDate = ''
+    startDate = ''
+    endDate = ''
 
     def __str__(self):
         return(self.job_title)

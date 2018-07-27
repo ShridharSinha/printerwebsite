@@ -21,6 +21,10 @@ def HomePage(request):
         context.get('FeaturedPrint').pop()
 
     context['TopPrints'] = list(User.objects.all())
+
+    context['BestPrintMonth'] = list(Job.objects.filter(job_id = 20))
+    context['BestPrintYear' ] = list(Job.objects.filter(job_id = 20))
+
     return render(request, 'HomePage.html', context)
 
 
@@ -40,6 +44,7 @@ def Schedule(request):
 
     printed  = list(Job.objects.filter(status = "Printed"))
 
+    #Sorting the lists
     for i in range(0, len(prints)):
         for j in range(0, len(prints) - i - 1):
             if(prints[j].job_id > prints[j + 1].job_id):
@@ -53,6 +58,23 @@ def Schedule(request):
                 temp = printed[j]
                 printed[j] = printed[j + 1]
                 printed[j + 1] = temp
+
+    #Formatting dates correctly
+    for i in range(0, len(prints)):
+        day  = prints[i].print_end_time.day
+        month = prints[i].print_end_time.month
+        year  = prints[i].print_end_time.year
+
+        date = str(day) + ' / ' + str(month) + ' / ' + str(year)
+        prints[i].endDate = date
+
+    for i in range(0, len(printed)):
+        day  = printed[i].print_end_time.day
+        month = printed[i].print_end_time.month
+        year  = printed[i].print_end_time.year
+
+        date = str(day) + ' / ' + str(month) + ' / ' + str(year)
+        printed[i].endDate = date
 
     context = {'Quota'   : '00:31:23',
                'Jobs'    : prints,
@@ -83,7 +105,13 @@ def Fail(request):
     return HttpResponse("Submission Fail")
 
 def PrintData(request, jobid):
-    printData = Job.objects.filter(job_id=jobid)
+    printData = list(Job.objects.filter(job_id=jobid))
+
+    for i in range(0, len(printData)):
+        printData[i].uploadDate = str(printData[i].upload_time.day)      + ' / ' + str(printData[i].upload_time.month)      + ' / ' + str(printData[i].upload_time.year)
+        printData[i].startDate  = str(printData[i].print_start_time.day) + ' / ' + str(printData[i].print_start_time.month) + ' / ' + str(printData[i].print_start_time.year)
+        printData[i].endDate    = str(printData[i].print_end_time.day)   + ' / ' + str(printData[i].print_end_time.month)   + ' / ' + str(printData[i].print_end_time.year)
+
     context = {'Quota'   : '00:31:23',
                'JobData' : printData}
     return render(request, 'PrintData.html', context)

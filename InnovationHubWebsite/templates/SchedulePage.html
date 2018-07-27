@@ -28,7 +28,7 @@
             <td style="cursor:pointer" onclick="location.href='/printData/{{Job.job_id}}'" class="Hover">{{Job.job_id}}</td>
             <td>{{Job.job_title}}</td>
             <td>{{Job.status}}</td>
-            <td>{{Job.print_start_time}}</td>
+            <td>{{Job.endDate}}</td>
           </tr>
           {% endfor %}
 
@@ -68,7 +68,7 @@
             <td style="cursor:pointer" onclick="location.href='/printData/{{Job.job_id}}'" class="Hover">{{Job.job_id}}</td>
             <td>{{Job.job_title}}</td>
             <td>{{Job.status}}</td>
-            <td>{{Job.print_start_time}}</td>
+            <td>{{Job.endDate}}</td>
           </tr>
           {% endfor %}
 

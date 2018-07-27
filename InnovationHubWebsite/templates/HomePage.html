@@ -51,6 +51,11 @@
           </tr>
         </thead>
         <tbody>
+          {% for Job in BestPrintMonth %}
+          <tr class="Subheading">
+            <td>{{Job.job_title}}
+          </tr>
+          {% endfor %}
           <tr>
             <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
           </tr>
@@ -153,6 +158,11 @@
           </tr>
         </thead>
         <tbody>
+          {% for Job in BestPrintMonth %}
+          <tr class="Subheading">
+            <td>{{Job.job_title}}
+          </tr>
+          {% endfor %}
           <tr>
             <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
           </tr>
@@ -190,7 +200,7 @@
           </tr>
 
           <tr>
-            <td colspan="3" style="font-size:15px; color:#1A3C40"> H</td>
+            <td colspan="3" style="font-size:15px; color:#1A3C40; cursor:default;">Innovation Hub Secret Code:2938 (Tell Carl Sir to redeem prize)</td>
           </tr>
 
           <tr>
@@ -201,6 +211,20 @@
         </thead>
 
       </table>
+    </div>
+
+    <div class="clear"></div>
+    <div class="grid_1 header"><p></p></div>
+    <div class="grid_10 header">
+      <table class="Data" style="border-radius:12px; background-color:#307672; border: 0px;">
+        <tbody>
+          <tr>
+            <td style="font-size: 25px; cursor:pointer; border-radius:6px;" onclick="location.href='/carlSegment/'">Want to learn how to use this website? Click here:</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--<h1 class="top heading hover"style="font-size: 25px; cursor:pointer; border-radius:6px;" onclick="location.href='/login/'">Not your account? Login Here:</th1>-->
     </div>
 
   </div>
