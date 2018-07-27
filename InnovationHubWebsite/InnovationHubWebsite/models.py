@@ -1,10 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
-class User(models.Model):
-    user_id   =models.AutoField(primary_key=True)
-    first_name=models.CharField(max_length=50)
-    last_name =models.CharField(max_length=50)
+class Profile(models.Model):
+    user      = models.OneToOneField(User, on_delete=models.CASCADE)
     quota     =models.IntegerField()
 
     def __str__(self):
@@ -20,7 +19,7 @@ class Job(models.Model):
     print_start_time=models.DateTimeField(null=True)
     print_end_time  =models.DateTimeField(null=True)
     printer_name    =models.CharField(max_length=20, null=True)
-    fk_user         =models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    fk_profile      =models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     file_path       =models.CharField(max_length=50, null=True)
     uploadDate = ''
     startDate = ''

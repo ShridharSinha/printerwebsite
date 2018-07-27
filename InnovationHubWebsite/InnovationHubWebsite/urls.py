@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
 
@@ -42,7 +43,7 @@ urlpatterns = [
     path('account/', views.AccountData),
     path('account/data/', views.AccountData),
     path('account/edit/', views.EditAccount),
-    path('account/login/', views.Login),
+    path('account/login/', auth_views.login, name='login'),
 
     #CarlSegment
     path('carlSegment/', views.CarlPage),
