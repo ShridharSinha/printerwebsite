@@ -4,10 +4,14 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user      = models.OneToOneField(User, on_delete=models.CASCADE)
-    quota     =models.IntegerField()
+    quota     = models.IntegerField()
 
     def __str__(self):
-        name = self.first_name + " " + self.last_name
+        name = ""
+        if(self.user.first_name != ""):
+            name = self.user.first_name + " " + self.user.last_name
+        else:
+            name = self.user.username
         return(name)
 
 

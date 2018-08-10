@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Job)
 admin.site.register(FeaturedPrint)
 admin.site.register(RecentPrint)
+admin.site.register(Profile)
