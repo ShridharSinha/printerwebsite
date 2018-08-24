@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
 from  .models import *
+from .Util import *
+from datetime import *
+
 
 # Create your views here.
 
@@ -20,7 +23,15 @@ def HomePage(request):
     for i in range(3, len(context.get('FeaturedPrint'))):
         context.get('FeaturedPrint').pop()
 
-    context['TopPrints'] = list(User.objects.all())
+    #profiles = list(Profile.objects.all())
+    #context['TopPrints'] = {'Profiles': [],
+                            #'Numbers' : [],
+                            #}
+    #for i in range(1, len(profiles) + 1):
+    #    context['TopPrints']['Profiles'].append(profiles[i - 1])
+    #    context['TopPrints']['Numbers'].append(i + 1)
+
+    context['TopPrints'] = list(Profile.objects.all())
 
     context['BestPrintMonth'] = list(Job.objects.filter(job_id = 20))
     context['BestPrintYear' ] = list(Job.objects.filter(job_id = 20))
@@ -95,7 +106,28 @@ def Submission(request):
 def Preview(request):
     return HttpResponse("Preview your model")
 
-def SubmissionForm(request):
+def SubmissionRequest(request):
+
+    if request.method == 'POST':
+
+        newJob = Job()
+        util   = Util()
+
+        newJob.job_title = request.POST.get('printName')
+        newJob.colour    = request.POST.get('colour')
+
+        path = util.handle_file(request.FILES['file'], request.POST.get('printName'))
+        newJob.file_path = path
+        newJob.status = 'in Queue'
+
+        newJob.uploadTime = datetime.now()
+        newJob.uploadTime = datetime.now()
+        newJob.print_start_time = datetime.now()
+        newJob.print_end_time   = datetime.now()
+        #newJob.fk_profile       =
+
+        newJob.save()
+
     return HttpResponse("Submission Form")
 
 def Success(request):

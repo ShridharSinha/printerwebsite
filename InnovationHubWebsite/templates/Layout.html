@@ -15,6 +15,12 @@
 
   {% endblock %}
 
+  {% block hiddenVar %}
+
+  <input type="hidden" value="0"    id="modelNum"></input>
+
+  {% endblock %}
+
   {% block css %}
   {% load static %}
   <link href="{% static 'CSS/PageStyle.css' %}" rel = "stylesheet" type = "text/css">
@@ -38,7 +44,7 @@
   <!--<script src="{% static 'JS/Thor.js' %}"></script>
   <script src="{% static 'JS/Zeus.js' %}"></script>-->
 
-  <script src="{% static 'JS/Model.js' %}"></script>
+  <script src="{% static 'JS/cd.js' %}"></script>
 
   {% endblock %}
 
@@ -75,7 +81,7 @@
         </div>
 
         <div>
-          <th style="cursor:pointer" onclick="location.href='/submit/request'">Submit</th>
+          <th style="cursor:pointer" onclick="location.href='/submit'">Submit</th>
         </div>
 
         <div>
@@ -100,9 +106,9 @@
   {% block content %}{% endblock %}
 
   {% block footer %}
-  <p style="font-size:41px; color:#E4EDDB; cursor:default;">|</p>
-  <div style="bottom:-76%; height:100%; position:fixed; width:100%">
-  <table class="Data Footer">
+  <!--<p style="font-size:41px; color:#E4EDDB; cursor:default;">|</p>-->
+  <div style="background-color:#1A3C40; bottom:0%; height:100%; position:relative; width:100%">
+  <table class="Data Footer" style="border:#1A3C40;">
     <thead>
       <tr>
         <th colspan="2">Contact us at:</th>

@@ -33,9 +33,8 @@ urlpatterns = [
 
     #Submit
     path('submit/', views.Submission),
-    path('submit/request/', views.Submission),
+    path('submit/request/', views.SubmissionRequest),
     path('submit/preview/', views.Preview),
-    path('submit/form/', views.SubmissionForm),
     path('submit/success/', views.Success),
     path('submit/fail/', views.Fail),
 
