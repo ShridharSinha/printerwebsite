@@ -23,13 +23,14 @@
 
   {% block css %}
   {% load static %}
-  <link href="{% static 'CSS/PageStyle.css' %}" rel = "stylesheet" type = "text/css">
+  <!--<link href="{% static 'CSS/PageStyle.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle2.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle3.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle4.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle5.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/PageStyle6.css' %}" rel = "stylesheet" type = "text/css">
-  <link href="{% static 'CSS/PageStyle7.css' %}" rel = "stylesheet" type = "text/css">
+  <link href="{% static 'CSS/PageStyle7.css' %}" rel = "stylesheet" type = "text/css">-->
+  <link href="{% static 'CSS/Styles.css' %}" rel = "stylesheet" type = "text/css">
 
   <link href="{% static 'CSS/960.css' %}" rel = "stylesheet" type = "text/css">
   <link href="{% static 'CSS/960_12_col.css' %}" rel = "stylesheet" type = "text/css">
@@ -61,11 +62,21 @@
       <tr>
         <th rowspan = "2" colspan = "1" id="WhiteBack"><a href="https://www.curiositygym.com" target="_blank"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></th>
         <th rowspan = "2" colspan = "2" style="cursor:pointer; font-size: 35px;" onclick="location.href='/carlSegment/'" id="Carl">The Carl Segment</th>
-        <th style="cursor:pointer" onclick="location.href='/account/data'">TIME</th>
+        {% if user.is_authenticated %}
+        <th style="cursor:pointer; border:#E4EDDB solid 3px; border-radius:6px;" onclick="location.href='/logout'">LOGOUT</th>
+        {% else %}
+        <th style="cursor:pointer; border:#E4EDDB solid 3px; border-radius:6px;" onclick="location.href='/login'">LOGIN</th>
+        {% endif %}
       </tr>
 
       <tr>
+        {% if user.is_superuser %}
+        <th style="cursor:pointer; border:#E4EDDB solid 3px; border-radius:6px;" onclick="location.href='/ADMIN'">ADMIN</th>
+        {% elif user.is_authenticated %}
         <th style="cursor:pointer" onclick="location.href='/account/data'">{{Quota}}</th>
+        {% else %}
+        <th style="cursor:pointer">--:--:--</th>
+        {% endif %}
       </tr>
 
     </thead>
@@ -95,7 +106,7 @@
   {% endblock %}
 
   {% block JSbackground %}
-  <div id="Background" style="z-index: -999; position: fixed; width:100%; height:100%;"></div>
+  <div id="Background" style="z-index: -1000; position: fixed; width:100%; height:100%;"></div>
   {% endblock %}
 
   <div class="container_12">

@@ -35,26 +35,35 @@ urlpatterns = [
     path('submit/', views.Submission),
     path('submit/request/', views.SubmissionRequest),
     path('submit/preview/', views.Preview),
-    path('submit/success/', views.Success),
-    path('submit/fail/', views.Fail),
+    path('submit/request/success/', views.Success),
+    path('submit/request/fail/', views.Fail),
 
     #Account
     path('account/', views.AccountData),
     path('account/data/', views.AccountData),
     path('account/edit/', views.EditAccount),
-    path('account/login/', auth_views.login, name='login'),
+    #path('account/login/', auth_views.login, name='login'),
+    #path('account/logout/', views.Logout),
+    #path('accounts/login/', auth_views.LoginView.as_view()),
+
 
     #CarlSegment
     path('carlSegment/', views.CarlPage),
 
     #Login
     path('login/', views.Login),
+    path('login/authenticate/', views.Authenticate),
+    path('logout/', views.Logout),
 
     #FeaturedPrints
     path('featuredPrints/', views.Featured),
 
     #Layout
     path('layout/', views.Layout),
+
+    #ADMIN
+    path('ADMIN/', views.AdminHome),
+    path('infidel/', views.Infidel),
 ]
 
 #handler404 = 'views.error_404_view'

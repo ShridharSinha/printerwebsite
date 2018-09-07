@@ -1,0 +1,192 @@
+/*COLOURS:
+ *#1A3C40
+ *#144D53
+ *#307672
+ *#E4EDDB
+ */
+
+ body {
+  background-color: #E4EDDB;
+  font-family: courier;
+}
+
+h1 {
+  color: #307672;
+}
+
+.top {
+  position: relative;
+  top: 10px;
+  text-align: center;
+}
+
+table.MenuBar{
+  table-layout: fixed;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  border: 2px solid #144D53;
+
+  background-color: #1A3C40;
+  color: #E4EDDB;
+
+  border-radius: 6px;
+
+  font-family: courier;
+  font-weight: bold;
+  font-size: 25px;
+
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table.MenuBar th:hover{
+  background-color: #E4EDDB;
+  color: #1A3C40;
+}
+
+table.MenuBar tbody{
+  background-color: #307672;
+  color: #E4EDDB;
+
+  border: 2px solid #144D53;
+
+  font-size: 20px;
+}
+
+table.MenuBar tbody th:hover{
+  color: #307672;
+  background-color: #E4EDDB;
+}
+
+table.Data {
+  background-color:#1A3C40;
+  font-family: courier;
+
+  border: 2px solid #144D53;
+  border-radius: 6px;
+  width: 100%;
+  padding:10px 0px;
+
+  color: #E4EDDB;
+  font-weight: bold;
+  align-content: center;
+
+  margin:30px 0px;
+}
+
+table.Data thead {
+  font-size: 30px;
+}
+
+table.Data tbody {
+  background-color: #307672;
+  text-align:center;
+  font-size:20px;
+}
+
+table.Data tbody tr.Subheading {
+  background-color: #144D53;
+  font-size:25px;
+}
+
+table.Data thead tr th.Button {
+  font-size: 15px;
+  border:2px solid #E4EDDB;
+  border-radius: 6px;
+}
+
+table.Data thead tr th.Button:hover {
+  color: #1A3C40;
+  background-color: #E4EDDB;
+}
+
+table.Data thead tr th.Votes {
+  font-size:20px;
+  text-align: right;
+}
+
+h1.top.heading{
+  /*border: 2px solid #144D53;*/
+  border-radius:6px;
+  padding:10px 0px;
+  margin:30px 0px;
+
+  width: 100%;
+  align-self: center;
+
+  color: #E4EDDB;
+  font-family:courier;
+  font-size: 30px;
+
+  background-color: #307672;
+
+  z-index: -90;
+}
+
+#Carl {
+  font-size:30px;
+}
+
+#WhiteBack {
+  background-color: #E4EDDB;
+}
+
+table.Data thead tr.FooterNote th {
+  font-size: 10px;
+  text-align: right;
+}
+
+table.Data tbody tr td.Field {
+  background-color: #144D53;
+}
+
+table.Data tbody tr td.LeftAlign{
+  text-align: left;
+}
+
+table.Data tbody tr td.RightAlign{
+  text-align: right;
+}
+
+table#NavBar.MenuBar {
+  border-collapse: separate;
+  border-spacing: 2px;
+
+  z-index:999;
+}
+
+img.logo {
+  z-index:0;
+}
+
+table.Data tbody tr td.Hover:hover {
+  background-color: #E4EDDB;
+  color: #307672;
+}
+
+input {
+  background-color: #307672;
+  color:#E4EDDB;
+  border:2px solid #144D53;
+  border-radius: 6px;
+
+  font-family: courier;
+  font-size: 20px;
+
+  text-align: center;
+
+  padding: 2px;
+}
+
+input.Submit {
+  padding: 3px;
+}
+
+input.Submit:hover {
+  background-color: #E4EDDB;
+  color:#307672;
+
+  cursor:pointer;
+}

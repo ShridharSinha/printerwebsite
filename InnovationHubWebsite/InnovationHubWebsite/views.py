@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import Context, loader
-from  .models import *
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+
+from .models import *
 from .Util import *
 from datetime import *
 
@@ -10,7 +13,10 @@ from datetime import *
 
 #HomePage Views
 def HomePage(request):
-    context = {'Quota' : '00:31:23'}
+    util = Util()
+
+    context = util.getQuota(request.user)
+
     context['FeaturedPrint'] = list(FeaturedPrint.objects.all())
 
     for i in range(0, len(context.get('FeaturedPrint'))):
@@ -41,19 +47,35 @@ def HomePage(request):
 
 
 #Schedule Views
+@login_required(login_url='/login/')
 def Schedule(request):
-    inQueue  = list(Job.objects.filter(status = "in Queue"))
-    printing = list(Job.objects.filter(status = "Printing"))
+    util = Util()
 
     prints = []
+    printed = []
+    if request.user.is_superuser:
+        inQueue  = list(Job.objects.filter(status = "in Queue"))
+        printing = list(Job.objects.filter(status = "Printing"))
 
-    for i in range(0, len(inQueue)):
-        prints.append(inQueue[i])
+        for i in range(0, len(inQueue)):
+            prints.append(inQueue[i])
 
-    for i in range(0, len(printing)):
-        prints.append(printing[i])
+        for i in range(0, len(printing)):
+            prints.append(printing[i])
 
-    printed  = list(Job.objects.filter(status = "Printed"))
+        printed  = list(Job.objects.filter(status = "Printed"))
+
+    else:
+        inQueue  = list(Job.objects.filter(status = "in Queue").filter(fk_profile = util.getProfile(request.user)))
+        printing = list(Job.objects.filter(status = "Printing"))
+
+        for i in range(0, len(inQueue)):
+            prints.append(inQueue[i])
+
+        for i in range(0, len(printing)):
+            prints.append(printing[i])
+
+        printed  = list(Job.objects.filter(status = "Printed"))
 
     #Sorting the lists
     for i in range(0, len(prints)):
@@ -87,10 +109,13 @@ def Schedule(request):
         date = str(day) + ' / ' + str(month) + ' / ' + str(year)
         printed[i].endDate = date
 
-    context = {'Quota'   : '00:31:23',
-               'Jobs'    : prints,
-               'Printed' : printed,
-              }
+    util = Util()
+
+    context = util.getQuota(request.user)
+
+    context['Jobs'] = prints
+    context['Printed'] = printed
+
     #for i in range(0, len(prints)):
         #context["Job"    + str(i)] = prints[i].__str__()
         #context["Status" + str(i)] = prints[i].status
@@ -99,43 +124,71 @@ def Schedule(request):
 
 
 #Submit Views
+@login_required(login_url='/login/')
 def Submission(request):
-    context = {'Quota' : '00:31:23'}
+    util = Util()
+
+    context = util.getQuota(request.user)
+
     return render(request, 'SubmitFile.html', context)
 
+@login_required(login_url='/login/')
 def Preview(request):
     return HttpResponse("Preview your model")
 
+@login_required(login_url='/login/')
 def SubmissionRequest(request):
+    try:
+        if request.method == 'POST':
 
-    if request.method == 'POST':
+            newJob = Job()
+            util   = Util()
 
-        newJob = Job()
-        util   = Util()
+            newJob.job_title = request.POST['printName']
+            newJob.colour    = request.POST['colour']
 
-        newJob.job_title = request.POST.get('printName')
-        newJob.colour    = request.POST.get('colour')
+            #pathSTL, pathOBJ = util.handle_file(request.FILES['file'], request.POST.get('printName'), request.user)
+            #newJob.file_path_stl = pathSTL
+            #newJob.file_path_obj = pathOBJ
 
-        path = util.handle_file(request.FILES['file'], request.POST.get('printName'))
-        newJob.file_path = path
-        newJob.status = 'in Queue'
+            newJob.status           = 'in Queue'
+            newJob.upload_time      = datetime.now()
+            newJob.print_start_time = util.getPrintStartTime()
+            newJob.print_end_time   = util.getPrintEndTime(request.FILES['file'])
+            newJob.fk_profile       = util.getProfile(request.user)
+            newJob.printer_name     = util.getPrinterName();
 
-        newJob.uploadTime = datetime.now()
-        newJob.uploadTime = datetime.now()
-        newJob.print_start_time = datetime.now()
-        newJob.print_end_time   = datetime.now()
-        #newJob.fk_profile       =
 
-        newJob.save()
+            newJob.save()
 
-    return HttpResponse("Submission Form")
+            pathSTL, pathOBJ = util.handle_file(request.FILES['file'], request.POST['printName'], request.user, newJob.job_id)
+            newJob.file_path_stl = pathSTL
+            newJob.file_path_obj = pathOBJ
 
+            newJob.save()
+
+            #return HttpResponse("Submission Form")
+            return redirect("success/")
+        else:
+            return redirect('fail/')
+    except:
+        return redirect('fail/')
+
+@login_required(login_url='/login/')
 def Success(request):
+    util = Util()
+
+    context = util.getQuota(request.user)
     return HttpResponse("Submission Success")
 
+@login_required(login_url='/login/')
 def Fail(request):
+    util = Util()
+
+    context = util.getQuota(request.user)
     return HttpResponse("Submission Fail")
 
+@login_required(login_url='/login/')
 def PrintData(request, jobid):
     printData = list(Job.objects.filter(job_id=jobid))
 
@@ -144,44 +197,90 @@ def PrintData(request, jobid):
         printData[i].startDate  = str(printData[i].print_start_time.day) + ' / ' + str(printData[i].print_start_time.month) + ' / ' + str(printData[i].print_start_time.year)
         printData[i].endDate    = str(printData[i].print_end_time.day)   + ' / ' + str(printData[i].print_end_time.month)   + ' / ' + str(printData[i].print_end_time.year)
 
-    context = {'Quota'   : '00:31:23',
-               'JobData' : printData}
+    util = Util()
+
+    context = util.getQuota(request.user)
+    context['JobData'] = printData
+
     return render(request, 'PrintData.html', context)
 
 
 
 #Account Views
+@login_required(login_url='/login/')
 def AccountData(request):
-    context = {'Quota' : '00:31:23'}
+    util = Util()
+
+    context = util.getQuota(request.user)
+    context['name']  = util.getProfile(request.user).__str__()
+    context['class'] = util.getProfile(request.user).section
+
     return render(request, 'AccountData.html', context)
 
+@login_required(login_url='/login/')
 def EditAccount(request):
     return HttpResponse("Account Editor")
 
+@login_required(login_url='/login/')
 def Login(request):
     return HttpResponse("Login to Account")
 
-def layout(request):
-    context = {'Quota' : '00:31:23'}
-    return render(request, 'layout.html', context)
+#@login_required(login_url='/login/')
+#def layout(request):
+#    context = {'Quota' : '00:31:23'}
+
+#    if request.user.is_authenticated():
+#        context['LogButton'] = 'LOGOUT'
+#    else:
+#        context['LogButton'] = 'LOGIN'
+
+#    return render(request, 'layout.html', context)
 
 
 
 #The Carl Segment
 def CarlPage(request):
-    context = {'Quota' : '00:31:23'}
+    util = Util()
+
+    context = util.getQuota(request.user)
     return render(request, 'CarlSegment.html', context)
 
 
 #Login views
 def Login(request):
-    context = {'Quota' : '00:31:23'}
+    util = Util()
+
+    context = util.getQuota(request.user)
+    context['next'] = request.GET.get('next')
+
     return render(request, 'Login.html', context)
+
+
+def Authenticate(request):
+    username = request.POST['username']
+    password = request.POST['password']
+
+    user = authenticate(request, username = username, password = password)
+
+    next = request.POST['next']
+
+    if user is not None:
+        login(request, user)
+        return redirect(next)
+    else:
+        return redirect('/login/?next=/home/')
+    #return HttpResponse("Auth")
+
+def Logout(request):
+    logout(request)
+    return redirect('/login/')
 
 #Featured Prints
 def Featured(request):
-    context = {'Quota' : '00:31:23',
-               'Jobs'  : list(FeaturedPrint.objects.all())}
+    util = Util()
+
+    context = util.getQuota(request.user)
+    context['Jobs'] = list(FeaturedPrint.objects.all())
 
     for i in range(0, len(context.get('Jobs'))):
         for j in range(0, len(context.get('Jobs')) - i - 1):
@@ -195,8 +294,25 @@ def Featured(request):
 
 #Layout
 def Layout(request):
-    context = {'Quota' : '00:31:23'}
+    util = Util()
+
+    context = util.getQuota(request.user)
+
     return render(request, 'Layout.html', context)
+
+
+#ADMIN
+@login_required(login_url='/infidel/')
+def AdminHome(request):
+    if(request.user.is_superuser):
+        context = {}
+        return render(request, 'Admin.html', context)
+    else:
+        return redirect('/infidel/')
+        #return HttpResponse("This is the grown up's table! It's not for sneaky idiots like you!")
+
+def Infidel(request):
+    return HttpResponse("This is the grown up's table! It's not for sneaky idiots like you!")
 
 
 #Errors

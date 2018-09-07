@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user      = models.OneToOneField(User, on_delete=models.CASCADE)
     quota     = models.IntegerField()
+    section   = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         name = ""
@@ -14,10 +15,17 @@ class Profile(models.Model):
             name = self.user.username
         return(name)
 
+    def equals(self, user):
+        equality = (user.id == self.user.id)
+        return(equality)
+
+    def equalsProfile(self, profile):
+        return(profile.id == self.id)
+
 
 class Job(models.Model):
     job_id          =models.AutoField(primary_key=True)
-    job_title       =models.CharField(max_length=50)
+    job_title       =models.CharField(max_length=500)
     status          =models.CharField(max_length=20)             #in Queue, Printing, Printed
     colour          =models.CharField(max_length=10, null=True)
     upload_time     =models.DateTimeField(null=True)
@@ -25,7 +33,9 @@ class Job(models.Model):
     print_end_time  =models.DateTimeField(null=True)
     printer_name    =models.CharField(max_length=20, null=True)
     fk_profile      =models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
-    file_path       =models.CharField(max_length=50, null=True)
+    file_path_stl   =models.CharField(max_length=1000, null=True)
+    file_path_obj   =models.CharField(max_length=1000, null=True)
+    special_marker  =models.CharField(max_length=20, null=True)
     uploadDate = ''
     startDate = ''
     endDate = ''

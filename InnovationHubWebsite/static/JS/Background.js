@@ -1,11 +1,8 @@
-let canvas;
 let particles = [];
-
 let pNum;
 
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight);
-  //canvas.position(0, 0);
+  let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("Background");
 
   pNum = (windowWidth + windowHeight)/20;
@@ -125,7 +122,7 @@ class Particle {
     if(this.vy > v) {
       this.vy = v;
     } else if(this.vx < -v) {
-      this.vy = -v
+      this.vy = -v;
     }
   }
 }

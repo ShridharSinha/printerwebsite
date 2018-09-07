@@ -27,15 +27,15 @@
         <tbody>
           <tr>
             <td class="Field">Name:</td>
-            <td class="LeftAlign">Aryaman Kejriwal</td>
+            <td>{{name}}<!--Aryaman Kejriwal--></td>
           </tr>
           <tr>
             <td class="Field">Class:</td>
-            <td class="LeftAlign">10D</td>
+            <td>{{class}}</td>
           </tr>
           <tr>
-            <td class="Field">Time:</td>
-            <td class="LeftAlign">{{Quota}}</td>
+            <td class="Field">Quota:</td>
+            <td>{{Quota}}</td>
           </tr>
         </tbody>
       </table>
@@ -70,10 +70,10 @@
     <div class="clear"></div>
     <div class="grid_2 header"><p></p></div>
     <div class="grid_8 header">
-      <table class="Data" style="border-radius:12px; background-color:#307672; border: 0px;">
+      <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/logout/'">
         <tbody>
           <tr>
-            <td style="font-size: 25px; cursor:pointer; border-radius:6px;" onclick="location.href='/login/'">Not your account? Login Here:</td>
+            <td style="font-size: 25px; border-radius:6px;">Not your account? Login Here</td>
           </tr>
         </tbody>
       </table>

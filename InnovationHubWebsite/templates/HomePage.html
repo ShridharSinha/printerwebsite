@@ -17,6 +17,23 @@
 {% block content %}
 
   <div class="container_12">
+
+    {% if not user.is_authenticated %}
+    <div class="clear"></div>
+    <div class="grid_2 header"><p></p></div>
+    <div class="grid_8 header">
+      <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672;  border:#144D53 solid 5px;" onclick="location.href='/login/'">
+        <tbody>
+          <tr>
+            <td style="font-size: 20px; border-radius:6px; padding:0px; margin:0px;" >You don't seem to be logged in. Login Here</td>
+          </tr>
+        </tbody>
+      </table>
+
+            <!--<h1 class="top heading hover"style="font-size: 25px; cursor:pointer; border-radius:6px;" onclick="location.href='/login/'">Not your account? Login Here:</th1>-->
+    </div>
+    {% endif %}
+
     <div class = "grid_12 header">
       <table class='Data' style="z-index:10;">
         <thead>
@@ -42,14 +59,14 @@
             <td id="c" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
             <td id="d" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
           </tr>
-          <tr class= "Subheading">
+          <!--<tr class= "Subheading">
             <td>Some Third God</td>
             <td>Some Final God</td>
           </tr>
           <tr>
             <td id="e" style="background:#E4EDDB;"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
             <td id="f" style="background:#E4EDDB;"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
-          </tr>
+          </tr>-->
         </tbody>
       </table>
     </div>
@@ -228,16 +245,16 @@
     <div class="clear"></div>
     <div class="grid_1 header"><p></p></div>
     <div class="grid_10 header">
-      <table class="Data" style="border-radius:12px; background-color:#307672; border: 0px;">
+      <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;"  onclick="location.href='/carlSegment/'">
         <tbody>
           <tr>
-            <td style="font-size: 25px; cursor:pointer; border-radius:6px;" onclick="location.href='/carlSegment/'">Want to learn how to use this website? Click here:</td>
+            <td style="font-size: 25px; border-radius:6px;">Want to learn how to use this website? Click here</td>
           </tr>
         </tbody>
       </table>
+    </div>
+
 
       <!--<h1 class="top heading hover"style="font-size: 25px; cursor:pointer; border-radius:6px;" onclick="location.href='/login/'">Not your account? Login Here:</th1>-->
     </div>
-
-  </div>
 {% endblock %}
