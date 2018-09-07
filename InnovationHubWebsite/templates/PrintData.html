@@ -67,5 +67,31 @@
       </table>
     </div>
     <div class="clear"></div>
+
+    {% if user.is_superuser %}
+    <div class="grid_6 header">
+      <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
+      <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/schedule/'">
+        <tbody>
+          <tr>
+            <td style="font-size: 30px; border-radius:6px;">Download</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid_6 header">
+      <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
+      <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/schedule/'">
+        <tbody>
+          <tr>
+            <td style="font-size: 30px; border-radius:6px;">Add to Featured</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="clear"></div>
+    {% endif %}
   </div>
   {% endblock %}

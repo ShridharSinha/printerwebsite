@@ -71,11 +71,11 @@
 
       <tr>
         {% if user.is_superuser %}
-        <th style="cursor:pointer; border:#E4EDDB solid 3px; border-radius:6px;" onclick="location.href='/ADMIN'">ADMIN</th>
+        <th style="cursor:pointer; border:#E4EDDB solid 3px; border-radius:6px;" onclick="location.href='/ADMIN'">ADMIN PANEL</th>
         {% elif user.is_authenticated %}
-        <th style="cursor:pointer" onclick="location.href='/account/data'">{{Quota}}</th>
+        <th style="cursor:pointer;" onclick="location.href='/account/data'">{{Quota}}</th>
         {% else %}
-        <th style="cursor:pointer">--:--:--</th>
+        <th style="cursor:pointer;">--:--:--</th>
         {% endif %}
       </tr>
 

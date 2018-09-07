@@ -7,8 +7,49 @@
   {% block content %}
   <div class="container_12">
     <div class="grid_12 header">
-      <h5 style="text-align:center; color:#307672;">Congratulations! You have won a lot of print time. Tell Rupin sir the following code: 4DM1N</h5>
+      <!--<h5 style="text-align:center; color:#307672;">Congratulations! You have won a lot of print time. Tell Rupin sir the following code: 4DM1N</h5>-->
     </div>
+    <div class="clear"></div>
+
+    <div class="grid_12 header">
+      <table class="MenuBar" style="border-collapse:separate; border-spacing:2px;">
+        <thead>
+          <tr>
+
+            <td colspan="2" style="font-size:35px; text-align:center;">Student Controls</td>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th rowspan="2" style="font-size:30px; padding: 40px 0px; cursor:pointer; border-radius:6px;">Add Students via Excel</th>
+            <th style="padding:15px 0px; cursor:pointer; border-radius:6px;">Push all Grades Up</th>
+          </tr>
+          <tr>
+            <th style="cursor:pointer; border-radius:6px;">Push all Grades Down</th>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th colspan="2" style="cursor:pointer; border-radius:6px;">Delete all Seniors</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="clear"></div>
+
+    <div class="grid_12 header">
+      <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
+      <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/admin/'">
+        <tbody>
+          <tr>
+            <td style="font-size: 30px; border-radius:6px;">Click here to view Django Admin Controls</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="clear"></div>
+
   </div>
 
   {% endblock %}
