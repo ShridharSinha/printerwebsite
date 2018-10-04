@@ -1,0 +1,33 @@
+{% extends "Layout.html" %}
+{% load static %}
+  {% block title %}InnovationHub  |  Success{% endblock %}
+
+  {% block heading %}Your file was successfully Submitted{% endblock %}
+
+  {% block content %}
+    <div class="container_12">
+      <div class="grid_6 header">
+        <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
+        <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/home/'">
+          <tbody>
+            <tr>
+              <td style="font-size: 30px; border-radius:6px;">Home</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid_6 header">
+        <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
+        <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/schedule/'">
+          <tbody>
+            <tr>
+              <td style="font-size: 30px; border-radius:6px;">Your Print Schedule</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+  {% endblock %}

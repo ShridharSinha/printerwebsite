@@ -92,3 +92,10 @@ class Util:
             return({'Quota' : quota})
         else:
             return({'Quota' : '--:--:--'})
+
+    def changeGrade(self, diff):
+        profiles = list(Profile.objects.all())
+
+        for p in profiles:
+            p.grade += diff
+            p.save()

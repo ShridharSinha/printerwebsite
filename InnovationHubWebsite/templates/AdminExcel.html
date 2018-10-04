@@ -1,0 +1,52 @@
+{% extends "Layout.html" %}
+{% load static %}
+  {% block title %}InnovationHub  |  Excel{% endblock %}
+
+  {% block heading %}Add Students from an Excel File{% endblock %}
+
+  {% block content %}
+  <div class="container_12">
+    <div class="grid_12 header">
+
+      <form method="post" action="/home/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="Data Footer">
+          <thead>
+            <tr>
+              <th colspan="2" style="padding:0px 0px 10px 0px;">Add Students</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="Field">Excel File:</td>
+              <td style="text-align:left;"><input type="file" name="file" style="align: left;"></td>
+            </tr>
+            <tr>
+              <td class="Field">Action:</td>
+              <td style="text-align:left;"><input type="radio" name="action" value='add'>Add<br>
+                  <input type="radio" name="action" value='update'>Update<br>
+                  <input type="radio" name="action" value='replace'>Replace</td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+
+            <tr>
+              <th colspan="2"><input type="submit" name="Submit" class="Submit"></th>
+            </tr>
+          </thead>
+        </table>
+      </form>
+
+    </div>
+  </div>
+  <p style="font-size:41px; color:#E4EDDB; cursor:default;">|</p>
+  {% endblock %}

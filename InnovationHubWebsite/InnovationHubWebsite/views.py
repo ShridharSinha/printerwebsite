@@ -179,7 +179,8 @@ def Success(request):
     util = Util()
 
     context = util.getQuota(request.user)
-    return HttpResponse("Submission Success")
+    #return HttpResponse("Submission Success")
+    return render(request, 'SubmissionSuccess.html', context)
 
 @login_required(login_url='/login/')
 def Fail(request):
@@ -202,6 +203,10 @@ def PrintData(request, jobid):
     context = util.getQuota(request.user)
     context['JobData'] = printData
 
+    printData = list(Job.objects.filter(job_id=jobid))
+
+    context['filePath'] = printData[0].file_path_stl
+
     return render(request, 'PrintData.html', context)
 
 
@@ -213,7 +218,7 @@ def AccountData(request):
 
     context = util.getQuota(request.user)
     context['name']  = util.getProfile(request.user).__str__()
-    context['class'] = util.getProfile(request.user).section
+    context['class'] = str(util.getProfile(request.user).grade) + util.getProfile(request.user).section
 
     return render(request, 'AccountData.html', context)
 
@@ -311,8 +316,34 @@ def AdminHome(request):
         return redirect('/infidel/')
         #return HttpResponse("This is the grown up's table! It's not for sneaky idiots like you!")
 
+@login_required(login_url='/infidel/')
+def IncreaseGrade(request):
+    if(request.user.is_superuser):
+        util = Util()
+        util.changeGrade(1)
+        return redirect('/ADMIN/')
+    else:
+        return redirect('/infidel/')
+
+@login_required(login_url='/infidel/')
+def DecreaseGrade(request):
+    if(request.user.is_superuser):
+        util = Util()
+        util.changeGrade(-1)
+        return redirect('/ADMIN/')
+    else:
+        return redirect('/infidel/')
+
+def AdminExcel(request):
+    if(request.user.is_superuser):
+        util = Util()
+        context= util.getQuota(request.user)
+        return render(request, 'AdminExcel.html', context)
+    else:
+        return redirect('/infidel/')
+
 def Infidel(request):
-    return HttpResponse("This is the grown up's table! It's not for sneaky idiots like you!")
+    return HttpResponse("This is the grown up's table! It's not for sneaky idiots like you!<br>I've got to say though, nice try!<br>But now it's time for bed.<br><br>GO <a href='/home'>Home</a>!!!")
 
 
 #Errors

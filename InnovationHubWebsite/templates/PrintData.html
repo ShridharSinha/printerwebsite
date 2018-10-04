@@ -1,5 +1,12 @@
 {% extends "Layout.html" %}
 {% load static %}
+{% block hiddenVar %}
+
+  <input type="hidden" value="1" id="modelNum"></input>
+  <input type="hidden" value={{filePath}} id="modelName1"></input>
+
+{% endblock %}
+
   {% block title %}InnovationHub  |  PrintData{% endblock %}
 
   {% block heading %}Print Details{% endblock %}
@@ -17,7 +24,7 @@
         </thead>
         <tbody>
           <tr>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
+            <td id={{filePath}} style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
           </tr>
         </tbody>
       </table>
@@ -71,13 +78,13 @@
     {% if user.is_superuser %}
     <div class="grid_6 header">
       <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
-      <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/schedule/'">
+      <a href={{filePath}} download><table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;">
         <tbody>
           <tr>
             <td style="font-size: 30px; border-radius:6px;">Download</td>
           </tr>
         </tbody>
-      </table>
+      </table></a>
     </div>
 
     <div class="grid_6 header">
@@ -86,6 +93,20 @@
         <tbody>
           <tr>
             <td style="font-size: 30px; border-radius:6px;">Add to Featured</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="clear"></div>
+    {% elif user.is_authenticated %}
+
+    <div class="grid_12 header">
+      <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
+      <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/schedule/'">
+        <tbody>
+          <tr>
+            <td style="font-size: 30px; border-radius:6px;">Download</td>
           </tr>
         </tbody>
       </table>
