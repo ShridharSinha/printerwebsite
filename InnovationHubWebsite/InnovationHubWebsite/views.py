@@ -119,6 +119,13 @@ def Schedule(request):
     #for i in range(0, len(prints)):
         #context["Job"    + str(i)] = prints[i].__str__()
         #context["Status" + str(i)] = prints[i].status
+
+    if(len(printed) >= 3):
+        context['Recent']       = True
+        context['RecentPrints'] = [printed[0], printed[1], printed[2]]
+    else :
+        context['Recent'] = False
+
     return render(request, 'SchedulePage.html', context)
 
 

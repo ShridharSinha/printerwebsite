@@ -86,6 +86,7 @@
       {% endif %}
     </div>
 
+    {% if Recent %}
     <div class="clear"></div>
     <div class="grid_12 header">
       <table class="Data">
@@ -97,9 +98,12 @@
 
         <tbody>
           <tr class="Subheading">
-            <td>Name 1</td>
+            {% for print in RecentPrints %}
+            <td>{{print.job_title}}</td>
+            {% endfor %}
+            <!--<td>Name 1</td>
             <td>Name 2</td>
-            <td>Name 3</td>
+            <td>Name 3</td>-->
           </tr>
 
           <tr>
@@ -111,6 +115,7 @@
 
       </table>
     </div>
+    {% endif %}
 
     <div class="clear"></div>
     {% if user.is_superuser %}
