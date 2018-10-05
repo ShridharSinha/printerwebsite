@@ -1,5 +1,16 @@
 {% extends "Layout.html" %}
 {% load static %}
+{% block hiddenVar %}
+  {% if Recent %}
+  <input type="hidden" value="3" id="modelNum"></input>
+  <input type="hidden" value={{RecentPrints0.file_path_obj}} id="modelName1"></input>
+  <input type="hidden" value={{RecentPrints1.file_path_obj}} id="modelName2"></input>
+  <input type="hidden" value={{RecentPrints2.file_path_obj}} id="modelName3"></input>
+  {% else %}
+  <input type="hidden" value="0" id="modelNum"></input>
+  {% endif %}
+
+{% endblock %}
 
   {% block title %}InnovationHub  |  Schedule{% endblock %}
 
@@ -98,18 +109,18 @@
 
         <tbody>
           <tr class="Subheading">
-            {% for print in RecentPrints %}
-            <td>{{print.job_title}}</td>
-            {% endfor %}
+            <td>{{RecentPrints0.job_title}}</td>
+            <td>{{RecentPrints1.job_title}}</td>
+            <td>{{RecentPrints2.job_title}}</td>
             <!--<td>Name 1</td>
             <td>Name 2</td>
             <td>Name 3</td>-->
           </tr>
 
           <tr>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
+            <td id={{RecentPrints0.file_path_obj}} style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id={{RecentPrints1.file_path_obj}} style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id={{RecentPrints2.file_path_obj}} style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
           </tr>
         </tbody>
 

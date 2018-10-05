@@ -29,6 +29,15 @@ def HomePage(request):
     for i in range(3, len(context.get('FeaturedPrint'))):
         context.get('FeaturedPrint').pop()
 
+    if(len(context['FeaturedPrint']) < 3):
+        context['Featured'] = False
+    else:
+        context['Featured'] = True
+
+    context['FeaturedPrint0'] = context.get('FeaturedPrint')[0]
+    context['FeaturedPrint1'] = context.get('FeaturedPrint')[1]
+    context['FeaturedPrint2'] = context.get('FeaturedPrint')[2]
+
     #profiles = list(Profile.objects.all())
     #context['TopPrints'] = {'Profiles': [],
                             #'Numbers' : [],
@@ -67,7 +76,7 @@ def Schedule(request):
 
     else:
         inQueue  = list(Job.objects.filter(status = "in Queue").filter(fk_profile = util.getProfile(request.user)))
-        printing = list(Job.objects.filter(status = "Printing"))
+        printing = list(Job.objects.filter(status = "Printing").filter(fk_profile = util.getProfile(request.user)))
 
         for i in range(0, len(inQueue)):
             prints.append(inQueue[i])
@@ -75,7 +84,7 @@ def Schedule(request):
         for i in range(0, len(printing)):
             prints.append(printing[i])
 
-        printed  = list(Job.objects.filter(status = "Printed"))
+        printed  = list(Job.objects.filter(status = "Printed").filter(fk_profile = util.getProfile(request.user)))
 
     #Sorting the lists
     for i in range(0, len(prints)):
@@ -122,7 +131,9 @@ def Schedule(request):
 
     if(len(printed) >= 3):
         context['Recent']       = True
-        context['RecentPrints'] = [printed[0], printed[1], printed[2]]
+        context['RecentPrints0'] = printed[0]
+        context['RecentPrints1'] = printed[1]
+        context['RecentPrints2'] = printed[2]
     else :
         context['Recent'] = False
 
@@ -212,7 +223,7 @@ def PrintData(request, jobid):
 
     printData = list(Job.objects.filter(job_id=jobid))
 
-    context['filePath'] = printData[0].file_path_stl
+    context['filePath'] = printData[0].file_path_obj
 
     return render(request, 'PrintData.html', context)
 
@@ -226,6 +237,20 @@ def AccountData(request):
     context = util.getQuota(request.user)
     context['name']  = util.getProfile(request.user).__str__()
     context['class'] = str(util.getProfile(request.user).grade) + util.getProfile(request.user).section
+
+    #if request.user.is_superuser:
+    #    printed  = list(Job.objects.filter(status = "Printed"))
+    #else:
+    #    printed  = list(Job.objects.filter(status = "Printed").filter(fk_profile = util.getProfile(request.user)))
+    if(not(request.user.is_superuser)):
+        printed  = list(Job.objects.filter(status = "Printed").filter(fk_profile = util.getProfile(request.user)))
+        if(len(printed) >= 3):
+            context['Recent']       = True
+            context['RecentPrints0'] = printed[0]
+            context['RecentPrints1'] = printed[1]
+            context['RecentPrints2'] = printed[2]
+        else:
+            context['Recent'] = False
 
     return render(request, 'AccountData.html', context)
 

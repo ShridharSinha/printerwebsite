@@ -17,14 +17,14 @@ let init = function() {
         m.canvas = m.createCanvas(300, 240, m.WEBGL);
         //m.canvas.parent("Zeus");
 
-        m.models = m.loadModel("/static/JS/3DModels/" + m.getModelName("modelName" + i));
+        m.models = m.loadModel(m.getModelName("modelName" + i));
         //console.log("/static/JS/3DModels/" + m.getModelName("modelNames"));
         m.angle = 0;
       };
 
       m.getModelName = function(value) {
         //console.log("getModelName()");
-        return (document.getElementById(value).value + ".obj");
+        return (document.getElementById(value).value);// + ".obj");
       };
 
       m.draw = function() {

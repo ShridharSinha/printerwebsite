@@ -2,13 +2,14 @@
 {% load static %}
   {% block hiddenVar %}
 
-    <input type="hidden" value="4" id="modelNum"></input>
-    <input type="hidden" value="a" id="modelName1"></input>
-    <input type="hidden" value="b" id="modelName2"></input>
-    <input type="hidden" value="c" id="modelName3"></input>
-    <input type="hidden" value="d" id="modelName4"></input>
-    <input type="hidden" value="e" id="modelName5"></input>
-    <input type="hidden" value="f" id="modelName6"></input>
+    <input type="hidden" value="7" id="modelNum"></input>
+    <input type="hidden" value="/static/JS/3DModels/a.obj" id="modelName1"></input>
+    <input type="hidden" value="/static/JS/3DModels/b.obj" id="modelName2"></input>
+    <input type="hidden" value="/static/JS/3DModels/c.obj" id="modelName3"></input>
+    <input type="hidden" value="/static/JS/3DModels/d.obj" id="modelName4"></input>
+    <input type="hidden" value={{FeaturedPrint0.fk_job.file_path_obj}} id="modelName5"></input>
+    <input type="hidden" value={{FeaturedPrint1.fk_job.file_path_obj}} id="modelName6"></input>
+    <input type="hidden" value={{FeaturedPrint2.fk_job.file_path_obj}} id="modelName7"></input>
 
   {% endblock %}
   {% block title %}InnovationHub  |  Home{% endblock %}
@@ -48,16 +49,16 @@
             <td>Thor</td>
           </tr>
           <tr>
-            <td id="a" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
-            <td id="b" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id="/static/JS/3DModels/a.obj" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id="/static/JS/3DModels/b.obj" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
           </tr>
           <tr class= "Subheading">
             <td>Some God</td>
             <td>Some Other God</td>
           </tr>
           <tr>
-            <td id="c" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
-            <td id="d" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id="/static/JS/3DModels/c.obj" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id="/static/JS/3DModels/d.obj" style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
           </tr>
           <!--<tr class= "Subheading">
             <td>Some Third God</td>
@@ -200,6 +201,7 @@
     </div>
     <div class="clear"></div>
 
+    {% if Featured %}
     <div class="grid_12 header">
       <table class="Data">
         <thead>
@@ -215,9 +217,11 @@
             {%endfor%}
           </tr>
           <tr>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
+            {% for Job in FeaturedPrint %}
+            <td id={{Job.fk_job.file_path_obj}} style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            {%endfor%}
+            <!--<td id={{FeaturedPrint1.file_path_stl}} style="background:#E4EDDB;"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
+            <td id={{FeaturedPrint2.file_path_stl}} style="background:#E4EDDB;"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>-->
           </tr>
         </tbody>
 
@@ -241,8 +245,9 @@
 
       </table>
     </div>
-
     <div class="clear"></div>
+    {% endif %}
+
     <div class="grid_1 header"><p></p></div>
     <div class="grid_10 header">
       <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;"  onclick="location.href='/carlSegment/'">
