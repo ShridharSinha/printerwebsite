@@ -1,5 +1,16 @@
 {% extends "Layout.html" %}
 {% load static %}
+
+{% block hiddenVar %}
+
+  <input type="hidden" value={{num}} id="modelNum"></input>
+
+  {% for var in hiddenVar %}
+  <input type="hidden" value={{var.prints.fk_job.file_path_obj}} id={{var.ids}}></input>
+  {% endfor %}
+
+{% endblock %}
+
   {% block title %}InnovationHub  |  Featured Prints{% endblock %}
 </head>
 
@@ -23,7 +34,7 @@
             <td>{{print.fk_job.fk_user.first_name}}</td>
           </tr>
           <tr>
-            <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
+            <td id={{print.fk_job.file_path_obj}} style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
           </tr>
         </tbody>
 

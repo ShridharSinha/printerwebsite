@@ -326,6 +326,22 @@ def Featured(request):
                 context.get('Jobs')[j] = context.get('Jobs')[j + 1]
                 context.get('Jobs')[j + 1] = temp
 
+    context['num'] = len(context.get('Jobs'))
+
+    context['hiddenVar'] = []#{'prints':[],
+                             #'ids'   :[],}
+
+    for i in range(1, len(context.get('Jobs')) + 1):
+        var = {}
+        #context.get('hiddenVar').get('ids').append('ModelName' + str(i))
+        #context.get('hiddenVar').get('prints').append(context.get('Jobs')[i - 1])
+        var['ids']    = 'modelName' + str(i)
+        var['prints'] = context.get('Jobs')[i - 1]
+
+        context.get('hiddenVar').append(var)
+
+
+
     return render(request, 'FeaturedPrints.html', context)
 
 
