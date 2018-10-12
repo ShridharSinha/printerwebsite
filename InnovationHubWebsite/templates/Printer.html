@@ -1,0 +1,51 @@
+{% extends "Layout.html" %}
+{% load static %}
+  {% block title %}InnovationHub  |  Printer{% endblock %}
+
+  {% block heading %}Printer: <em>{{name}}</em>{% endblock %}
+
+  {% block content %}
+  <div class="container_12">
+      {% if current %}
+      {% for print in current %}
+      <div class="grid_12 header"><h1 class="top heading">Currently Printing : <br><em>{{print}}</em></h1></div>
+      <div class="clear"></div>
+      {% endfor %}
+      {% endif %}
+
+      <div class="grid_12 header">
+        {% if inQueue %}
+        <table class="Data">
+          <thead>
+            <tr>
+              <th colspan="4">Pending Prints</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="Subheading">
+              <td>#</td>
+              <td>Print Name</td>
+              <td>Download</td>
+              <td>Action</td>
+            </tr>
+
+            {% for Job in inQueue %}
+            <tr>
+              <td class="Hover" onclick="location.href='/printData/{{Job.job_id}}'" style="cursor:pointer;">{{Job.job_id}}</td>
+              <td class="Hover">{{Job.job_title}}</td>
+              <td class="Hover"style="cursor:pointer;">Download</td>
+              <td class="Hover"style="cursor:pointer;">Start Printing</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+        {% else %}
+        <h1 class="top heading">No pending prints for {{name}}</h1>
+        {% endif %}
+      </div>
+      <div class="clear"></div>
+
+  </div>
+  {% endblock %}

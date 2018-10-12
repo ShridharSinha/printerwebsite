@@ -1,5 +1,6 @@
 from datetime import *
 from .models  import *
+from random import randint
 #from pymesh import stl, obj
 
 class Util:
@@ -54,7 +55,8 @@ class Util:
         return(datetime.now())
 
     def getPrinterName(self):
-        return('Thor')
+        printer = ['Thor', 'Artemis', 'Zeus']
+        return(printer[randint(0, 2)])
 
     def getProfile(self, user):
         profiles = list(Profile.objects.all())

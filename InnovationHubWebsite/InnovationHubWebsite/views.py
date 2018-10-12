@@ -390,9 +390,21 @@ def AdminExcel(request):
     else:
         return redirect('/infidel/')
 
-def Infidel(request):
-    return HttpResponse("This is the grown up's table! It's not for sneaky idiots like you!<br>I've got to say though, nice try!<br>But now it's time for bed.<br><br>GO <a href='/home'>Home</a>!!!")
+@login_required(login_url='/infidel/')
+def Printer(request, name):
+    if(request.user.is_superuser):
+        context = {'name':name,}
 
+        current = list(Job.objects.filter(printer_name = name).filter(status = 'Printing'))
+        if(len(current)):
+            context['current'] = current
+
+        inQueue = list(Job.objects.filter(printer_name = name).filter(status = 'in Queue'))
+        context['inQueue'] = inQueue
+
+        return render(request, 'Printer.html', context)
+    else:
+        return redirect('/infidel/')
 
 #Errors
 #def error_404_view(request, exception):
@@ -402,3 +414,6 @@ def Infidel(request):
 #def error_500_view(request, exception):
 #    context = {'Quota' : '00:31:23',}
 #    return render(request, '500.html', context)
+
+def Infidel(request):
+    return HttpResponse("This is the grown up's table! It's not for sneaky idiots like you!<br>I've got to say though, nice try!<br>But now it's time for bed.<br><br>GO <a href='/home'>Home</a>!!!")

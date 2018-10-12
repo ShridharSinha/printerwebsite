@@ -67,6 +67,9 @@ urlpatterns = [
     path('ADMIN/DECREASE_GRADE', views.DecreaseGrade),
     path('ADMIN/EXCEL', views.AdminExcel),
     path('infidel/', views.Infidel),
+
+    #Printer
+    path('printer/<str:name>', views.Printer),
 ]
 
 #handler404 = 'views.error_404_view'
