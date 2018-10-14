@@ -7,7 +7,7 @@
   <script>
 
     $(function() {
-      $(".Current").click(function() {
+      $(".current").click(function() {
         $(this).slideUp(1000);
         console.log("Click");
       });
@@ -25,7 +25,7 @@
   <div class="container_12">
       {% if current %}
       {% for print in current %}
-      <div class="grid_12 header"><h1 class="top heading Current" style="border: 2px solid #144D53;">Currently Printing : <br><em>{{print}}</em></h1></div>
+      <div class="grid_12 header"><h1 class="top heading current" style="border: 2px solid #144D53;">Currently Printing : <br><em>{{print}}</em></h1></div>
       <div class="clear"></div>
       {% endfor %}
       {% endif %}
