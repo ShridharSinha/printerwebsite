@@ -40,6 +40,8 @@
   <script src="{% static 'JS/p5.js' %}"></script>
   <script src="{% static 'JS/p5.dom.js' %}"></script>
 
+  <script src="{% static 'JS/jQuery.js' %}"></script>
+
   <!--<script src="{% static 'JS/background.js' %}"></script>-->
 
   <!--<script src="{% static 'JS/Thor.js' %}"></script>
@@ -51,6 +53,9 @@
 
   <title>{% block title %}InnovationHub  |  Layout{% endblock %}</title>
 
+  {% block Script %}
+  {% endblock %}
+  
 </head>
 {% endblock %}
 
