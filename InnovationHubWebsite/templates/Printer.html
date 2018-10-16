@@ -27,6 +27,12 @@
       }
     });
 
+    /*$('.print').click(function() {
+      $(this).siblings().slideUp();
+      $(this).slideUp();
+      //$(this).parent().slideUp();
+    });*/
+
     //$(".current.top.heading").delay(1000).slideUp(1000).delay(1000).show(1000);
     //console.log("Out");
   });
@@ -96,10 +102,12 @@
 
             {% for Job in inQueue %}
             <tr>
-              <td class="Hover" onclick="location.href='/printData/{{Job.job_id}}'" style="cursor:pointer;">{{Job.job_id}}</td>
-              <td class="Hover">{{Job.job_title}}</td>
-              <td class="Hover"style="cursor:pointer;">Download</td>
-              <td class="Hover"style="cursor:pointer;">Start Printing</td>
+              <div class="row">
+                <td class="Hover" onclick="location.href='/printData/{{Job.job_id}}'" style="cursor:pointer;">{{Job.job_id}}</td>
+                <td class="Hover">{{Job.job_title}}</td>
+                <td class="Hover"style="cursor:pointer;">Download</td>
+                <td class="Hover print"style="cursor:pointer;">Start Printing</td>
+              </div>
             </tr>
             {% endfor %}
 
