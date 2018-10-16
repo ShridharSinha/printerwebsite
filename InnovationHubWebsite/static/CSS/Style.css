@@ -122,8 +122,27 @@ h1.top.heading{
 
   background-color: #307672;
 
-  z-index: -90;
+  /*z-index: -90;*/
 }
+
+/*h1.current{
+  border-radius:6px;
+  padding:10px 0px;
+  margin:30px 0px;
+
+  width: 100%;
+  align-self: center;
+
+  color: #E4EDDB;
+  font-family:courier;
+  font-size: 30px;
+
+  background-color: #307672;
+
+  position: relative;
+  top: 10px;
+  text-align: center;
+}*/
 
 #Carl {
   font-size:30px;

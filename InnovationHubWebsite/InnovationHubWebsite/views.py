@@ -396,8 +396,11 @@ def Printer(request, name):
         context = {'name':name,}
 
         current = list(Job.objects.filter(printer_name = name).filter(status = 'Printing'))
-        if(len(current)):
+        if(len(current) > 0):
             context['current'] = current
+
+            if(len(current) > 1):
+                context['currentLen']  = len(current)
 
         inQueue = list(Job.objects.filter(printer_name = name).filter(status = 'in Queue'))
         context['inQueue'] = inQueue

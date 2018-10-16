@@ -1,23 +1,40 @@
 {% extends "Layout.html" %}
 {% load static %}
-  {% block title %}InnovationHub  |  Printer({{name}}){% endblock %}
 
-  {% block Script %}
+{% block Script %}
 
-  <script>
+<script>
 
-    $(function() {
-      $(".current").click(function() {
-        $(this).slideUp(1000);
-        console.log("Click");
-      });
+  $(document).ready(function() {
 
-      //$(".Current").delay(1000).slideUp(1000).delay(1000).show(1000);
+    let lenth = $('.current').length;
+
+    $(".current").click(function() {
+      $(this).slideUp(1000);
+      $(this).parent().slideUp(1000);
+      $(this).parent().parent().slideUp(1000);
+      $(this).parent().parent().parent().slideUp(1000);
+      
+      console.log("In");
+      console.log(this);
+
+      length = length - 1;
+
+      if(length <= 1) {
+        $('#attention').parent().parent().parent().delay(1100).slideUp(1000);
+
+      }
     });
 
-  </script>
+    //$(".current.top.heading").delay(1000).slideUp(1000).delay(1000).show(1000);
+    //console.log("Out");
+  });
 
-  {% endblock %}
+</script>
+
+{% endblock %}
+
+  {% block title %}InnovationHub  |  Printer({{name}}){% endblock %}
 
   {% block heading %}Printer: <em>{{name}}</em>{% endblock %}
 
@@ -25,9 +42,33 @@
   <div class="container_12">
       {% if current %}
       {% for print in current %}
-      <div class="grid_12 header"><h1 class="top heading current" style="border: 2px solid #144D53;">Currently Printing : <br><em>{{print}}</em></h1></div>
-      <div class="clear"></div>
+      <div class="grid_12 header">
+        <!--<h1 class="current top heading" style="border: 2px solid #144D53;">Currently Printing : <br><em>{{print}}</em></h1>-->
+        <table class="Data">
+          <tbody>
+            <tr>
+              <td style="border-radius:6px; font-size:30px">Currently Printing : <em>{{print}}</em></th>
+              <td class="Hover current" style="cursor:pointer; border-radius:6px; font-size:30px">Done Printing</th>
+            </tr>
+          </tbody>
+        <!--</table>
+      </div>
+      <div class="clear"></div>-->
       {% endfor %}
+        </table>
+      </div>
+      <div class="clear"></div>
+
+
+      {% if currentLen %}
+      <table class="Data">
+          <tbody>
+            <tr>
+              <td style="border-radius:6px; font-size:25px" colspan="2" id="attention">ATTENTION! Please clear the prints that aren't currently printing.</th>
+            </tr>
+          </tbody>
+        </table>
+      {% endif %}
       {% endif %}
 
       <div class="grid_12 header">
