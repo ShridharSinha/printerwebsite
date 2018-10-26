@@ -1,6 +1,8 @@
 from datetime import *
 from .models  import *
 from random import randint
+from openpyxl import load_workbook
+from openpyxl import Workbook
 #from pymesh import stl, obj
 
 class Util:
@@ -101,3 +103,61 @@ class Util:
         for p in profiles:
             p.grade += diff
             p.save()
+
+
+    """def readFrom(a,b):
+          wb = load_workbook(filename=a)
+          ws = wb[b]
+          data=[]
+          for i in range(1,len(list(ws.rows))):
+             row=list(ws.rows)[i]
+             k=[]
+             for cell in row:
+                k.append(cell.value)
+             data.append(k)
+          return(data)
+
+    def writeTo(a,b,c):
+       wb = load_workbook(a)
+       ws = wb[b]
+       for i in range(1,len(list(ws.rows))):
+             row=list(ws.rows)[i]
+             count=0
+             print(len(list(row)))
+             for cell in row:
+                try:
+                   cell.value=c[i-1][count]
+                except:
+                   cell.value=None
+                count=count+1
+       try:
+          for j in range(i,len(c)):
+             ws.append(c[j-1])
+       except:
+          print('')
+       wb.save(a)"""
+
+
+    def readFrom(self, file_name, sheet_name):
+          wb = load_workbook(filename=file_name)
+          ws = wb[sheet_name]
+          data=[]
+          for i in range(0,len(list(ws.rows))):
+             row=list(ws.rows)[i]
+             k=[]
+             for cell in row:
+                k.append(cell.value)
+             data.append(k)
+          return(data)
+
+    def writeTo(self, file_name, file_data):
+       wb = Workbook()
+       ws = wb.active
+
+       file_name = 'InnovationHubWebsite/' + file_name
+
+       for i in range(0,len(file_data)):
+           ws.append(file_data[i])
+           #print(file_data[i])
+           #print('appending')
+       wb.save(file_name)

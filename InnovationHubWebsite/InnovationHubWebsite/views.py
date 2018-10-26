@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+import os
+from django.conf import settings
 
 from .models import *
 from .Util import *
@@ -389,6 +391,47 @@ def AdminExcel(request):
         return render(request, 'AdminExcel.html', context)
     else:
         return redirect('/infidel/')
+
+
+def ReturnStudentList(request):
+    if(request.user.is_superuser):
+        file_name = "Students.xls"
+
+        util = Util()
+        students = list(Profile.objects.all())
+
+        studentData = []
+        #print("Num Students:")
+        #print(len(students))
+
+        for i in range(0, len(students)):
+            s = []
+            s.append(str(i + 1))
+            s.append(students[i].user.first_name)
+            s.append(students[i].user.last_name)
+            s.append(students[i].user.username)
+            s.append(students[i].grade)
+            s.append(students[i].section)
+            s.append(students[i].quota)
+            studentData.append(s)
+
+        util.writeTo(file_name, studentData)
+
+        #response = HttpResponse(content_type='application/ms-excel')
+        #response['Content-Disposition'] = 'attachment;filename=%s' % file_name
+        #response['X-sendfile'] = os.path.join(os.path.dirname(__file__), file_name)
+        #print(response)
+        #print(os.path.join(os.path.dirname(__file__), file_name))
+
+        response = HttpResponse(open(file_name, 'rb').read())
+        response['Content-Type'] = 'application/ms-excel'
+        response['Content-Disposition'] = 'attachment;filename=%s' % file_name
+
+        return(response)
+
+    else:
+        return redirect('/infidel/')
+
 
 @login_required(login_url='/infidel/')
 def Printer(request, name):

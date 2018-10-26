@@ -68,6 +68,8 @@ urlpatterns = [
     path('ADMIN/EXCEL', views.AdminExcel),
     path('infidel/', views.Infidel),
 
+    path('studentFile/', views.ReturnStudentList),
+
     #Printer
     path('printer/<str:name>', views.Printer),
 ]
