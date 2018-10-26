@@ -154,7 +154,7 @@ class Util:
        wb = Workbook()
        ws = wb.active
 
-       file_name = 'InnovationHubWebsite/' + file_name
+       #file_name = 'InnovationHubWebsite/' + file_name
 
        for i in range(0,len(file_data)):
            ws.append(file_data[i])

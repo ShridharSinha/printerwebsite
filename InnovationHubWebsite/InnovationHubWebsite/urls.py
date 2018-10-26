@@ -69,6 +69,7 @@ urlpatterns = [
     path('infidel/', views.Infidel),
 
     path('studentFile/', views.ReturnStudentList),
+    path('jobFile/', views.ReturnJobList),
 
     #Printer
     path('printer/<str:name>', views.Printer),

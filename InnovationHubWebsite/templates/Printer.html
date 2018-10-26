@@ -10,7 +10,7 @@
     let lenth = $('.current').length;
 
     $(".current").click(function() {
-      $(this).slideUp(1000);
+      $(this).parent().parent().parent().parent().slideUp(1000);
       //$(this).parent().slideUp(1000);
       //$(this).parent().parent().slideUp(1000);
       //$(this).parent().parent().parent().slideUp(1000);
@@ -50,13 +50,13 @@
       {% if current %}
       {% for print in current %}
       <div class="grid_12 header">
-        <div class="current">
+        <div>
         <!--<h1 class="current top heading" style="border: 2px solid #144D53;">Currently Printing : <br><em>{{print}}</em></h1>-->
-        <table class="Data">
+        <table class="Data" style="cursor:default;">
           <tbody>
             <tr>
               <td style="border-radius:6px; font-size:30px">Currently Printing : <em>{{print}}</em></th>
-              <td class="Hover" style="cursor:pointer; border-radius:6px; font-size:30px">Done Printing</th>
+              <td class="Hover current" style="cursor:pointer; border-radius:6px; font-size:30px">Done Printing</th>
             </tr>
           </tbody>
         </table>

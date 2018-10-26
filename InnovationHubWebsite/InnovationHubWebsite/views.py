@@ -432,6 +432,50 @@ def ReturnStudentList(request):
     else:
         return redirect('/infidel/')
 
+def ReturnJobList(request):
+    if(request.user.is_superuser):
+        file_name = "Jobs.xls"
+
+        util = Util()
+        jobs = list(Job.objects.all())
+
+        jobData = []
+        #print("Num Students:")
+        #print(len(students))
+
+        for i in range(0, len(jobs)):
+            j = []
+            j.append(str(i + 1))
+            j.append(jobs[i].job_id)
+            j.append(jobs[i].job_title)
+            j.append(jobs[i].colour)
+            j.append(jobs[i].upload_time)
+            j.append(jobs[i].print_start_time)
+            j.append(jobs[i].print_end_time)
+            j.append(jobs[i].printer_name)
+            j.append(jobs[i].fk_profile.user.username)
+            j.append(jobs[i].file_path_stl)
+            j.append(jobs[i].file_path_obj)
+            j.append(jobs[i].special_marker)
+            jobData.append(j)
+
+        util.writeTo(file_name, jobData)
+
+        #response = HttpResponse(content_type='application/ms-excel')
+        #response['Content-Disposition'] = 'attachment;filename=%s' % file_name
+        #response['X-sendfile'] = os.path.join(os.path.dirname(__file__), file_name)
+        #print(response)
+        #print(os.path.join(os.path.dirname(__file__), file_name))
+
+        response = HttpResponse(open(file_name, 'rb').read())
+        response['Content-Type'] = 'application/ms-excel'
+        response['Content-Disposition'] = 'attachment;filename=%s' % file_name
+
+        return(response)
+
+    else:
+        return redirect('/infidel/')
+
 
 @login_required(login_url='/infidel/')
 def Printer(request, name):
