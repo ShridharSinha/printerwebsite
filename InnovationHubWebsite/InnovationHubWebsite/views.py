@@ -496,6 +496,33 @@ def Printer(request, name):
     else:
         return redirect('/infidel/')
 
+@login_required(login_url='/infidel/')
+
+def Printed(request, jobid):
+    if(request.user.is_superuser):
+        jobs = list(Job.objects.filter(job_id = jobid))
+        if(len(jobs) == 1):
+
+            job = jobs[0]
+            job.status = "Printed"
+            time = int(request.GET['job_time'])
+            job.print_time = str(time)
+
+            profile = job.fk_profile# -= time
+            profile.quota = profile.quota - time
+
+            if(profile.quota < 0):
+                profile.quota = 0
+
+            job.save()
+
+            profile.save()
+
+            return HttpResponse('success')
+
+    else:
+        return redirect('/infidel/')
+
 #Errors
 #def error_404_view(request, exception):
 #    context = {'Quota' : '00:31:23',}

@@ -1,30 +1,42 @@
 {% extends "Layout.html" %}
 {% load static %}
 
+
 {% block Script %}
 
 <script>
 
   $(document).ready(function() {
 
-    let lenth = $('.current').length;
+    //let length = $('.current').length;
 
     $(".current").click(function() {
-      $(this).parent().parent().parent().parent().slideUp(1000);
-      //$(this).parent().slideUp(1000);
-      //$(this).parent().parent().slideUp(1000);
-      //$(this).parent().parent().parent().slideUp(1000);
+      $(this).parent().parent().parent().parent().slideUp(400);
 
-      console.log("In");
-      console.log(this);
 
-      length = length - 1;
+      jobid = $(this).data("jobid");
 
-      if(length <= 1) {
-        //$('#attention').parent().parent().parent().delay(1100).slideUp(1000);
-        $('#attention').slideUp(1000);
+      time = '#Time_' + jobid;
+      time = $(time).val();
+      console.log(time);
+      $.ajax({
+          url:"/printer/printed/" + jobid +"?job_time=" + time,
+          success:function(result){
 
+        console.log("Success");
       }
+    });
+
+      //console.log("In");
+      //console.log(this);
+
+      //length = length - 1;
+
+    //  if(length <= 1) {
+        //$('#attention').parent().parent().parent().delay(1100).slideUp(1000);
+      //  $('#attention').slideUp(1000);
+
+      //}
     });
 
     /*$('.print').click(function() {
@@ -56,7 +68,8 @@
           <tbody>
             <tr>
               <td style="border-radius:6px; font-size:30px">Currently Printing : <em>{{print}}</em></th>
-              <td class="Hover current" style="cursor:pointer; border-radius:6px; font-size:30px">Done Printing</th>
+              <td style="border-radius:6px; font-size:30px">Time:<input type='text' name='time_{{print.job_id}}' id='Time_{{print.job_id}}'></td>
+              <td class="Hover current" style="cursor:pointer; border-radius:6px; font-size:30px" data-jobid = {{print.job_id}}>Done Printing</th>
             </tr>
           </tbody>
         </table>
@@ -69,18 +82,6 @@
       <div class="clear"></div>
       {% endfor %}
 
-
-      {% if currentLen %}
-      <div id="attention">
-      <table class="Data">
-          <tbody>
-            <tr>
-              <td style="border-radius:6px; font-size:25px" colspan="2">ATTENTION! Please clear the prints that aren't currently printing.</th>
-            </tr>
-          </tbody>
-        </table>
-       </div>
-      {% endif %}
       {% endif %}
 
       <div class="grid_12 header">

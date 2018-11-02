@@ -32,6 +32,7 @@ class Job(models.Model):
     upload_time     =models.DateTimeField(null=True)
     print_start_time=models.DateTimeField(null=True)
     print_end_time  =models.DateTimeField(null=True)
+    print_time      =models.CharField(max_length=20, null=True)
     printer_name    =models.CharField(max_length=20, null=True)
     fk_profile      =models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     file_path_stl   =models.CharField(max_length=1000, null=True)
