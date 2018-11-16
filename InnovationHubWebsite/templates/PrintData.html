@@ -78,13 +78,13 @@
     {% if user.is_superuser %}
     <div class="grid_6 header">
       <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
-      <a href={{filePath}} download><table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;">
+      <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;"  onclick="location.href='/printData/download/{{jobid}}'">
         <tbody>
           <tr>
             <td style="font-size: 30px; border-radius:6px;">Download</td>
           </tr>
         </tbody>
-      </table></a>
+      </table>
     </div>
 
     <div class="grid_6 header">

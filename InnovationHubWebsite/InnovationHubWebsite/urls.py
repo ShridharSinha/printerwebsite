@@ -30,6 +30,7 @@ urlpatterns = [
     #Schedule
     path('schedule/', views.Schedule),
     path('printData/<int:jobid>', views.PrintData),
+    path('printData/download/<int:jobid>', views.PrintDownload),
 
     #Submit
     path('submit/', views.Submission),

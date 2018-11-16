@@ -35,10 +35,10 @@ def HomePage(request):
         context['Featured'] = False
     else:
         context['Featured'] = True
-
-    context['FeaturedPrint0'] = context.get('FeaturedPrint')[0]
-    context['FeaturedPrint1'] = context.get('FeaturedPrint')[1]
-    context['FeaturedPrint2'] = context.get('FeaturedPrint')[2]
+    if(len(context.get('FeaturedPrint')) > 2):
+        context['FeaturedPrint0'] = context.get('FeaturedPrint')[0]
+        context['FeaturedPrint1'] = context.get('FeaturedPrint')[1]
+        context['FeaturedPrint2'] = context.get('FeaturedPrint')[2]
 
     #profiles = list(Profile.objects.all())
     #context['TopPrints'] = {'Profiles': [],
@@ -179,7 +179,7 @@ def SubmissionRequest(request):
             newJob.printer_name     = util.getPrinterName();
 
 
-            newJob.save()
+            #newJob.save()
 
             pathSTL, pathOBJ = util.handle_file(request.FILES['file'], request.POST['printName'], request.user, newJob.job_id)
             newJob.file_path_stl = pathSTL
@@ -191,7 +191,8 @@ def SubmissionRequest(request):
             return redirect("success/")
         else:
             return redirect('fail/')
-    except:
+    except Exception as e:
+        print(e)
         return redirect('fail/')
 
 @login_required(login_url='/login/')
@@ -225,9 +226,22 @@ def PrintData(request, jobid):
 
     printData = list(Job.objects.filter(job_id=jobid))
 
-    context['filePath'] = printData[0].file_path_obj
+    context['filePath'] = "/" + printData[0].file_path_stl
+    context['jobid']    = jobid
 
     return render(request, 'PrintData.html', context)
+
+def PrintDownload(request, jobid):
+    #context = {}
+    printData = list(Job.objects.filter(job_id=jobid))
+    file_name = printData[0].file_path_stl
+
+    response = HttpResponse(open(file_name, 'rb').read())
+    response['Content-Type'] = 'application/sla'
+    response['Content-Disposition'] = 'attachment;filename=%s' % file_name
+
+    return(response)
+
 
 
 

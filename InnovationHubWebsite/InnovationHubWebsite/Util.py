@@ -3,6 +3,8 @@ from .models  import *
 from random import randint
 from openpyxl import load_workbook
 from openpyxl import Workbook
+import os
+import sys
 #from pymesh import stl, obj
 
 class Util:
@@ -25,7 +27,7 @@ class Util:
         path1 = path
         path2 = 'static/JS/3DModels/' + name + '.obj'
 
-        f2 = self.convertSTLtoOBJ(f)
+        f2 = self.convertSTLtoOBJ(path, path2)
         #f2 = self.saveSTLasOBJ(path1, path2, f)
 
         open(path2, 'a').close()
@@ -36,8 +38,12 @@ class Util:
 
         return(path1, path2)
 
-    def convertSTLtoOBJ(self, f):
-        return(f)
+    def convertSTLtoOBJ(self, f, f2):
+        os.system("cd static\\JS\\3DModels && blender -b Empty.obj.blend -P blender.py "+f+".stl")
+        k=sys.argv[1]
+        #print(k)
+        #path = 'static/JS/3DModels'
+        return(open(f2, 'a'))
     #def saveSTLasOBJ(self, path1, path2, f):
     #    PyMesh = pymesh()
     #    mesh = PyMesh.load_mesh(path1)
