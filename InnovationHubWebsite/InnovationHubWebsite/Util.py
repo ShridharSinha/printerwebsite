@@ -27,7 +27,8 @@ class Util:
         path1 = path
         path2 = 'static/JS/3DModels/' + name + '.obj'
 
-        f2 = self.convertSTLtoOBJ(path, path2)
+        #f2 = self.convertSTLtoOBJ(path, path2)
+        f2 = f
         #f2 = self.saveSTLasOBJ(path1, path2, f)
 
         open(path2, 'a').close()

@@ -537,6 +537,21 @@ def Printed(request, jobid):
     else:
         return redirect('/infidel/')
 
+def Printing(request, jobid):
+    if(request.user.is_superuser):
+        jobs = list(Job.objects.filter(job_id = jobid))
+        if(len(jobs) == 1):
+
+            job = jobs[0]
+            job.status = "Printing"
+            job.save()
+
+            #path = '/printer/' + job.printer_name
+            return redirect('/printData/download/' + str(jobid))
+
+    else:
+        return redirect('/infidel/')
+
 #Errors
 #def error_404_view(request, exception):
 #    context = {'Quota' : '00:31:23',}

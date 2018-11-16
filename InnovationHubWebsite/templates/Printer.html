@@ -11,14 +11,15 @@
     //let length = $('.current').length;
 
     $(".current").click(function() {
-      $(this).parent().parent().parent().parent().slideUp(400);
 
+      $(this).parent().parent().parent().parent().slideUp(400);
 
       jobid = $(this).data("jobid");
 
       time = '#Time_' + jobid;
       time = $(time).val();
       console.log(time);
+
       $.ajax({
           url:"/printer/printed/" + jobid +"?job_time=" + time,
           success:function(result){
@@ -106,8 +107,8 @@
               <div class="row">
                 <td class="Hover" onclick="location.href='/printData/{{Job.job_id}}'" style="cursor:pointer;">{{Job.job_id}}</td>
                 <td class="Hover">{{Job.job_title}}</td>
-                <td class="Hover"style="cursor:pointer;">Download</td>
-                <td class="Hover print"style="cursor:pointer;">Start Printing</td>
+                <td class="Hover"style="cursor:pointer;" onclick="location.href='/printData/download/{{Job.job_id}}'">Download</td>
+                <td class="Hover print"style="cursor:pointer;" onclick="location.href='/printer/printing/{{Job.job_id}}'">Start Printing</td>
               </div>
             </tr>
             {% endfor %}

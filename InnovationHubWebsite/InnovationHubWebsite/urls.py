@@ -75,6 +75,7 @@ urlpatterns = [
     #Printer
     path('printer/<str:name>', views.Printer),
     path('printer/printed/<int:jobid>', views.Printed),
+    path('printer/printing/<int:jobid>', views.Printing),
 ]
 
 #handler404 = 'views.error_404_view'
