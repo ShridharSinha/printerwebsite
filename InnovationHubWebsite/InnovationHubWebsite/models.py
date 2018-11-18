@@ -1,4 +1,5 @@
 from django.db import models
+from vote.models import VoteModel
 from django.contrib.auth.models import User
 
 
@@ -49,7 +50,7 @@ class Job(models.Model):
         return(self.status)
 
 
-class FeaturedPrint(models.Model):
+class FeaturedPrint(VoteModel, models.Model):
     #print_id =models.AutoField(primary_key=True)
     fk_job   =models.ForeignKey(Job, on_delete=models.CASCADE, null=True)
     votes    =models.IntegerField()
