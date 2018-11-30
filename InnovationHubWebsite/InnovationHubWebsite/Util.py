@@ -3,8 +3,11 @@ from .models  import *
 from random import randint
 from openpyxl import load_workbook
 from openpyxl import Workbook
+from django.core.files.storage import default_storage
+#import Blender
 import os
 import sys
+#import bpy
 #from pymesh import stl, obj
 
 class Util:
@@ -13,38 +16,58 @@ class Util:
         date = '_' + str(datetime.now().day) + '_' + str(datetime.now().month) + '_' + str(datetime.now().year) + '_' + str(datetime.now().hour)+ '_' + str(datetime.now().minute)+ '_' + str(datetime.now().second) + '_'
 
         name += date + user.first_name + '_' + user.last_name
-        name  = str(jobid) + '_' + name
+        name1 = str(jobid) + '_' + name + '.stl'
 
-        path = 'UploadedFiles/' + name + '.stl'
+        #path = 'UploadedFiles/' + name
         #path = 'The.stl'
 
-        open(path, 'a').close()
+        #open(path, 'a').close()
 
-        with open(path, 'wb+') as destination:
-            for chunk in f.chunks():
-                destination.write(chunk)
+        #with open(path, 'wb+') as destination:
+        #    for chunk in f.chunks():
+        #        destination.write(chunk)
+
+        file = default_storage.open(name1, 'w')
+        file.write(f)
+        file.close()
+
+        #path = file.get()['Body'].read()
+        path = file.name
+        #print("Path:" + path)
 
         path1 = path
-        path2 = 'static/JS/3DModels/' + name + '.obj'
+        #path2 = 'static/JS/3DModels/' + name + '.obj'
 
         #f2 = self.convertSTLtoOBJ(path, path2)
-        f2 = f
+        #f2 = self.convertSTLtoOBJ(path)
         #f2 = self.saveSTLasOBJ(path1, path2, f)
+        f2 = f
 
-        open(path2, 'a').close()
+        name2 = str(jobid) + name + '.obj'
+        file2 = default_storage.open(name2, 'w')
 
-        with open(path2, 'wb+') as destination:
-            for chunk in f2.chunks():
-                destination.write(chunk)
+        path2 = file2.name
 
+        #open(path2, 'a').close()
+
+        #with open(path2, 'wb+') as destination:
+        #    for chunk in f2.chunks():
+        #        destination.write(chunk)
+
+        #return(path1, path2)
         return(path1, path2)
 
-    def convertSTLtoOBJ(self, f, f2):
+    def convertSTLtoOBJ(self, f):
         os.system("cd static\\JS\\3DModels && blender -b Empty.obj.blend -P blender.py "+f+".stl")
         k=sys.argv[1]
         #print(k)
         #path = 'static/JS/3DModels'
         return(open(f2, 'a'))
+        #blender = Blender()
+        #blender.import_export(f)
+
+
+
     #def saveSTLasOBJ(self, path1, path2, f):
     #    PyMesh = pymesh()
     #    mesh = PyMesh.load_mesh(path1)

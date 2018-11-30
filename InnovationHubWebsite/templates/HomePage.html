@@ -206,19 +206,19 @@
       <table class="Data">
         <thead>
           <tr>
-            <th colspan="3">Featured Prints</th>
+            <th colspan="6">Featured Prints</th>
           </tr>
         </thead>
 
         <tbody>
           <tr class="Subheading">
             {% for Job in FeaturedPrint %}
-            <td>{{Job}}</td>
+            <td colspan="2">{{Job}}</td>
             {%endfor%}
           </tr>
           <tr>
             {% for Job in FeaturedPrint %}
-            <td id={{Job.fk_job.file_path_obj}} style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id={{Job.fk_job.file_path_obj}} style="background:#E4EDDB;" colspan="2"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
             {%endfor%}
             <!--<td id={{FeaturedPrint1.file_path_stl}} style="background:#E4EDDB;"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
             <td id={{FeaturedPrint2.file_path_stl}} style="background:#E4EDDB;"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>-->
@@ -228,17 +228,19 @@
         <thead>
           <tr>
             {% for Job in FeaturedPrint %}
+            <th class="Button" style="cursor:pointer" style="padding:0 10;">Like</th>
             <th class="Votes">{{Job.votes}}</th>
             {%endfor%}
           </tr>
 
           <tr>
-            <td colspan="3" style="font-size:15px; color:#1A3C40; cursor:default;">Innovation Hub Secret Code:2938 (Tell Carl Sir to redeem prize)</td>
+            <td colspan="6" style="font-size:15px; color:#1A3C40; cursor:default;">Innovation Hub Secret Code:2938 (Tell Carl Sir to redeem prize)</td>
           </tr>
 
           <tr>
             <th></th>
             <th></th>
+
             <th class="Button" style="cursor:pointer" onclick="location.href='/featuredPrints'">View All</th>
           </tr>
         </thead>

@@ -179,7 +179,17 @@ def SubmissionRequest(request):
             newJob.printer_name     = util.getPrinterName();
 
 
-            #newJob.save()
+            newJob.save()
+            #jobs = list(Job.objects.all())
+            #id = 0
+            #if(len(jobs) == 0):
+            #    id = 0
+            #for i in range(0, len(jobs)):
+            #    if(jobs[i].job_id > id):
+            #        id = jobs[i].job_id
+
+            #id =
+
 
             pathSTL, pathOBJ = util.handle_file(request.FILES['file'], request.POST['printName'], request.user, newJob.job_id)
             newJob.file_path_stl = pathSTL
@@ -193,6 +203,7 @@ def SubmissionRequest(request):
             return redirect('fail/')
     except Exception as e:
         print(e)
+        Job.objects.filter(job_id = newJob.job_id).delete()
         return redirect('fail/')
 
 @login_required(login_url='/login/')

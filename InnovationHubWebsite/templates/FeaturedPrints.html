@@ -25,21 +25,22 @@
       <table class="Data">
         <thead>
           <tr>
-            <th colspan="3">{{print.fk_job.job_title}}</th>
+            <th colspan="2">{{print.fk_job.job_title}}</th>
           </tr>
         </thead>
 
         <tbody>
           <tr class="Subheading">
-            <td>{{print.fk_job.fk_user.first_name}}</td>
+            <td colspan="2">{{print.fk_job.fk_user.first_name}}</td>
           </tr>
           <tr>
-            <td id={{print.fk_job.file_path_obj}} style="background:#E4EDDB;"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id={{print.fk_job.file_path_obj}} style="background:#E4EDDB;" colspan="2"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
           </tr>
         </tbody>
 
         <thead>
           <tr>
+            <th class="Button" style="cursor:pointer">Like</th>
             <th class="Votes">{{print.votes}}</th>
           </tr>
         </thead>
