@@ -41,7 +41,13 @@ INSTALLED_APPS = [
     "vote",
 ]
 
-
+DEFAULT_FILE_STORAGE    = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID       = 'AKIAICPDA7JPJZGMGEYQ'
+AWS_SECRET_ACCESS_KEY   = '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'
+AWS_STORAGE_BUCKET_NAME = 'queue-manager-prints'
+AWS_AUTO_CREATE_BUCKET  = True
+AWS_REGION              = 'us-west-2'
+AWS_DEFAULT_ACL         = 'private'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

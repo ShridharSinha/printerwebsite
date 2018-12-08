@@ -43,7 +43,7 @@ class Util:
         #f2 = self.saveSTLasOBJ(path1, path2, f)
         f2 = f
 
-        name2 = str(jobid) + name + '.obj'
+        name2 = str(jobid) + '_' + name + '.obj'
         file2 = default_storage.open(name2, 'w')
 
         path2 = file2.name
