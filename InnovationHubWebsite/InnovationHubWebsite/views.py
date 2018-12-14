@@ -23,7 +23,7 @@ def HomePage(request):
 
     for i in range(0, len(context.get('FeaturedPrint'))):
         for j in range(0, len(context.get('FeaturedPrint')) - i - 1):
-            if(context.get('FeaturedPrint')[j].votes < context.get('FeaturedPrint')[j + 1].votes):
+            if(context.get('FeaturedPrint')[j].votes.count() < context.get('FeaturedPrint')[j + 1].votes.count()):
                 temp = context.get('FeaturedPrint')[j]
                 context.get('FeaturedPrint')[j] = context.get('FeaturedPrint')[j + 1]
                 context.get('FeaturedPrint')[j + 1] = temp
@@ -39,6 +39,9 @@ def HomePage(request):
         context['FeaturedPrint0'] = context.get('FeaturedPrint')[0]
         context['FeaturedPrint1'] = context.get('FeaturedPrint')[1]
         context['FeaturedPrint2'] = context.get('FeaturedPrint')[2]
+
+    #for i in range(0,3):
+        #context.get('FeaturedPrint' + str(i)).annotate(num_votes = Count('votes__user'))
 
     #profiles = list(Profile.objects.all())
     #context['TopPrints'] = {'Profiles': [],
@@ -348,7 +351,7 @@ def Featured(request):
 
     for i in range(0, len(context.get('Jobs'))):
         for j in range(0, len(context.get('Jobs')) - i - 1):
-            if(context.get('Jobs')[j].votes < context.get('Jobs')[j + 1].votes):
+            if(context.get('Jobs')[j].votes.count() < context.get('Jobs')[j + 1].votes.count()):
                 temp = context.get('Jobs')[j]
                 context.get('Jobs')[j] = context.get('Jobs')[j + 1]
                 context.get('Jobs')[j + 1] = temp
@@ -367,10 +370,37 @@ def Featured(request):
 
         context.get('hiddenVar').append(var)
 
+    #for i in range(0, context.get('Jobs')):
+        #context.get('Jobs')[i].annotate(num_votes = Count('votes__user'))
 
 
     return render(request, 'FeaturedPrints.html', context)
 
+@login_required(login_url='/login/')
+def VoteUp(request, jobid):
+    user = request.user
+
+
+    #try:
+    fPrint = list(FeaturedPrint.objects.filter(fk_job = list(Job.objects.filter(job_id = jobid))[0]))
+    fPrint[0].votes.up(user.id)
+    #except:
+        #print("FAIL UP")
+
+    return(HttpResponse("VoteUp"))
+
+@login_required(login_url='/login/')
+def VoteDown(request, jobid):
+    user = request.user
+    #fPrint = list(FeaturedPrint.objects.filter(fk_job = Job.objects.filter(job_id = jobid)))
+
+    try:
+        fPrint = list(FeaturedPrint.objects.filter(fk_job = list(Job.objects.filter(job_id = jobid))[0]))
+        fPrint[0].vote.down(user.id)
+    except:
+        print("FAIL DOWN")
+
+    return(HttpResponse("VoteDown"))
 
 #Layout
 def Layout(request):

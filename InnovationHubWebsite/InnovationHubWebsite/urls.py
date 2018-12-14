@@ -58,6 +58,8 @@ urlpatterns = [
 
     #FeaturedPrints
     path('featuredPrints/', views.Featured),
+    path('featuredPrints/voteUp/<int:jobid>', views.VoteUp),
+    path('featuredPrints/voteDown/<int:jobid>', views.VoteDown),
 
     #Layout
     path('layout/', views.Layout),

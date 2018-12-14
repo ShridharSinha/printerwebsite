@@ -53,7 +53,7 @@ class Job(models.Model):
 class FeaturedPrint(VoteModel, models.Model):
     #print_id =models.AutoField(primary_key=True)
     fk_job   =models.ForeignKey(Job, on_delete=models.CASCADE, null=True)
-    votes    =models.IntegerField()
+    #votes    =models.IntegerField()
 
     def __str__(self):
         return(self.fk_job.__str__())
