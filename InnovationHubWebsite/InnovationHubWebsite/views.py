@@ -604,3 +604,10 @@ def Printing(request, jobid):
 
 def Infidel(request):
     return HttpResponse("This is the grown up's table! It's not for sneaky idiots like you!<br>I've got to say though, nice try!<br>But now it's time for bed.<br><br>GO <a href='/home'>Home</a>!!!")
+
+
+
+#AboutUs
+def AboutUs(request):
+    context = {}
+    return(render(request, 'AboutUs.html', context))

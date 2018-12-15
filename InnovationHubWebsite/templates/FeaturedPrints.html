@@ -11,8 +11,49 @@
 
 {% endblock %}
 
+{% block Script %}
+
+<script>
+
+  $(document).ready(function() {
+
+    $(".likeButton").click(function() {
+      /*
+      //console.log($(this).data("clicked") == 'false');
+      if($(this).data("clicked") === 'false') {
+        $(this).data('clicked', 'true');
+        //console.log('Made True');
+      } else if($(this).data("clicked") === 'true'){
+        $(this).data('clicked', 'false');
+        //console.log('Made False');
+      }
+
+      console.log($(this).data("clicked"));
+      $(this).data('clicked', 'true');*/
+
+      if($(this).data("clicked")) {
+        $(this).removeData("clicked");
+        $(this).attr("style", "cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;");
+        //console.log('Removed');
+      } else {
+        $(this).data("clicked", 'true');
+        $(this).attr("style", "cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;");
+        //console.log('Added');
+      }
+
+      //console.log($(this).data("clicked"));
+
+    });
+
+  });
+
+
+</script>
+
+{% endblock %}
+
   {% block title %}InnovationHub  |  Featured Prints{% endblock %}
-</head>
+<!--</head>-->
 
 
   {% block heading %}Featured Prints{% endblock %}
@@ -40,7 +81,7 @@
 
         <thead>
           <tr>
-            <th class="Button" style="cursor:pointer">Like</th>
+            <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;">Like</th>
             <th class="Votes">{{print.vote_score}}</th>
           </tr>
         </thead>

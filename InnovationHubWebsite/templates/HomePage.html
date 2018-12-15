@@ -12,6 +12,49 @@
     <input type="hidden" value={{FeaturedPrint2.fk_job.file_path_obj}} id="modelName7"></input>
 
   {% endblock %}
+
+  {% block Script %}
+
+  <script>
+
+    $(document).ready(function() {
+
+      $(".likeButton").click(function() {
+        /*
+        //console.log($(this).data("clicked") == 'false');
+        if($(this).data("clicked") === 'false') {
+          $(this).data('clicked', 'true');
+          //console.log('Made True');
+        } else if($(this).data("clicked") === 'true'){
+          $(this).data('clicked', 'false');
+          //console.log('Made False');
+        }
+
+        console.log($(this).data("clicked"));
+        $(this).data('clicked', 'true');*/
+
+        if($(this).data("clicked")) {
+          $(this).removeData("clicked");
+          $(this).attr("style", "cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;");
+          //console.log('Removed');
+        } else {
+          $(this).data("clicked", 'true');
+          $(this).attr("style", "cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;");
+          //console.log('Added');
+        }
+
+        //console.log($(this).data("clicked"));
+
+      });
+
+    });
+
+
+  </script>
+
+  {% endblock %}
+
+
   {% block title %}InnovationHub  |  Home{% endblock %}
 
   {% block heading %}Welcome to the Innovation Hub Website{% endblock %}
@@ -228,7 +271,8 @@
         <thead>
           <tr>
             {% for Job in FeaturedPrint %}
-            <th class="Button" style="cursor:pointer" style="padding:0 10;">Like</th>
+            <!--<th class="Button likeButton" style="cursor:pointer" style="padding:0 10;" data-clicked="false">Like</th>-->
+            <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;">Like</th>
             <th class="Votes">{{Job.vote_score}}</th>
             {%endfor%}
           </tr>
