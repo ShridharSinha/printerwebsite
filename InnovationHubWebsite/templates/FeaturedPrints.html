@@ -35,10 +35,45 @@
         $(this).removeData("clicked");
         $(this).attr("style", "cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;");
         //console.log('Removed');
+
+        let id = $(this).data('id');
+        console.log('id: ' + id);
+
+        $.ajax({
+            url:"/featuredPrints/voteDown/" + id,
+            success:function(result){
+              console.log("DownVote");
+            }
+        });
+
+        let votes = $(this).siblings('.Votes' + id)[0];
+        //console.log('votes = ' + votes);
+        //console.log(votes);
+
+        let voteNum = Number(votes.textContent);
+        votes.innerHTML = (voteNum - 1).toString();
+
       } else {
         $(this).data("clicked", 'true');
         $(this).attr("style", "cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;");
-        //console.log('Added');
+
+        let id = $(this).data('id');
+        console.log('id: ' + id);
+
+        $.ajax({
+            url:"/featuredPrints/voteUp/" + id,
+            success:function(result){
+              console.log("UpVote");
+            }
+        });
+
+        let votes = $(this).siblings('.Votes' + id)[0];
+        //console.log('votes = ' + votes);
+        //console.log(votes);
+
+        let voteNum = Number(votes.textContent);
+        votes.innerHTML = (voteNum + 1).toString();
+
       }
 
       //console.log($(this).data("clicked"));
@@ -66,23 +101,27 @@
       <table class="Data">
         <thead>
           <tr>
-            <th colspan="2">{{print.fk_job.job_title}}</th>
+            <th colspan="2">{{print.Job.fk_job.job_title}}</th>
           </tr>
         </thead>
 
         <tbody>
           <tr class="Subheading">
-            <td colspan="2">{{print.fk_job.fk_user.first_name}}</td>
+            <td colspan="2">{{print.Job.fk_job.fk_user.first_name}}</td>
           </tr>
           <tr>
-            <td id={{print.fk_job.file_path_obj}} style="background:#E4EDDB;" colspan="2"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id={{print.Job.fk_job.file_path_obj}} style="background:#E4EDDB;" colspan="2"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
           </tr>
         </tbody>
 
         <thead>
           <tr>
-            <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;">Like</th>
-            <th class="Votes">{{print.vote_score}}</th>
+            {% if print.VoteStatus%}
+              <th class="likeButton" style="cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;" data-id={{print.Job.fk_job.job_id}} data-clicked='true'>Like</th>
+            {% else %}
+              <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;" data-id={{print.Job.fk_job.job_id}}>Like</th>
+            {% endif %}
+            <th class="Votes{{print.Job.fk_job.job_id}} Votes">{{print.Job.vote_score}}</th>
           </tr>
         </thead>
 

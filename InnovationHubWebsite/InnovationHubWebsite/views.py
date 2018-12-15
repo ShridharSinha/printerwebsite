@@ -40,6 +40,12 @@ def HomePage(request):
         context['FeaturedPrint1'] = context.get('FeaturedPrint')[1]
         context['FeaturedPrint2'] = context.get('FeaturedPrint')[2]
 
+    for i in range(0, len(context.get('FeaturedPrint'))):
+        job = context.get('FeaturedPrint' + str(i))
+        context.get('FeaturedPrint')[i] = {'Job'       : job,
+                                           'VoteStatus': job.votes.exists(request.user.id),
+                                           }
+
     #for i in range(0,3):
         #context.get('FeaturedPrint' + str(i)).annotate(num_votes = Count('votes__user'))
 
@@ -355,6 +361,12 @@ def Featured(request):
                 temp = context.get('Jobs')[j]
                 context.get('Jobs')[j] = context.get('Jobs')[j + 1]
                 context.get('Jobs')[j + 1] = temp
+
+    for i in range(0, len(context.get('Jobs'))):
+        job = context.get('Jobs')[i]
+        context.get('Jobs')[i] = {'Job'       : job,
+                                  'VoteStatus': job.votes.exists(request.user.id), 
+                                 }
 
     context['num'] = len(context.get('Jobs'))
 

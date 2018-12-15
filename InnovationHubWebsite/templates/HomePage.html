@@ -291,12 +291,12 @@
         <tbody>
           <tr class="Subheading">
             {% for Job in FeaturedPrint %}
-            <td colspan="2">{{Job}}</td>
+            <td colspan="2">{{Job.Job}}</td>
             {%endfor%}
           </tr>
           <tr>
             {% for Job in FeaturedPrint %}
-            <td id={{Job.fk_job.file_path_obj}} style="background:#E4EDDB;" colspan="2"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
+            <td id={{Job.Job.fk_job.file_path_obj}} style="background:#E4EDDB;" colspan="2"><!--<img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'>--></td>
             {%endfor%}
             <!--<td id={{FeaturedPrint1.file_path_stl}} style="background:#E4EDDB;"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
             <td id={{FeaturedPrint2.file_path_stl}} style="background:#E4EDDB;"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>-->
@@ -307,8 +307,14 @@
           <tr>
             {% for Job in FeaturedPrint %}
             <!--<th class="Button likeButton" style="cursor:pointer" style="padding:0 10;" data-clicked="false">Like</th>-->
-            <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;" data-id={{Job.fk_job.job_id}}>Like</th>
-            <th class="Votes{{Job.fk_job.job_id}} Votes">{{Job.vote_score}}</th>
+
+            {% if Job.VoteStatus%}
+              <th class="likeButton" style="cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;" data-id={{Job.Job.fk_job.job_id}} data-clicked='true'>Like</th>
+            {% else %}
+              <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;" data-id={{Job.Job.fk_job.job_id}}>Like</th>
+            {% endif %}
+
+            <th class="Votes{{Job.Job.fk_job.job_id}} Votes">{{Job.Job.vote_score}}</th>
             {%endfor%}
           </tr>
 
