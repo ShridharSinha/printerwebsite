@@ -48,8 +48,12 @@
               }
           });
 
-          let votes = $(this).siblings('.Votes').val();
-          console.log('votes = ' + votes);
+          let votes = $(this).siblings('.Votes' + id)[0];
+          //console.log('votes = ' + votes);
+          //console.log(votes);
+
+          let voteNum = Number(votes.textContent);
+          votes.innerHTML = (voteNum - 1).toString();
 
         } else {
           $(this).data("clicked", 'true');
@@ -65,8 +69,12 @@
               }
           });
 
-          let votes = $(this).siblings('.Votes').val();
-          console.log('votes = ' + votes);
+          let votes = $(this).siblings('.Votes' + id)[0];
+          //console.log('votes = ' + votes);
+          //console.log(votes);
+
+          let voteNum = Number(votes.textContent);
+          votes.innerHTML = (voteNum + 1).toString();
 
         }
 
@@ -300,7 +308,7 @@
             {% for Job in FeaturedPrint %}
             <!--<th class="Button likeButton" style="cursor:pointer" style="padding:0 10;" data-clicked="false">Like</th>-->
             <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;" data-id={{Job.fk_job.job_id}}>Like</th>
-            <th class="Votes">{{Job.vote_score}}</th>
+            <th class="Votes{{Job.fk_job.job_id}} Votes">{{Job.vote_score}}</th>
             {%endfor%}
           </tr>
 
