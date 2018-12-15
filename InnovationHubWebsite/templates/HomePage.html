@@ -37,10 +37,37 @@
           $(this).removeData("clicked");
           $(this).attr("style", "cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;");
           //console.log('Removed');
+
+          let id = $(this).data('id');
+          console.log('id: ' + id);
+
+          $.ajax({
+              url:"/featuredPrints/voteDown/" + id,
+              success:function(result){
+                console.log("DownVote");
+              }
+          });
+
+          let votes = $(this).siblings('.Votes').val();
+          console.log('votes = ' + votes);
+
         } else {
           $(this).data("clicked", 'true');
           $(this).attr("style", "cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;");
-          //console.log('Added');
+
+          let id = $(this).data('id');
+          console.log('id: ' + id);
+
+          $.ajax({
+              url:"/featuredPrints/voteUp/" + id,
+              success:function(result){
+                console.log("UpVote");
+              }
+          });
+
+          let votes = $(this).siblings('.Votes').val();
+          console.log('votes = ' + votes);
+
         }
 
         //console.log($(this).data("clicked"));
@@ -272,7 +299,7 @@
           <tr>
             {% for Job in FeaturedPrint %}
             <!--<th class="Button likeButton" style="cursor:pointer" style="padding:0 10;" data-clicked="false">Like</th>-->
-            <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;">Like</th>
+            <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;" data-id={{Job.fk_job.job_id}}>Like</th>
             <th class="Votes">{{Job.vote_score}}</th>
             {%endfor%}
           </tr>

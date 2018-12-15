@@ -396,7 +396,7 @@ def VoteDown(request, jobid):
 
     try:
         fPrint = list(FeaturedPrint.objects.filter(fk_job = list(Job.objects.filter(job_id = jobid))[0]))
-        fPrint[0].vote.down(user.id)
+        fPrint[0].votes.delete(user.id)
     except:
         print("FAIL DOWN")
 
