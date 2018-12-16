@@ -3,12 +3,6 @@
 
 {% block hiddenVar %}
   {{block.super}}
-
-  {% for chart in charts%}
-
-    <input type='hidden' value={{chart.Title}} id={{chart.Title}}></input>
-
-  {% endfor %}
 {% endblock %}
 
 
@@ -44,7 +38,7 @@
                 <td>{{chart.Subtitle}}</td>
               </tr>
               <tr>
-                <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
+                <td id="WhiteBack"><canvas id={{chart.Title}} width='400px' height='300px'></canvas></td>
               </tr>
             </tbody>
 
