@@ -74,6 +74,8 @@ urlpatterns = [
     path('studentFile/', views.ReturnStudentList),
     path('jobFile/', views.ReturnJobList),
 
+    path('ADMIN/statistics', views.Statistics),
+
     #Printer
     path('printer/<str:name>', views.Printer),
     path('printer/printed/<int:jobid>', views.Printed),

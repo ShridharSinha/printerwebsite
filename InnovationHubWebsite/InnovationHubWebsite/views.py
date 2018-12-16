@@ -550,6 +550,16 @@ def ReturnJobList(request):
 
 
 @login_required(login_url='/infidel/')
+def Statistics(request):
+    if(request.user.is_superuser):
+        util = Util()
+        context = util.getQuota(request.user)
+
+        return render(request, 'Statistics.html', context)
+    else:
+        return redirect('/infidel/')
+
+@login_required(login_url='/infidel/')
 def Printer(request, name):
     if(request.user.is_superuser):
         context = {'name':name,}
