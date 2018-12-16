@@ -555,6 +555,14 @@ def Statistics(request):
         util = Util()
         context = util.getQuota(request.user)
 
+        context['charts'] = []
+
+        for i in range(1, 6):
+            context.get('charts').append({'Title'   : str(i),
+                                       'Subtitle': str(i),
+                                       'Type'    : 'Bar',
+                                      });
+
         return render(request, 'Statistics.html', context)
     else:
         return redirect('/infidel/')
