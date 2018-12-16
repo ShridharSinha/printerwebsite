@@ -116,10 +116,14 @@
 
         <thead>
           <tr>
-            {% if print.VoteStatus%}
-              <th class="likeButton" style="cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;" data-id={{print.Job.fk_job.job_id}} data-clicked='true'>Like</th>
+            {% if authenticated %}
+              {% if print.VoteStatus%}
+                <th class="likeButton" style="cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;" data-id={{print.Job.fk_job.job_id}} data-clicked='true'>Like</th>
+              {% else %}
+                <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;" data-id={{print.Job.fk_job.job_id}}>Like</th>
+              {% endif %}
             {% else %}
-              <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;" data-id={{print.Job.fk_job.job_id}}>Like</th>
+                <th></th>
             {% endif %}
             <th class="Votes{{print.Job.fk_job.job_id}} Votes">{{print.Job.vote_score}}</th>
           </tr>

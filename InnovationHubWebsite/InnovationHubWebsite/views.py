@@ -62,6 +62,9 @@ def HomePage(request):
     context['BestPrintMonth'] = list(Job.objects.filter(job_id = 20))
     context['BestPrintYear' ] = list(Job.objects.filter(job_id = 20))
 
+    if(request.user.is_authenticated):
+        context['authenticated'] = 'true'
+
     return render(request, 'HomePage.html', context)
 
 
@@ -365,7 +368,7 @@ def Featured(request):
     for i in range(0, len(context.get('Jobs'))):
         job = context.get('Jobs')[i]
         context.get('Jobs')[i] = {'Job'       : job,
-                                  'VoteStatus': job.votes.exists(request.user.id), 
+                                  'VoteStatus': job.votes.exists(request.user.id),
                                  }
 
     context['num'] = len(context.get('Jobs'))
@@ -385,6 +388,8 @@ def Featured(request):
     #for i in range(0, context.get('Jobs')):
         #context.get('Jobs')[i].annotate(num_votes = Count('votes__user'))
 
+    if(request.user.is_authenticated):
+        context['authenticated'] = 'true'
 
     return render(request, 'FeaturedPrints.html', context)
 
@@ -621,5 +626,6 @@ def Infidel(request):
 
 #AboutUs
 def AboutUs(request):
-    context = {}
+    util = Util()
+    context = util.getQuota(request.user)
     return(render(request, 'AboutUs.html', context))

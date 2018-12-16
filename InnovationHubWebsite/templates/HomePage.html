@@ -307,13 +307,15 @@
           <tr>
             {% for Job in FeaturedPrint %}
             <!--<th class="Button likeButton" style="cursor:pointer" style="padding:0 10;" data-clicked="false">Like</th>-->
-
-            {% if Job.VoteStatus%}
-              <th class="likeButton" style="cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;" data-id={{Job.Job.fk_job.job_id}} data-clicked='true'>Like</th>
+            {% if authenticated %}
+              {% if Job.VoteStatus%}
+                <th class="likeButton" style="cursor:pointer; background-color:#E4EDDB; color:#1A3C40; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;" data-id={{Job.Job.fk_job.job_id}} data-clicked='true'>Like</th>
+              {% else %}
+                <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;" data-id={{Job.Job.fk_job.job_id}}>Like</th>
+              {% endif %}
             {% else %}
-              <th class="likeButton" style="cursor:pointer; font-size: 15px;border:2px solid #E4EDDB;border-radius: 6px;padding:0 10;" data-id={{Job.Job.fk_job.job_id}}>Like</th>
+                <th></th>
             {% endif %}
-
             <th class="Votes{{Job.Job.fk_job.job_id}} Votes">{{Job.Job.vote_score}}</th>
             {%endfor%}
           </tr>
