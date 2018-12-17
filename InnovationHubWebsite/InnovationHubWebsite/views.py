@@ -562,8 +562,16 @@ def Statistics(request):
         #for i in range(1, 6):
         context.get('charts').append({'No'      : '3',
                                       'Title'   : 'User Activity',
-                                      'Subtitle': '',
-                                      'Type'    : 'Line',
+                                      'Subtitle': 'Number of Active Users',
+                                      'Type'    : 'line',
+                                      'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
+                                     });
+
+        context.get('charts').append({'No'      : '4',
+                                      'Title'   : 'Print Submission',
+                                      'Subtitle': 'Success Rate',
+                                      'Type'    : 'line',
                                       'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                       'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
                                      });

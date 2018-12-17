@@ -10,7 +10,47 @@
 
   <script>
     $(document).ready(function() {
-      let raw_charts = {{charts}};
+
+      let Num      = 0;
+      let Title    = '';
+      let Subtitle = '';
+      let Type     = '';
+      let Labels   = [];
+      let Data     = [];
+
+      let temp     = [];
+
+      {% for chart in charts %}
+        //let raw_charts = {{charts}};
+        //console.log('Yesssssss!!!')
+
+        Num      = {{chart.No}};
+        Title    = '{{chart.Title}}';
+        Subtitle = '{{chart.Subtitle}}';
+        Type     = '{{chart.Type}}';
+        Labels   = [];
+        Data     = [];
+
+        {% for Label in chart.Labels %}
+          Labels.push('{{Label}}');
+        {% endfor %}
+
+        {% for DataSet in chart.Data %}
+          temp = []
+          {% for data in DataSet %}
+            temp.push({{data}});
+          {% endfor %}
+          Data.push(temp);
+
+        {% endfor %}
+
+        console.log(Data);
+        console.log(Labels);
+        //console.log(Num + " " + Title + " " + Subtitle + " " + Type);
+
+
+
+      {% endfor %}
     });
   </script>
 
