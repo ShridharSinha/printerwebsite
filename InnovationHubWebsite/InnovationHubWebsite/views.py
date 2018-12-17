@@ -10,6 +10,8 @@ from .models import *
 from .Util import *
 from datetime import *
 
+import json
+
 
 # Create your views here.
 
@@ -557,14 +559,20 @@ def Statistics(request):
 
         context['charts'] = []
 
-        for i in range(1, 6):
-            context.get('charts').append({'No'      : str(i),
-                                          'Title'   : str(i),
-                                          'Subtitle': str(i),
-                                          'Type'    : 'Bar',
-                                          'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                                          'Data'    : [[]],
-                                         });
+        #for i in range(1, 6):
+        context.get('charts').append({'No'      : '3',
+                                      'Title'   : 'User Activity',
+                                      'Subtitle': '',
+                                      'Type'    : 'Line',
+                                      'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
+                                     });
+
+        #context['chart_data'] = []
+
+        #for i in range(0, len(context.get('charts'))):
+            #context.get('chart_data').append(json.dumps(context.get('charts')[i]))
+
 
         return render(request, 'Statistics.html', context)
     else:

@@ -8,9 +8,11 @@
 
 {% block Script %}
 
-<script>
-
-</script>
+  <script>
+    $(document).ready(function() {
+      let raw_charts = {{charts}};
+    });
+  </script>
 
 {% endblock %}
 
