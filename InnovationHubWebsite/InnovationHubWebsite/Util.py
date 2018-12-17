@@ -87,8 +87,26 @@ class Util:
         return(datetime.now())
 
     def getPrinterName(self):
-        printer = ['Thor', 'Artemis', 'Zeus']
-        return(printer[randint(0, 2)])
+        #printer = ['Thor', 'Artemis', 'Zeus']
+        #return(printer[randint(0, 2)])
+        Thor    = list(Job.objects.filter(printer_name = 'Thor').filter(status = 'in Queue'))
+        Zeus    = list(Job.objects.filter(printer_name = 'Zeus').filter(status = 'in Queue'))
+        Artemis = list(Job.objects.filter(printer_name = 'Artemis').filter(status = 'in Queue'))
+
+        prints = [len(Thor), len(Zeus), len(Artemis)]
+
+        printer = ''
+
+        if(prints[0] < prints[1] and prints[0] < prints[2]):
+            printer = 'Thor'
+        elif(prints[1] < prints[2]):
+            printer = 'Zeus'
+        else:
+            printer = 'Artemis'
+
+        return(printer)
+
+
 
     def getProfile(self, user):
         profiles = list(Profile.objects.all())
