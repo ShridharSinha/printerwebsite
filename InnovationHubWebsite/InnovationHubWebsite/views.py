@@ -566,6 +566,7 @@ def Statistics(request):
                                       'Type'    : 'line',
                                       'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                       'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
+                                      'Keys'     :["Very Active Users", "Active Users", "Total Number of Users"],
                                      });
 
         context.get('charts').append({'No'      : '4',
@@ -574,6 +575,7 @@ def Statistics(request):
                                       'Type'    : 'line',
                                       'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                       'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
+                                      'Keys'     :["Very Active Users", "Active Users", "Total Number of Users"],
                                      });
 
         #context['chart_data'] = []

@@ -17,8 +17,12 @@
       let Type     = '';
       let Labels   = [];
       let Data     = [];
+      let datasets = [];
+      let Key      = [];
 
       let temp     = [];
+      let canvas;
+      let chart;
 
       {% for chart in charts %}
         //let raw_charts = {{charts}};
@@ -30,6 +34,8 @@
         Type     = '{{chart.Type}}';
         Labels   = [];
         Data     = [];
+        datasets = [];
+        Key      = [];
 
         {% for Label in chart.Labels %}
           Labels.push('{{Label}}');
@@ -44,9 +50,35 @@
 
         {% endfor %}
 
-        console.log(Data);
-        console.log(Labels);
+        {% for key in chart.Keys %}
+          Key.push('{{key}}');
+        {% endfor %}
+
+        //console.log(Data);
+        //console.log(Labels);
         //console.log(Num + " " + Title + " " + Subtitle + " " + Type);
+
+        for(let i = 0; i < Data.length; i++) {
+          datasets.push({
+
+            'label'       : Key[i],
+            'fill'        : false,
+            'lineTension' : 0.1,
+            'data'        :Data[i],
+
+          });
+          console.log(Key[i]);
+        }
+
+        canvas = document.getElementById(Title.split(" ")[0])
+        //console.log(canvas);
+        chart  = new Chart(canvas, {
+          'type': Type,
+          'data': {'labels'  : Labels,
+                   'datasets': datasets,
+
+                  },
+        });
 
 
 
