@@ -64,3 +64,14 @@ class RecentPrint(models.Model):
     fk_job =models.ForeignKey(Job, on_delete=models.CASCADE, null=True)
 
     #def __str__(self):
+
+class Statistics(models.Model):
+    month_name                =models.CharField(max_length=30)
+    print_num                 =models.IntegerField()
+    print_time_average        =models.IntegerField()
+    wait_time_average         =models.IntegerField()
+    successful_submission_num =models.IntegerField()
+    failed_submission_num     =models.IntegerField()
+
+    def __str__(self):
+        return(self.month_name)

@@ -558,10 +558,13 @@ def Statistics(request):
         context['charts'] = []
 
         for i in range(1, 6):
-            context.get('charts').append({'Title'   : str(i),
-                                       'Subtitle': str(i),
-                                       'Type'    : 'Bar',
-                                      });
+            context.get('charts').append({'No'      : str(i),
+                                          'Title'   : str(i),
+                                          'Subtitle': str(i),
+                                          'Type'    : 'Bar',
+                                          'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                          'Data'    : [[]],
+                                         });
 
         return render(request, 'Statistics.html', context)
     else:
