@@ -560,6 +560,24 @@ def Statistics(request):
         context['charts'] = []
 
         #for i in range(1, 6):
+        context.get('charts').append({'No'      : '1',
+                                      'Title'   : 'Number of Prints',
+                                      'Subtitle': 'and Average Print Time',
+                                      'Type'    : 'bar',
+                                      'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
+                                      'Keys'     :["No. of Prints", "Average Print Time"],
+                                     });
+
+        context.get('charts').append({'No'      : '2',
+                                      'Title'   : 'Average Wait Time',
+                                      'Subtitle': 'for Prints',
+                                      'Type'    : 'bar',
+                                      'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Data'    : [[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
+                                      'Keys'     :["Average Wait Time"],
+                                     });
+
         context.get('charts').append({'No'      : '3',
                                       'Title'   : 'User Activity',
                                       'Subtitle': 'Number of Active Users',

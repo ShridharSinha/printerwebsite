@@ -59,25 +59,89 @@
         //console.log(Num + " " + Title + " " + Subtitle + " " + Type);
 
         for(let i = 0; i < Data.length; i++) {
+          let colours = ['rgba(13,30,32,1)', 'rgba(26,60,64,1)', 'rgba(20,77,83,1)', 'rgba(48,118,114,1)', 'rgba(96,236,228,1)']; //Darkest to Lightest
+
           datasets.push({
 
-            'label'       : Key[i],
-            'fill'        : false,
-            'lineTension' : 0.1,
-            'data'        :Data[i],
+            label       : Key[i],
+            fill        : false,
+            lineTension : 0.15,
+            data        :Data[i],
 
           });
+
+          if(i == 0) {
+            datasets[i]["borderColor"] = colours[1];
+            datasets[i]["backgroundColor"] = colours[1];
+
+            {% if chart.Type == 'line' %}
+            datasets[i]["pointBackgroundColor"] = colours[0];
+            datasets[i]["pointHoverBackgroundColor"] = colours[2];
+            {% endif %}
+
+            {% if chart.Type == 'bar' %}
+            datasets[i]["pointBackgroundColor"] = colours[0];
+            datasets[i]["pointHoverBackgroundColor"] = colours[2];
+            {% endif %}
+
+          } else if(i == 1) {
+             datasets[i]["borderColor"] = colours[2];
+             datasets[i]["backgroundColor"] = colours[2];
+
+             {% if chart.Type == 'line' %}
+             datasets[i]["pointBackgroundColor"] = colours[1];
+             datasets[i]["pointHoverBackgroundColor"] = colours[3];
+             {% endif %}
+
+             {% if chart.Type == 'bar' %}
+             //datasets[i]["pointBackgroundColor"] = colours[1];
+             datasets[i]["HoverBackgroundColor"] = colours[3];
+             datasets[i]["borderColor"] = colours[3];
+             datasets[i]["backgroundColor"] = colours[3];
+             {% endif %}
+          } else {
+             datasets[i]["borderColor"] = colours[3];
+             datasets[i]["backgroundColor"] = colours[3];
+
+             {% if chart.Type == 'line' %}
+             //datasets[i]["pointBackgroundColor"] = colours[2];
+             datasets[i]["HoverBackgroundColor"] = colours[3];
+             {% endif %}
+
+             {% if chart.Type == 'bar' %}
+             //datasets[i]["pointBackgroundColor"] = colours[2];
+             datasets[i]["HoverBackgroundColor"] = colours[3];
+             {% endif %}
+          }
           //console.log(Key[i]);
         }
 
         canvas = document.getElementById(Title.split(" ")[0])
         //console.log(canvas);
         chart  = new Chart(canvas, {
-          'type': Type,
-          'data': {'labels'  : Labels,
-                   'datasets': datasets,
+          type: Type,
+          data: {
+            labels  : Labels,
+            datasets: datasets,
+          },
 
-                  },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                }
+              }]
+            },
+
+            legend: {
+              labels: {
+                fontColor : 'rgba(26,60,64,1)',
+                fontFamily: 'Courier',
+                fontStyle : 'bold',
+              },
+            },
+          },
         });
 
 
