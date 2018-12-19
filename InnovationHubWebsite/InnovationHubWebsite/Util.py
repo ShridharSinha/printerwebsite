@@ -120,7 +120,7 @@ class Util:
             return('December')
 
     def clearStatistics(self):
-        months = list(Statistics.objects.all())
+        months = list(Statistic.objects.all())
 
         for month in months:
             month.clear()

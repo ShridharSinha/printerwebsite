@@ -637,6 +637,16 @@ def Statistics(request):
         return redirect('/infidel/')
 
 @login_required(login_url='/infidel/')
+def ClearStatistics(request):
+    if(request.user.is_superuser):
+        util = Util()
+        util.clearStatistics()
+
+        return HttpResponse("Statistics Cleared")
+    else:
+        return redirect('/infidel/')
+
+@login_required(login_url='/infidel/')
 def Printer(request, name):
     if(request.user.is_superuser):
         context = {'name':name,}

@@ -176,6 +176,18 @@
 
 
       {% endfor %}
+
+
+      $('#clearStats').click(function(){
+        $.ajax({
+          url:"/ADMIN/statistics/clear",
+          success:function(result){
+            console.log("Success");
+          }
+        });
+        location.reload();
+        //console.log("failed")
+      });
     });
   </script>
 
@@ -212,6 +224,18 @@
           </table>
         </div>
       {% endfor %}
+      <div class="clear"></div>
+
+      <div class="grid_12 header">
+        <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
+        <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" id='clearStats'>
+          <tbody>
+            <tr>
+              <td style="font-size: 30px; border-radius:6px;">View Website Statistics</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="clear"></div>
     </div>
 

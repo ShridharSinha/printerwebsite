@@ -82,9 +82,12 @@ class Statistic(models.Model):
         return(self.month_name)
 
     def clear(self):
-        self.month_name                = 0
+        #self.month_name                = 0
         self.print_num                 = 0
-        self.print_time_average        = 0
-        self.wait_time_average         = 0
+        self.print_time                = 0
+        self.wait_time                 = 0
         self.successful_submission_num = 0
         self.failed_submission_num     = 0
+        self.total_users_num           = 0
+        self.active_users_num          = 0
+        self.very_active_users_num     = 0
