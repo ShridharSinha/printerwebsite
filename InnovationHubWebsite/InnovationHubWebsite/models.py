@@ -68,6 +68,7 @@ class RecentPrint(models.Model):
     #def __str__(self):
 
 class Statistic(models.Model):
+    month_num                 =models.IntegerField(null=True)
     month_name                =models.CharField(max_length=30)
     print_num                 =models.IntegerField()
     print_time                =models.IntegerField()

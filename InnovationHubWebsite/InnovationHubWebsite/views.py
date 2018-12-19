@@ -585,12 +585,25 @@ def Statistics(request):
 
         context['charts'] = []
 
+        statistics = list(Statistic.objects.all())
+
+        for i in range(0, len(statistics) - 1):
+            for j in range(0, len(statistics) - 1 - i):
+                if(statistics[j].month_num > statistics[j+1].month_num):
+                    temp            = statistics[j]
+                    statistics[j]   = statistics[j+1]
+                    statistics[j+1] = temp
+
+        labels = []
+        for stat in statistics:
+            labels.append(stat.month_name)
+
         #for i in range(1, 6):
         context.get('charts').append({'No'      : '1',
                                       'Title'   : 'Number of Prints',
                                       'Subtitle': 'and Average Print Time',
                                       'Type'    : 'bar',
-                                      'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Labels'  : labels, #['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                       'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
                                       'Keys'     :["No. of Prints", "Average Print Time"],
                                       'CutOut'  : 0,
@@ -600,7 +613,7 @@ def Statistics(request):
                                       'Title'   : 'Average Wait Time',
                                       'Subtitle': 'for Prints',
                                       'Type'    : 'bar',
-                                      'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Labels'  : labels, #['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                       'Data'    : [[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
                                       'Keys'     :["Average Wait Time"],
                                       'CutOut'  : 0,
@@ -610,7 +623,7 @@ def Statistics(request):
                                       'Title'   : 'User Activity',
                                       'Subtitle': 'Number of Active Users',
                                       'Type'    : 'line',
-                                      'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Labels'  : labels, #['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                       'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
                                       'Keys'     :["Very Active Users", "Active Users", "Total Number of Users"],
                                       'CutOut'  : 0,
