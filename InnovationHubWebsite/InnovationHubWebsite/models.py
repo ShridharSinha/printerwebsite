@@ -34,11 +34,13 @@ class Job(models.Model):
     print_start_time=models.DateTimeField(null=True)
     print_end_time  =models.DateTimeField(null=True)
     print_time      =models.CharField(max_length=20, null=True)
+    wait_time       =models.IntegerField(null=True)
     printer_name    =models.CharField(max_length=20, null=True)
     fk_profile      =models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     file_path_stl   =models.CharField(max_length=1000, null=True)
     file_path_obj   =models.CharField(max_length=1000, null=True)
     special_marker  =models.CharField(max_length=20, null=True)
+
     uploadDate = ''
     startDate = ''
     endDate = ''
@@ -65,13 +67,24 @@ class RecentPrint(models.Model):
 
     #def __str__(self):
 
-class Statistics(models.Model):
+class Statistic(models.Model):
     month_name                =models.CharField(max_length=30)
     print_num                 =models.IntegerField()
-    print_time_average        =models.IntegerField()
-    wait_time_average         =models.IntegerField()
+    print_time                =models.IntegerField()
+    wait_time                 =models.IntegerField()
     successful_submission_num =models.IntegerField()
     failed_submission_num     =models.IntegerField()
+    total_users_num           =models.IntegerField(null=True)
+    active_users_num          =models.IntegerField(null=True)
+    very_active_users_num     =models.IntegerField(null=True)
 
     def __str__(self):
         return(self.month_name)
+
+    def clear(self):
+        self.month_name                = 0
+        self.print_num                 = 0
+        self.print_time_average        = 0
+        self.wait_time_average         = 0
+        self.successful_submission_num = 0
+        self.failed_submission_num     = 0

@@ -75,7 +75,8 @@
 
             datasets.push({
               backgroundColor      : [colours[0], colours[2]],
-              hoverBackgroundColor : [colours[1], colours[3]],
+              hoverBackgroundColor : [colours[3], colours[3]],
+              borderColor          : [colours[0], colours[0]],
               data                 : Data[i],
             });
 
@@ -101,7 +102,7 @@
             {% if chart.Type == 'bar' %}
             datasets[i]["pointBackgroundColor"] = colours[0];
             datasets[i]["pointHoverBackgroundColor"] = colours[2];
-            datasets[i]["hoverBackgroundColor"] = colours[2];
+            datasets[i]["hoverBackgroundColor"] = colours[3];
             {% endif %}
 
           } else if(i == 1) {

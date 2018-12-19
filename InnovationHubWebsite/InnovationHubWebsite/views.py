@@ -9,12 +9,13 @@ from django.conf import settings
 from .models import *
 from .Util import *
 from datetime import *
+import pytz
 
 import json
 
 
 # Create your views here.
-
+MONTHLY_QUOTA = 3600
 #HomePage Views
 def HomePage(request):
     util = Util()
@@ -66,6 +67,8 @@ def HomePage(request):
 
     if(request.user.is_authenticated):
         context['authenticated'] = 'true'
+
+    #month = util.getCurrentMonth()
 
     return render(request, 'HomePage.html', context)
 
@@ -211,12 +214,35 @@ def SubmissionRequest(request):
 
             newJob.save()
 
+            month    = util.getCurrentMonth()
+            objects  = list(Statistic.objects.filter(month_name = month))
+            if(len(objects) > 0):
+                Statistic_obj = objects[0]
+                #Statistic_obj.print_num                 = Statistic_obj.print_num + 1
+                Statistic_obj.successful_submission_num = Statistic_obj.successful_submission_num + 1
+                Statistic_obj.total_users_num           = len(list(User.objects.filter(is_superuser=False)))
+                Statistic_obj.save()
+                #print(Statistic_obj)
+
+
             #return HttpResponse("Submission Form")
             return redirect("success/")
         else:
+            month    = util.getCurrentMonth()
+            objects  = list(Statistic.objects.filter(month_name = month))
+            if(len(objects) > 0):
+                Statistic_obj = objects[0]
+                Statistic_obj.failed_submission_num = Statistic_obj.failed_submission_num + 1
+                Statistic_obj.save()
             return redirect('fail/')
     except Exception as e:
         print(e)
+        month    = util.getCurrentMonth()
+        objects  = list(Statistic.objects.filter(month_name = month))
+        if(len(objects) > 0):
+            Statistic_obj = objects[0]
+            Statistic_obj.failed_submission_num = Statistic_obj.failed_submission_num + 1
+            Statistic_obj.save()
         Job.objects.filter(job_id = newJob.job_id).delete()
         return redirect('fail/')
 
@@ -633,6 +659,7 @@ def Printer(request, name):
 
 def Printed(request, jobid):
     if(request.user.is_superuser):
+        util = Util()
         jobs = list(Job.objects.filter(job_id = jobid))
         if(len(jobs) == 1):
 
@@ -641,15 +668,39 @@ def Printed(request, jobid):
             time = int(request.GET['job_time'])
             job.print_time = str(time)
 
+            job.print_end_time = datetime.now();
+
             profile = job.fk_profile# -= time
+            initial_quota = profile.quota
+            has_become_active = initial_quota >= MONTHLY_QUOTA
             profile.quota = profile.quota - time
 
+            has_become_very_active = False
             if(profile.quota < 0):
                 profile.quota = 0
+                if(initial_quota > 0):
+                    has_become_very_active = True
 
             job.save()
 
             profile.save()
+
+            month    = util.getCurrentMonth()
+            objects  = list(Statistic.objects.filter(month_name = month))
+            if(len(objects) > 0):
+                Statistic_obj            = objects[0]
+                Statistic_obj.print_num  = Statistic_obj.print_num  + 1
+                Statistic_obj.print_time = Statistic_obj.print_time + time
+
+                wait = job.wait_time
+                Statistic_obj.wait_time = Statistic_obj.wait_time + wait
+                if(has_become_active):
+                    Statistic_obj.active_users_num = Statistic_obj.active_users_num + 1
+                if(has_become_very_active):
+                    Statistic_obj.very_active_users_num = Statistic_obj.very_active_users_num + 1
+
+                #print("Success!")
+                Statistic_obj.save()
 
             return HttpResponse('success')
 
@@ -663,6 +714,16 @@ def Printing(request, jobid):
 
             job = jobs[0]
             job.status = "Printing"
+            job.print_start_time = datetime.now()
+
+            #now_aware = unaware.replace(tzinfo=pytz.UTC)
+            time_a = job.print_start_time.replace(tzinfo=pytz.UTC)
+            time_b = job.upload_time.replace(tzinfo=pytz.UTC)
+            delta_time = time_a - time_b
+            wait_in_seconds = delta_time.total_seconds()
+
+            job.wait_time = wait_in_seconds
+
             job.save()
 
             #path = '/printer/' + job.printer_name

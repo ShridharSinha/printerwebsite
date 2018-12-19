@@ -86,6 +86,47 @@ class Util:
     def getPrintEndTime(self, f):
         return(datetime.now())
 
+    def getCurrentMonth(self):
+        month_num  = datetime.now().strftime("%m")
+        month_name = self.convertMonthNumToName(month_num)
+
+        #print(month_name)
+        return(month_name)
+
+    def convertMonthNumToName(self, num):
+        if(num == 1):
+            return('January')
+        elif(num== 2):
+            return('February')
+        elif(num== 3):
+            return('March')
+        elif(num== 4):
+            return('April')
+        elif(num== 5):
+            return('May')
+        elif(num== 6):
+            return('June')
+        elif(num== 7):
+            return('July')
+        elif(num== 8):
+            return('August')
+        elif(num== 9):
+            return('September')
+        elif(num== 10):
+            return('October')
+        elif(num== 11):
+            return('November')
+        else:
+            return('December')
+
+    def clearStatistics(self):
+        months = list(Statistics.objects.all())
+
+        for month in months:
+            month.clear()
+            month.save()
+
+
     def getPrinterName(self):
         #printer = ['Thor', 'Artemis', 'Zeus']
         #return(printer[randint(0, 2)])
