@@ -567,6 +567,7 @@ def Statistics(request):
                                       'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                       'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
                                       'Keys'     :["No. of Prints", "Average Print Time"],
+                                      'CutOut'  : 0,
                                      });
 
         context.get('charts').append({'No'      : '2',
@@ -576,6 +577,7 @@ def Statistics(request):
                                       'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                       'Data'    : [[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
                                       'Keys'     :["Average Wait Time"],
+                                      'CutOut'  : 0,
                                      });
 
         context.get('charts').append({'No'      : '3',
@@ -585,15 +587,17 @@ def Statistics(request):
                                       'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                       'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
                                       'Keys'     :["Very Active Users", "Active Users", "Total Number of Users"],
+                                      'CutOut'  : 0,
                                      });
 
         context.get('charts').append({'No'      : '4',
                                       'Title'   : 'Print Submission',
                                       'Subtitle': 'Success Rate',
-                                      'Type'    : 'line',
-                                      'Labels'  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                                      'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
-                                      'Keys'     :["Very Active Users", "Active Users", "Total Number of Users"],
+                                      'Type'    : 'pie',
+                                      'Labels'  : ['Success', 'Failure'],
+                                      'Data'    : [[54, 8]],
+                                      #'Keys'     :["Success", "Failure"],
+                                      'CutOut'  : 50,
                                      });
 
         #context['chart_data'] = []
