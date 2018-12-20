@@ -90,7 +90,7 @@
         <table class="Data">
           <thead>
             <tr>
-              <th colspan="4">Pending Prints</th>
+              <th colspan="5">Pending Prints</th>
             </tr>
           </thead>
 
@@ -98,6 +98,7 @@
             <tr class="Subheading">
               <td>#</td>
               <td>Print Name</td>
+              <td>Colour</td>
               <td>Download</td>
               <td>Action</td>
             </tr>
@@ -107,6 +108,7 @@
               <div class="row">
                 <td class="Hover" onclick="location.href='/printData/{{Job.job_id}}'" style="cursor:pointer;">{{Job.job_id}}</td>
                 <td class="Hover">{{Job.job_title}}</td>
+                <td class="Hover">{{Job.colour}}</td>
                 <td class="Hover"style="cursor:pointer;" onclick="location.href='/printData/download/{{Job.job_id}}'">Download</td>
                 <td class="Hover print"style="cursor:pointer;" onclick="location.href='/printer/printing/{{Job.job_id}}'">Start Printing</td>
               </div>

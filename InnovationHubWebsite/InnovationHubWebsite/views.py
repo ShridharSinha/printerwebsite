@@ -737,6 +737,21 @@ def Printer(request, name):
                 context['currentLen']  = len(current)
 
         inQueue = list(Job.objects.filter(printer_name = name).filter(status = 'in Queue'))
+
+        for i in range(0, len(current)):
+            for j in range(0, len(current) - 1 - i):
+                if(current[j].job_id > current[j+1].job_id):
+                    temp         = current[j]
+                    current[j]   = current[j+1]
+                    current[j+1] = temp
+
+        for i in range(0, len(inQueue)):
+            for j in range(0, len(inQueue) - 1 - i):
+                if(inQueue[j].job_id > inQueue[j+1].job_id):
+                    temp         = inQueue[j]
+                    inQueue[j]   = inQueue[j+1]
+                    inQueue[j+1] = temp
+
         context['inQueue'] = inQueue
 
         return render(request, 'Printer.html', context)
@@ -820,14 +835,6 @@ def Printing(request, jobid):
     else:
         return redirect('/infidel/')
 
-#Errors
-#def error_404_view(request, exception):
-#    context = {'Quota' : '00:31:23',}
-#    return render(request, '404.html', context)
-
-#def error_500_view(request, exception):
-#    context = {'Quota' : '00:31:23',}
-#    return render(request, '500.html', context)
 
 def Infidel(request):
     return HttpResponse("This is the grown up's table! It's not for sneaky idiots like you!<br>I've got to say though, nice try!<br>But now it's time for bed.<br><br>GO <a href='/home'>Home</a>!!!")
@@ -839,3 +846,16 @@ def AboutUs(request):
     util = Util()
     context = util.getQuota(request.user)
     return(render(request, 'AboutUs.html', context))
+
+#Errors
+def error_404(request, exception):
+    util = Util()
+    context = util.getQuota()
+    return render(request, '404.html', context)
+
+#def error_500_view(request, exception):
+#    context = {'Quota' : '00:31:23',}
+#    return render(request, '500.html', context)
+
+
+handler404 = error_404

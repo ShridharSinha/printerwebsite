@@ -1,13 +1,13 @@
 {% extends "Layout.html" %}
 {% load static %}
-  {% block title %}InnovationHub  |  Home{% endblock %}
+  {% block title %}InnovationHub  |  404 ERROR{% endblock %}
 
-  {% block heading %}A <em><u>404</u></em> ERROR SEEMS TO HAVE OCCURRED{% endblock %}
+  {% block heading %}A <em>404</em> ERROR SEEMS TO HAVE OCCURRED{% endblock %}
 
   {% block content %}
   <div class="container_12">
-    <div class"grid_12 header">
-      <h1 class="top heading" style="background-color:#144D53; font-size: 19px;">The page you are looking for doesn't seem to exist. Please return to the Home Page.</h1>
+    <div class"grid_12 header" onclick="location.href='/home'" style="cursor:pointer;">
+      <h1 class="top heading" style="background-color:#144D53;font-size:19px;margin-bottom:250px; margin-top:10px;"><em>The page you are looking for doesn't seem to exist. Please return to the Home Page.</em></h1>
     </div>
   </div>
   {% endblock %}
