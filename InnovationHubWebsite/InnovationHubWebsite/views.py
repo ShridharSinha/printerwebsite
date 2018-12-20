@@ -848,14 +848,17 @@ def AboutUs(request):
     return(render(request, 'AboutUs.html', context))
 
 #Errors
-def error_404(request, exception):
-    util = Util()
-    context = util.getQuota()
-    return render(request, '404.html', context)
+#def error_404(request, exception):
+    #util = Util()
+    #context = util.getQuota()
+
+    ##context['Error']         = '404'
+    ##context['error_message'] = 'The page you are looking for doesn\'t seem to exist. Please return to the Home Page.'
+    #return render(request, '404.html', context)
 
 #def error_500_view(request, exception):
 #    context = {'Quota' : '00:31:23',}
 #    return render(request, '500.html', context)
 
 
-handler404 = error_404
+#handler404 = 'InnovationHubWebite.views.error_404'
