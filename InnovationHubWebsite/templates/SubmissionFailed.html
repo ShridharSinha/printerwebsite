@@ -1,0 +1,42 @@
+{% extends "Layout.html" %}
+{% load static %}
+  {% block title %}InnovationHub  |  Fail{% endblock %}
+
+  {% block heading %}Uh Oh! Something went wrong{% endblock %}
+
+  {% block content %}
+    <div class="container_12">
+      <div class="grid_12 header">
+        {% if error_message == 'a' %}
+        <h2 style='color:#1A3C40;'>Please ensure the prints meet the requirements and that you have entered all the required data.</h2>
+        {% else %}
+        <h2 style='color:#1A3C40;'>{{error_message}}</h2>
+        {% endif %}
+        <h3 style='color:#144D53;'>For any assistance, contact your instructor or contact us at the details below.</h3>
+      </div>
+      <div class='clear'></div>
+      <div class="grid_6 header">
+        <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
+        <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/home/'">
+          <tbody>
+            <tr>
+              <td style="font-size: 30px; border-radius:6px;">Home</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid_6 header">
+        <!--<h1 class="top heading" style="cursor:pointer;">Click here to view Django Admin Controls</h1>-->
+        <table class="Data" style="cursor:pointer; border-radius:12px; background-color:#307672; border: 0px;" onclick="location.href='/submit/'">
+          <tbody>
+            <tr>
+              <td style="font-size: 30px; border-radius:6px;">Try Again</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+  {% endblock %}

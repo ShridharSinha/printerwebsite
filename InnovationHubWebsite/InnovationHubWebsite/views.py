@@ -175,8 +175,16 @@ def Preview(request):
 
 @login_required(login_url='/login/')
 def SubmissionRequest(request):
+    util = Util()
+    saved = False
+    error_message = 'a'
     try:
         if request.method == 'POST':
+
+            if(not(request.user.is_superuser) and util.getProfile(request.user).quota <= 0):
+                error_message = 'Sorry, your print quota is over...  Try again next month.'
+                x = 0/0
+
 
             newJob = Job()
             util   = Util()
@@ -197,6 +205,7 @@ def SubmissionRequest(request):
 
 
             newJob.save()
+            saved = True
             #jobs = list(Job.objects.all())
             #id = 0
             #if(len(jobs) == 0):
@@ -243,8 +252,9 @@ def SubmissionRequest(request):
             Statistic_obj = objects[0]
             Statistic_obj.failed_submission_num = Statistic_obj.failed_submission_num + 1
             Statistic_obj.save()
-        Job.objects.filter(job_id = newJob.job_id).delete()
-        return redirect('fail/')
+        if(saved):
+            Job.objects.filter(job_id = newJob.job_id).delete()
+        return redirect('fail/' + error_message)
 
 @login_required(login_url='/login/')
 def Success(request):
@@ -255,11 +265,13 @@ def Success(request):
     return render(request, 'SubmissionSuccess.html', context)
 
 @login_required(login_url='/login/')
-def Fail(request):
+def Fail(request, error):
     util = Util()
 
     context = util.getQuota(request.user)
-    return HttpResponse("Submission Fail")
+    context['error_message'] = error
+    #return HttpResponse("Submission Fail")
+    return(render(request, 'SubmissionFailed.html', context))
 
 @login_required(login_url='/login/')
 def PrintData(request, jobid):

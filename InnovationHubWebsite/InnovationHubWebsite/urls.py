@@ -37,7 +37,7 @@ urlpatterns = [
     path('submit/request/', views.SubmissionRequest),
     path('submit/preview/', views.Preview),
     path('submit/request/success/', views.Success),
-    path('submit/request/fail/', views.Fail),
+    path('submit/request/fail/<str:error>', views.Fail),
 
     #Account
     path('account/', views.AccountData),
