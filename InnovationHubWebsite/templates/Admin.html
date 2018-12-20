@@ -6,12 +6,18 @@
 <script>
 
   $(document).ready(function() {
+    $('#quotaMessage').hide();
+    let reset = false;
 
     $("#resetQuota").click(function() {
       $.ajax({
         url: '/ADMIN/ResetQuota',
         success: function(result) {
-
+          if(!reset) {
+            $('#quotaMessage').append("<h1 class='top heading' style='border:6px solid #307672; border-radius:10px; background-color:#1A3C40;'>Quotas have been reset</h1>");
+            $('#quotaMessage').slideDown();
+            reset = true;
+          }
         },
       });
     });
@@ -94,6 +100,11 @@
           </tr>
         </thead>
       </table>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="grid_12 header" id='quotaMessage'>
     </div>
 
     <div class="clear"></div>
