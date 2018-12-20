@@ -484,6 +484,16 @@ def DecreaseGrade(request):
     else:
         return redirect('/infidel/')
 
+def ResetQuota(request):
+    profiles = list(Profile.objects.all())
+    for profile in profiles:
+        if(not profile.user.is_superuser):
+            if(profile.quota < MONTHLY_QUOTA):
+                profile.quota = MONTHLY_QUOTA
+
+        profile.save()
+    return(HttpResponse("Success"))
+
 def AdminExcel(request):
     if(request.user.is_superuser):
         util = Util()
@@ -594,17 +604,60 @@ def Statistics(request):
                     statistics[j]   = statistics[j+1]
                     statistics[j+1] = temp
 
-        labels = []
+
+        month    = util.getCurrentMonth()
+        objects  = list(Statistic.objects.filter(month_name = month))
+        if(len(objects) > 0):
+            Statistic_obj = objects[0]
+            Statistic_obj.total_users_num           = len(list(User.objects.filter(is_superuser=False)))
+            Statistic_obj.save()
+
+        labels                 = []
+        print_num              = []
+        total_print_time       = []
+        av_print_time          = []
+
+        total_wait_time        = []
+        av_wait_time           = []
+
+        total_users            = []
+        active_users           = []
+        very_active_users      = []
+
+        successful_submissions = 0
+        failed_submissions     = 0
+
         for stat in statistics:
             labels.append(stat.month_name)
+
+            print_num.append(stat.print_num)
+            total_print_time.append(stat.print_time)
+
+            total_wait_time.append(stat.wait_time)
+
+            total_users.append(stat.total_users_num)
+            active_users.append(stat.active_users_num)
+            very_active_users.append(stat.very_active_users_num)
+
+            successful_submissions = successful_submissions + stat.successful_submission_num
+            failed_submissions     = failed_submissions     + stat.failed_submission_num
+
+        for i in range(0, len(print_num)):
+            if(print_num[i] != 0):
+                av_print_time.append(total_print_time[i]/print_num[i])
+                av_wait_time.append(total_wait_time[i]/print_num[i])
+            else:
+                av_print_time.append(0)
+                av_wait_time.append(0)
+
 
         #for i in range(1, 6):
         context.get('charts').append({'No'      : '1',
                                       'Title'   : 'Number of Prints',
                                       'Subtitle': 'and Average Print Time',
                                       'Type'    : 'bar',
-                                      'Labels'  : labels, #['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                                      'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
+                                      'Labels'  : labels, # Dummy: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Data'    : [print_num, av_print_time], # Dummy: [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
                                       'Keys'     :["No. of Prints", "Average Print Time"],
                                       'CutOut'  : 0,
                                      });
@@ -613,8 +666,8 @@ def Statistics(request):
                                       'Title'   : 'Average Wait Time',
                                       'Subtitle': 'for Prints',
                                       'Type'    : 'bar',
-                                      'Labels'  : labels, #['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                                      'Data'    : [[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
+                                      'Labels'  : labels, # Dummy: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Data'    : [av_wait_time], # Dummy: [[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83]],
                                       'Keys'     :["Average Wait Time"],
                                       'CutOut'  : 0,
                                      });
@@ -623,9 +676,9 @@ def Statistics(request):
                                       'Title'   : 'User Activity',
                                       'Subtitle': 'Number of Active Users',
                                       'Type'    : 'line',
-                                      'Labels'  : labels, #['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                                      'Data'    : [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
-                                      'Keys'     :["Very Active Users", "Active Users", "Total Number of Users"],
+                                      'Labels'  : labels, # Dummy: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                      'Data'    : [very_active_users, active_users, total_users],# Dummy: [[25, 34, 90, 78, 45, 67, 142, 123, 109, 87, 75, 23],[65, 94, 200, 178, 145, 167, 234, 232, 209, 187, 175, 83], [400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400, 400]],
+                                      'Keys'    : ["Very Active Users", "Active Users", "Total Number of Users"],
                                       'CutOut'  : 0,
                                      });
 
@@ -634,8 +687,8 @@ def Statistics(request):
                                       'Subtitle': 'Success Rate',
                                       'Type'    : 'pie',
                                       'Labels'  : ['Success', 'Failure'],
-                                      'Data'    : [[54, 8]],
-                                      #'Keys'     :["Success", "Failure"],
+                                      'Data'    : [[successful_submissions, failed_submissions]], # Dummy: [[54, 8]],
+                                      'Keys'     :["Success", "Failure"],
                                       'CutOut'  : 50,
                                      });
 

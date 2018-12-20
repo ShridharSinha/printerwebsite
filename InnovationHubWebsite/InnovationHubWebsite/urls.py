@@ -68,6 +68,7 @@ urlpatterns = [
     path('ADMIN/', views.AdminHome),
     path('ADMIN/INCREASE_GRADE', views.IncreaseGrade),
     path('ADMIN/DECREASE_GRADE', views.DecreaseGrade),
+    path('ADMIN/ResetQuota', views.ResetQuota),
     path('ADMIN/EXCEL', views.AdminExcel),
     path('infidel/', views.Infidel),
 
