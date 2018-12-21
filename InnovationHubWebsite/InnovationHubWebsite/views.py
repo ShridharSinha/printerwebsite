@@ -8,6 +8,7 @@ from django.conf import settings
 
 from .models import *
 from .Util import *
+from .CustomExceptions import *
 from datetime import *
 import pytz
 
@@ -183,7 +184,7 @@ def SubmissionRequest(request):
 
             if(not(request.user.is_superuser) and util.getProfile(request.user).quota <= 0):
                 error_message = 'Sorry, your print quota is over...  Try again next month.'
-                x = 0/0
+                raise NoRemainingQuotaException
 
 
             newJob = Job()

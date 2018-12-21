@@ -1,0 +1,2 @@
+class NoRemainingQuotaException(Exception):
+    pass
