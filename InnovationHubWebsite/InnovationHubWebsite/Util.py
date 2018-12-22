@@ -84,7 +84,21 @@ class Util:
         return(datetime.now())
 
     def getPrintEndTime(self, f):
-        return(datetime.now())
+        total_wait_time = 0
+        total_print_num = 0
+        stats = list(Statistic.objects.all())
+
+        for stat in stats:
+            total_wait_time = total_wait_time + stat.wait_time
+            total_print_num = total_print_num + stat.print_num
+
+        average_wait_time = 0
+        if(not(total_print_num == 0)):
+            average_wait_time = total_wait_time/total_print_num
+
+        day_num = (average_wait_time/86400) + 4
+
+        return(datetime.now() + timedelta(days=day_num) )
 
     def getCurrentYear(self):
         return(datetime.now().strftime("%y"))
