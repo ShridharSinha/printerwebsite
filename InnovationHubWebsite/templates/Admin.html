@@ -21,6 +21,18 @@
         },
       });
     });
+
+    $("#resetQuota").mouseover(function() {
+      $(this).css("background-color", "#E4EDDB");
+      $(this).css("color", "#144D53");
+      //console.log('Hover b');
+    });
+
+    $("#resetQuota").mouseout(function() {
+      $(this).css("background-color", "#144D53");
+      $(this).css("color", "#E4EDDB");
+      //console.log('Hover b');
+    });
   });
 
 </script>
@@ -91,7 +103,7 @@
           </tr>
 
           <tr>
-            <th colspan='2' style="font-size:25px; cursor:pointer;" id="resetQuota">Reset All Quotas</th>
+            <th colspan='2' style="font-size:25px; cursor:pointer;background-color:#144D53;" id="resetQuota">Reset All Quotas</th>
           </tr>
         </tbody>
         <thead>

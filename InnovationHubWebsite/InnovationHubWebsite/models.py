@@ -92,3 +92,10 @@ class Statistic(models.Model):
         self.total_users_num           = 0
         self.active_users_num          = 0
         self.very_active_users_num     = 0
+
+
+class Video(models.Model):
+    title      =models.CharField(max_length=50)
+    subtitle   =models.CharField(max_length=50)
+    source     =models.CharField(max_length=500)
+    admin_only =models.BooleanField()

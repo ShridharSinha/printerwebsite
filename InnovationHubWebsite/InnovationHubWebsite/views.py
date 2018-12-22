@@ -71,6 +71,28 @@ def HomePage(request):
 
     #month = util.getCurrentMonth()
 
+    num_active      = util.getActiveUserNum()
+    num_very_active = util.getVeryActiveUserNum()
+
+    #profiles = list(Profile.objects.all())
+    #for i in range(len(profiles), 0):
+    #    if(profiles[i].quota < MONTHLY_QUOTA and not(profile.fk_user.is_superuser)):
+    #        num_active = num_active + 1
+    #    if(profiles[i].quota == 0 and not(profile.fk_user.is_superuser)):
+    #        num_very_active = num_very_active + 1
+
+    #num_active      = len(list(Profile.objects.filter(quota = MONTHLY_QUOTA))) - super_user_num
+    #num_very_active = len(list(Profile.objects.filter(quota=0)))               - super_user_num
+
+    month    = util.getCurrentMonth()
+    objects  = list(Statistic.objects.filter(month_name = month))
+    if(len(objects) > 0):
+        Statistic_obj = objects[0]
+
+        Statistic_obj.active_users_num      = num_active
+        Statistic_obj.very_active_users_num = num_very_active
+        Statistic_obj.save()
+
     return render(request, 'HomePage.html', context)
 
 
@@ -622,7 +644,9 @@ def Statistics(request):
         objects  = list(Statistic.objects.filter(month_name = month))
         if(len(objects) > 0):
             Statistic_obj = objects[0]
-            Statistic_obj.total_users_num           = len(list(User.objects.filter(is_superuser=False)))
+            Statistic_obj.total_users_num       = len(list(User.objects.filter(is_superuser=False)))
+            Statistic_obj.active_users_num      = util.getActiveUserNum()
+            Statistic_obj.very_active_users_num = util.getVeryActiveUserNum()
             Statistic_obj.save()
 
         labels                 = []
@@ -779,11 +803,27 @@ def Printed(request, jobid):
             has_become_active = initial_quota >= MONTHLY_QUOTA
             profile.quota = profile.quota - time
 
-            has_become_very_active = False
-            if(profile.quota < 0):
-                profile.quota = 0
-                if(initial_quota > 0):
-                    has_become_very_active = True
+            #has_become_very_active = False
+            #if(profile.quota < 0):
+            #    profile.quota = 0
+            #    if(initial_quota > 0):
+            #        has_become_very_active = True
+
+            num_active      = util.getActiveUserNum()
+            num_very_active = util.getVeryActiveUserNum()
+
+            #profiles = list(Profile.objects.all())
+
+            #for i in range(len(profiles), 0):
+            #    if(profiles[i].quota < MONTHLY_QUOTA and not(profile.fk_user.is_superuser)):
+            #        num_active = num_active + 1
+            #    if(profiles[i].quota == 0 and not(profile.fk_user.is_superuser)):
+            #        num_very_active = num_very_active + 1
+
+            #num_active      = len(list(Profile.objects.filter(quota = MONTHLY_QUOTA))) - super_user_num
+            #num_very_active = len(list(Profile.objects.filter(quota=0)))               - super_user_num
+
+
 
             job.save()
 
@@ -798,10 +838,13 @@ def Printed(request, jobid):
 
                 wait = job.wait_time
                 Statistic_obj.wait_time = Statistic_obj.wait_time + wait
-                if(has_become_active):
-                    Statistic_obj.active_users_num = Statistic_obj.active_users_num + 1
-                if(has_become_very_active):
-                    Statistic_obj.very_active_users_num = Statistic_obj.very_active_users_num + 1
+                #if(has_become_active):
+                #    Statistic_obj.active_users_num = Statistic_obj.active_users_num + 1
+                #if(has_become_very_active):
+                #    Statistic_obj.very_active_users_num = Statistic_obj.very_active_users_num + 1
+
+                Statistic_obj.active_users_num      = num_active
+                Statistic_obj.very_active_users_num = num_very_active
 
                 #print("Success!")
                 Statistic_obj.save()

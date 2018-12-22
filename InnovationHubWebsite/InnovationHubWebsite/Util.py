@@ -86,6 +86,10 @@ class Util:
     def getPrintEndTime(self, f):
         return(datetime.now())
 
+    def getCurrentYear(self):
+        return(datetime.now().strftime("%y"))
+
+
     def getCurrentMonth(self):
         month_num  = datetime.now().strftime("%m")
         month_name = self.convertMonthNumToName(month_num)
@@ -94,27 +98,27 @@ class Util:
         return(month_name)
 
     def convertMonthNumToName(self, num):
-        if(num == 1):
+        if(num == 1 or num == '01'):
             return('January')
-        elif(num== 2):
+        elif(num == 2 or num == '02'):
             return('February')
-        elif(num== 3):
+        elif(num == 3 or num == '03'):
             return('March')
-        elif(num== 4):
+        elif(num == 4 or num == '04'):
             return('April')
-        elif(num== 5):
+        elif(num == 5 or num == '05'):
             return('May')
-        elif(num== 6):
+        elif(num == 6 or num == '06'):
             return('June')
-        elif(num== 7):
+        elif(num == 7 or num == '07'):
             return('July')
-        elif(num== 8):
+        elif(num == 8 or num == '08'):
             return('August')
-        elif(num== 9):
+        elif(num == 9 or num == '09'):
             return('September')
-        elif(num== 10):
+        elif(num == 10 or num == '10'):
             return('October')
-        elif(num== 11):
+        elif(num == 11 or num == '11'):
             return('November')
         else:
             return('December')
@@ -192,6 +196,39 @@ class Util:
         for p in profiles:
             p.grade += diff
             p.save()
+
+
+    def getActiveUserNum(self):
+        profiles = list(Profile.objects.all())
+        jobs     = list(Job.objects.all())
+        num = 0
+        #print(len(profiles))
+
+        for i in range(len(profiles) - 1, -1, -1):
+            #print(i)
+            if(profiles[i].user.is_superuser):
+                profiles.pop(i)
+                #print('pop')
+
+        for i in range(0, len(profiles)):
+            for j in range(0, len(jobs)):
+                if(jobs[j].fk_profile == profiles[i] and self.convertMonthNumToName(jobs[j].upload_time.strftime("%m")) == self.getCurrentMonth() and jobs[j].upload_time.strftime("%y") == self.getCurrentYear()):
+                    num = num+1
+                    break
+
+        print(num)
+
+        return(num)
+
+
+    def getVeryActiveUserNum(self):
+        profiles = list(Profile.objects.all())
+
+        for i in range(len(profiles) - 1, -1, -1):
+            if(not(profiles[i].quota == 0 and not(profiles[i].user.is_superuser))):
+                profiles.pop(i)
+        print(len(profiles))
+        return(len(profiles))
 
 
     """def readFrom(a,b):
