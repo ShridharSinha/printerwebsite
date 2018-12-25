@@ -268,7 +268,7 @@ def SubmissionRequest(request):
                 Statistic_obj.save()
             return redirect('fail/')
     except Exception as e:
-        print(e)
+        #print(e)
         month    = util.getCurrentMonth()
         objects  = list(Statistic.objects.filter(month_name = month))
         if(len(objects) > 0):
@@ -382,6 +382,42 @@ def CarlPage(request):
     util = Util()
 
     context = util.getQuota(request.user)
+
+    videos = Video.objects.all()
+
+    context['mainVideos']  = list(videos.filter(title='Introduction')) #[{'title':'Introduction', 'subtitle': '\"Aim for the stars...\"'}]
+
+    context['userVideos']  = list(videos.filter(admin_only=False)) #[{'title':'The Home Page', 'subtitle': 'Part 1'},
+                              #{'title':'The Submit Page', 'subtitle': 'Part 2'},
+                              #{'title':'The Home Page', 'subtitle': 'Part 1'},
+                              #{'title':'The Submit Page', 'subtitle': 'Part 2'},
+                              #{'title':'The Home Page', 'subtitle': 'Part 1'},
+                              #{'title':'The Submit Page', 'subtitle': 'Part 2'},]
+    for i in range(len(context.get('userVideos')) - 1, -1, -1):
+        if(context.get('userVideos')[i].title == 'Introduction'):
+            context.get('userVideos').pop(i)
+
+    for i in range(0, len(context.get('userVideos')) - 1):
+        for j in range(0, len(context.get('userVideos')) - 1 - i):
+            if(context.get('userVideos')[j].serial_num > context.get('userVideos')[j+1].serial_num):
+                temp = context.get('userVideos')[j]
+                context.get('userVideos')[j] = context.get('userVideos')[j+1]
+                context.get('userVideos')[j+1] = temp
+
+
+    context['adminVideos'] = list(videos.filter(admin_only=True)) #[{'title':'The Home Page', 'subtitle': 'Part 1'},
+                              #{'title':'The Submit Page', 'subtitle': 'Part 2'},
+                              #{'title':'The Home Page', 'subtitle': 'Part 1'},
+                              #{'title':'The Submit Page', 'subtitle': 'Part 2'},
+                              #{'title':'The Home Page', 'subtitle': 'Part 1'},
+                              #{'title':'The Submit Page', 'subtitle': 'Part 2'},]
+    for i in range(0, len(context.get('adminVideos')) - 1):
+        for j in range(0, len(context.get('adminVideos')) - 1 - i):
+            if(context.get('adminVideos')[j].serial_num > context.get('adminVideos')[j+1].serial_num):
+                temp = context.get('adminVideos')[j]
+                context.get('adminVideos')[j] = context.get('adminVideos')[j+1]
+                context.get('adminVideos')[j+1] = temp
+
     return render(request, 'CarlSegment.html', context)
 
 
@@ -478,7 +514,8 @@ def VoteDown(request, jobid):
         fPrint = list(FeaturedPrint.objects.filter(fk_job = list(Job.objects.filter(job_id = jobid))[0]))
         fPrint[0].votes.delete(user.id)
     except:
-        print("FAIL DOWN")
+        #print("FAIL DOWN")
+        x = 1
 
     return(HttpResponse("VoteDown"))
 

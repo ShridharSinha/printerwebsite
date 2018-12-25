@@ -5,7 +5,99 @@
   {% block heading %}The Carl Segment{% endblock %}
 
   {% block content %}
+
   <div class="container_12">
+
+    {% for video in mainVideos %}
+      <div class='grid_12 header'>
+        <table class="Data">
+          <thead>
+            <tr>
+              <th colspan="3">{{video.title}}</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="Subheading">
+              <td>{{video.subtitle}}</td>
+            </tr>
+            <tr>
+              <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+      <div class="clear"></div>
+    {% endfor %}
+
+    {% for video in userVideos %}
+      <div class='grid_4 header'>
+        <table class="Data">
+          <thead>
+            <tr>
+              <th colspan="3">{{video.title}}</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="Subheading">
+              <td>{{video.subtitle}}</td>
+            </tr>
+            <tr>
+              <td id="WhiteBack"><iframe width="300" height="225" src="{{video.source}}"></iframe></td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+    {% endfor %}
+    <div class="clear"></div>
+
+
+    {% if user.is_superuser %}
+
+    <div class="adminVids grid_12" style="border:6px solid #144D53;border-radius:10px; background-color:#E4EDDB; margin-top:30px;">
+      <div class="grid_2 header"><p></p></div>
+      <div class="grid_8 header">
+        <h1 class="top heading" style="background-color:#144D53;margin-top:10px;margin-bottom:10px;">Admin Tutorials</h1>
+      </div>
+      <div class="grid_2 header"><p></p></div>
+      <div class="clear"></div>
+
+    {% for video in adminVideos %}
+      <div class='grid_4 header alpha'>
+        <table class="Data" style="margin:10px;">
+          <thead>
+            <tr>
+              <th colspan="3">{{video.title}}</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="Subheading">
+              <td>{{video.subtitle}}</td>
+            </tr>
+            <tr>
+              <td id="WhiteBack"><img class='logo' src = "{% static 'Images/CuriosityGymLogo.png' %}" alt = 'Curiosity Gym'></td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+      <!--<div class="clear"></div>-->
+    {% endfor %}
+
+    </div>
+    <div class="clear"></div>
+
+    {% endif %}
+
+  </div>
+  <!--<div class="container_12">
     <div class="grid_4 header">
       <table class="Data">
         <thead>
@@ -125,6 +217,6 @@
 
       </table>
     </div>
-    <div class="clear"></div>
+    <div class="clear"></div>-->
 
   </div>{% endblock %}

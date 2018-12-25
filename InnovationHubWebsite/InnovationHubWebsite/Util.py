@@ -230,7 +230,7 @@ class Util:
                     num = num+1
                     break
 
-        print(num)
+        #print(num)
 
         return(num)
 
@@ -241,7 +241,7 @@ class Util:
         for i in range(len(profiles) - 1, -1, -1):
             if(not(profiles[i].quota == 0 and not(profiles[i].user.is_superuser))):
                 profiles.pop(i)
-        print(len(profiles))
+        #print(len(profiles))
         return(len(profiles))
 
 

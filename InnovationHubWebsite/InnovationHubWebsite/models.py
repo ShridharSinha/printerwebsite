@@ -95,7 +95,14 @@ class Statistic(models.Model):
 
 
 class Video(models.Model):
+    serial_num =models.IntegerField(null=True)
     title      =models.CharField(max_length=50)
     subtitle   =models.CharField(max_length=50)
     source     =models.CharField(max_length=500)
     admin_only =models.BooleanField()
+
+    def __str__(self):
+        if(self.admin_only):
+            return(self.title + ' - ' + self.subtitle + ' (Admin)')
+        else:
+            return(self.title + ' - ' + self.subtitle)
