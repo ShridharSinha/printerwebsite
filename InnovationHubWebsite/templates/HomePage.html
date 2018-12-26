@@ -161,7 +161,7 @@
         <tbody>
           {% for Job in BestPrintMonth %}
           <tr class="Subheading">
-            <td>{{Job.job_title}}</td>
+            <td>{{Job.fk_job.job_title}}</td>
           </tr>
           {% endfor %}
           <tr>
@@ -184,10 +184,10 @@
             <td>Name</td>
           </tr>
 
-          {%for user in TopPrints%}
+          {%for user in TopUsersMonth%}
           <tr>
-            <td>{{user.user_id}}</td>
-            <td>{{user}}</td>
+            <td>{{user.ID}}</td>
+            <td>{{user.User}}</td>
           </tr>
           {%endfor%}
           <!--<tr>
@@ -226,10 +226,10 @@
             <td>Name</td>
           </tr>
 
-          {%for user in TopPrints%}
+          {%for user in TopUsersYear%}
           <tr>
-            <td>{{user.user_id}}</td>
-            <td>{{user}}</td>
+            <td>{{user.ID}}</td>
+            <td>{{user.User}}</td>
           </tr>
           {%endfor%}
 
@@ -268,7 +268,7 @@
         <tbody>
           {% for Job in BestPrintMonth %}
           <tr class="Subheading">
-            <td>{{Job.job_title}}
+            <td>{{Job.fk_job.job_title}}
           </tr>
           {% endfor %}
           <tr>
