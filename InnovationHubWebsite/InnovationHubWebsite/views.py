@@ -72,7 +72,7 @@ def HomePage(request):
 
         for i in range(len(jobs) -1, -1, -1):
             #print(jobs[i].fk_job.print_start_time.month)
-            if(jobs[i].fk_job.print_start_time.month == datetime.now().month and jobs[i].fk_job.fk_profile == user):
+            if(jobs[i].fk_job.print_start_time.month == datetime.now().month and jobs[i].fk_job.print_start_time.year == datetime.now().year and jobs[i].fk_job.fk_profile == user):
             #if(jobs[i].fk_job.fk_profile == user):
                 vote_num = vote_num + jobs[i].votes.count()
         users.get('Votes').append(vote_num)
@@ -148,7 +148,8 @@ def HomePage(request):
 
     best_print_month = list(FeaturedPrint.objects.all())
     for i in range(len(best_print_month) - 1, -1, -1):
-        if(not(best_print_month[i].fk_job.print_start_time.month == datetime.now().month)):
+        if(not(best_print_month[i].fk_job.print_start_time.month == datetime.now().month and best_print_month[i].fk_job.print_start_time.year == datetime.now().year)):
+            #print(best_print_month[i])
             best_print_month.pop(i)
 
     for i in range(0, len(best_print_month) - 1):
@@ -160,13 +161,19 @@ def HomePage(request):
     best_print_year = list(FeaturedPrint.objects.all())
     for i in range(len(best_print_year) - 1, -1, -1):
         if(not(best_print_year[i].fk_job.print_start_time.year == datetime.now().year)):
+            #print(best_print_year[i])
             best_print_year.pop(i)
 
     for i in range(0, len(best_print_year) - 1):
         if(best_print_year[0].votes.count() > best_print_year[1].votes.count()):
+            #print(best_print_year[1])
             best_print_year.pop(1)
         else:
+            #print(best_print_year[0])
             best_print_year.pop(0)
+
+    #print(best_print_year)
+
 
     #context['BestPrintMonth'] = list(Job.objects.filter(job_id = 20))
     context['BestPrintMonth'] = best_print_month
