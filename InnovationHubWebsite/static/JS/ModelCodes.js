@@ -1,5 +1,5 @@
-const WIDTH  = 300;
-const HEIGHT = 240;
+let WIDTH  = 300;
+let HEIGHT = 240;
 
 const VIEW_ANGLE = 45;
 const ASPECT = WIDTH/HEIGHT;
@@ -12,7 +12,18 @@ let init = function() {
   let num = document.getElementById("modelNum").value;
   models = [];
 
+  let isHomePage = document.getElementById('isHomePage').value;
+
   for(let i = 1; i <= num; i++) {
+
+    if(isHomePage == 'true' && i <= 4) {
+      WIDTH  = 400;
+      HEIGHT = 320;
+    } else {
+      WIDTH  = 300;
+      HEIGHT = 240;
+    };
+
     let tick = 0;
     let file_path = document.getElementById('modelName' + i).value;
     let container = document.getElementById(file_path);
@@ -48,8 +59,8 @@ let init = function() {
     //loading file
     let Mesh;
     let loader = new THREE.STLLoader();
-    loader.load('../static/JS/3DModels/Dragon.stl', function(geometry){
-      let mesh = new THREE.Mesh(geometry, MATERIAL[0]);
+    loader.load('../static/JS/3DModels/test_cube.stl', function(geometry){
+      let mesh = new THREE.Mesh(geometry, MATERIAL[1]);
       //mesh.position.set(0, -1, 0);
       //mesh.rotation.set( - Math.PI / 2, 0, 0 );
       //mesh.scale.set(0.01, 0.01, 0.01);
@@ -87,14 +98,14 @@ let init = function() {
       let width_ratio  = (WIDTH)/dimensions[1];
       let height_ratio = (HEIGHT)/dimensions[2];
 
-      //mesh.scale.set(length_ratio/15, width_ratio/15, height_ratio/15);
+      //mesh.scale.set(length_ratio/14, width_ratio/14, height_ratio/14);
 
       if(length_ratio < width_ratio && length_ratio < height_ratio) {
-        mesh.scale.set(length_ratio/15, length_ratio/15, length_ratio/15);
+        mesh.scale.set(length_ratio/14, length_ratio/14, length_ratio/14);
       } else if(width_ratio < height_ratio) {
-        mesh.scale.set(width_ratio/15, width_ratio/15, width_ratio/15);
+        mesh.scale.set(width_ratio/14, width_ratio/14, width_ratio/14);
       } else {
-        mesh.scale.set(height_ratio/15, height_ratio/15, height_ratio/15);
+        mesh.scale.set(height_ratio/14, height_ratio/14, height_ratio/14);
       };
 
       Mesh = mesh

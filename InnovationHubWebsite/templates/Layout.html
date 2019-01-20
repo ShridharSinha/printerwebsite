@@ -21,6 +21,10 @@
 
   {% endblock %}
 
+  {% block isHomePage %}
+  <input type="hidden" value="false" id="isHomePage"></input>
+  {% endblock %}
+
   {% block css %}
   {% load static %}
   <!--<link href="{% static 'CSS/PageStyle.css' %}" rel = "stylesheet" type = "text/css">
@@ -52,7 +56,7 @@
   <script src="{% static 'JS/Zeus.js' %}"></script>-->
 
   <!--<script src="{% static 'JS/ef.js' %}"></script>-->
-  <script src="{% static 'JS/ModelCode.js' %}"></script>
+  <script src="{% static 'JS/ModelCodes.js' %}"></script>
 
   {% endblock %}
 
