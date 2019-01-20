@@ -6,7 +6,7 @@
   <input type="hidden" value={{num}} id="modelNum"></input>
 
   {% for var in hiddenVar %}
-  <input type="hidden" value={{var.prints.fk_job.file_path_obj}} id={{var.ids}}></input>
+  <input type="hidden" value={{var.prints.Job.fk_job.file_path_obj}} id={{var.ids}}></input>
   {% endfor %}
 
 {% endblock %}

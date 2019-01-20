@@ -598,6 +598,8 @@ def Featured(request):
 
         context.get('hiddenVar').append(var)
 
+    #print(context.get('hiddenVar'))
+
     #for i in range(0, context.get('Jobs')):
         #context.get('Jobs')[i].annotate(num_votes = Count('votes__user'))
 
@@ -1041,6 +1043,11 @@ def AboutUs(request):
     util = Util()
     context = util.getQuota(request.user)
     return(render(request, 'AboutUs.html', context))
+
+def Test(request):
+    util = Util()
+    context = util.getQuota(request.user)
+    return(render(request, 'modelTest.html', context))
 
 #Errors
 #def error_404(request, exception):

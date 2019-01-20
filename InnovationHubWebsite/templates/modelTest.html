@@ -1,0 +1,32 @@
+{% extends "Layout.html" %}
+{% load static %}
+
+{% block test %}
+  <script src="{% static 'JS/three.js' %}"></script>
+  <script src="{% static 'JS/STLLoader.js' %}"></script>
+  <script src="{% static 'JS/jQuery.js' %}"></script>
+  <script src="{% static 'JS/ModelTest.js' %}"></script>
+
+
+{% endblock %}
+
+{% block js %}
+
+<!--<script src="{% static 'JS/background.js' %}"></script>-->
+
+<!--<script src="{% static 'JS/Thor.js' %}"></script>
+<script src="{% static 'JS/Zeus.js' %}"></script>-->
+
+{% endblock %}
+
+{% block title %}InnovationHub  |  Test Model{% endblock %}
+
+{% block heading %}Test the Model{% endblock %}
+
+
+{% block content %}
+  <div>
+    <canvas id='Model' height="600px" width="600px" style="border:2px solid #1A3C40; align:center;"></canvas>
+  </div>
+
+{% endblock %}

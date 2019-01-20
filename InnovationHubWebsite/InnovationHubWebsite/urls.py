@@ -85,6 +85,9 @@ urlpatterns = [
 
     #AboutUs
     path('aboutUs/', views.AboutUs),
+
+
+    path('test/', views.Test),
 ]
 
 #handler404 = 'views.error_404_view'

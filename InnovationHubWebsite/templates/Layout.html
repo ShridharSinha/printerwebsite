@@ -37,8 +37,10 @@
   {% endblock %}
 
   {% block js %}
-  <script src="{% static 'JS/p5.js' %}"></script>
-  <script src="{% static 'JS/p5.dom.js' %}"></script>
+  <!--<script src="{% static 'JS/p5.js' %}"></script>
+  <script src="{% static 'JS/p5.dom.js' %}"></script>-->
+  <script src="{% static 'JS/three.js' %}"></script>
+  <script src="{% static 'JS/STLLoader.js' %}"></script>
 
   <script src="{% static 'JS/jQuery.js' %}"></script>
 
@@ -49,8 +51,12 @@
   <!--<script src="{% static 'JS/Thor.js' %}"></script>
   <script src="{% static 'JS/Zeus.js' %}"></script>-->
 
-  <script src="{% static 'JS/ef.js' %}"></script>
+  <!--<script src="{% static 'JS/ef.js' %}"></script>-->
+  <script src="{% static 'JS/ModelCode.js' %}"></script>
 
+  {% endblock %}
+
+  {% block test %}
   {% endblock %}
 
   {% block Script %}
